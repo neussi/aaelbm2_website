@@ -1,0 +1,544 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Devenir membre" %} - A²ELBM2{% endblock %}
+
+{% block meta_description %}{% trans "Rejoignez l'Association des Anciens Élèves du Lycée Bilingue de Melong 2. Inscription simple et rapide pour devenir membre de notre communauté." %}{% endblock %}
+
+{% block og_title %}{% trans "Devenir membre" %} - A²ELBM2{% endblock %}
+{% block og_description %}{% trans "Rejoignez notre association d'anciens élèves et participez à nos activités et projets." %}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .registration-hero {
+        background: linear-gradient(135deg, rgba(44,85,48,0.9) 0%, rgba(74,124,89,0.8) 100%), url('{% static "images/school-bg.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 8rem 0 4rem;
+        color: white;
+        text-align: center;
+    }
+    
+    .registration-form-section {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .form-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        padding: 3rem;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .benefits-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .benefits-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .benefits-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .step-indicator {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+    
+    .step {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin: 0 1rem;
+        position: relative;
+    }
+    
+    .step::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 2rem;
+        height: 2px;
+        background: var(--primary-color);
+        transform: translateY(-50%);
+    }
+    
+    .step:last-child::after {
+        display: none;
+    }
+    
+    .form-section-title {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--secondary-color);
+    }
+    
+    .required-field::after {
+        content: ' *';
+        color: #dc3545;
+    }
+    
+    .form-help-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    .privacy-notice {
+        background: #e8f5e8;
+        border: 1px solid var(--primary-color);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    @media (max-width: 768px) {
+        .registration-hero {
+            padding: 6rem 0 3rem;
+        }
+        
+        .form-container {
+            padding: 2rem 1rem;
+            margin-top: -1rem;
+        }
+        
+        .step-indicator {
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            margin: 0.5rem;
+        }
+        
+        .step::after {
+            display: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="registration-hero">
+    <div class="container">
+        <div class="row justify-content-center" data-aos="fade-up">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-4">
+                    <i class="fas fa-user-plus me-3"></i>
+                    {% trans "Rejoignez notre communauté" %}
+                </h1>
+                <p class="lead mb-4">
+                    {% trans "Devenez membre de l'Association des Anciens Élèves du Lycée Bilingue de Melong 2 et participez à nos activités, projets et événements." %}
+                </p>
+                <div class="step-indicator">
+                    <div class="step">1</div>
+                    <div class="step">2</div>
+                    <div class="step">3</div>
+                </div>
+                <p class="small">{% trans "Remplissez le formulaire • Validation • Bienvenue !" %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Form Section -->
+<section class="registration-form-section">
+    <div class="container">
+        <div class="row">
+            <!-- Benefits Column -->
+            <div class="col-lg-4 mb-4" data-aos="fade-right">
+                <h3 class="mb-4 text-center">{% trans "Pourquoi nous rejoindre ?" %}</h3>
+                
+                <div class="benefits-card">
+                    <div class="benefits-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h5>{% trans "Réseau professionnel" %}</h5>
+                    <p class="mb-0">{% trans "Connectez-vous avec d'autres anciens élèves dans divers domaines professionnels." %}</p>
+                </div>
+                
+                <div class="benefits-card">
+                    <div class="benefits-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h5>{% trans "Projets innovants" %}</h5>
+                    <p class="mb-0">{% trans "Participez à des projets qui font la différence dans notre communauté." %}</p>
+                </div>
+                
+                <div class="benefits-card">
+                    <div class="benefits-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h5>{% trans "Événements exclusifs" %}</h5>
+                    <p class="mb-0">{% trans "Accédez à nos événements, conférences et activités de networking." %}</p>
+                </div>
+                
+                <div class="benefits-card">
+                    <div class="benefits-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h5>{% trans "Entraide et solidarité" %}</h5>
+                    <p class="mb-0">{% trans "Bénéficiez du soutien de la communauté et aidez les autres membres." %}</p>
+                </div>
+            </div>
+            
+            <!-- Form Column -->
+            <div class="col-lg-8" data-aos="fade-left">
+                <div class="form-container">
+                    <div class="text-center mb-4">
+                        <h2 class="form-section-title">
+                            <i class="fas fa-edit me-2"></i>
+                            {% trans "Formulaire d'adhésion" %}
+                        </h2>
+                        <p class="text-muted">{% trans "Veuillez remplir tous les champs marqués d'un astérisque (*)" %}</p>
+                    </div>
+                    
+                    <!-- Messages d'erreur -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Section Informations personnelles -->
+                        <div class="mb-4">
+                            <h4 class="form-section-title">
+                                <i class="fas fa-user me-2"></i>
+                                {% trans "Informations personnelles" %}
+                            </h4>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.nom_prenom.id_for_label }}" class="form-label required-field">
+                                        {{ form.nom_prenom.label }}
+                                    </label>
+                                    {{ form.nom_prenom|add_class:"form-control" }}
+                                    {% if form.nom_prenom.errors %}
+                                        <div class="text-danger small mt-1">{{ form.nom_prenom.errors.0 }}</div>
+                                    {% endif %}
+                                    <div class="form-help-text">{% trans "Nom et prénom complets" %}</div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.promotion.id_for_label }}" class="form-label required-field">
+                                        {{ form.promotion.label }}
+                                    </label>
+                                    {{ form.promotion|add_class:"form-control" }}
+                                    {% if form.promotion.errors %}
+                                        <div class="text-danger small mt-1">{{ form.promotion.errors.0 }}</div>
+                                    {% endif %}
+                                    <div class="form-help-text">{% trans "Année de fin d'études (ex: 2020)" %}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.date_naissance.id_for_label }}" class="form-label required-field">
+                                        {{ form.date_naissance.label }}
+                                    </label>
+                                    {{ form.date_naissance|add_class:"form-control" }}
+                                    {% if form.date_naissance.errors %}
+                                        <div class="text-danger small mt-1">{{ form.date_naissance.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.lieu_naissance.id_for_label }}" class="form-label required-field">
+                                        {{ form.lieu_naissance.label }}
+                                    </label>
+                                    {{ form.lieu_naissance|add_class:"form-control" }}
+                                    {% if form.lieu_naissance.errors %}
+                                        <div class="text-danger small mt-1">{{ form.lieu_naissance.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Section Contact -->
+                        <div class="mb-4">
+                            <h4 class="form-section-title">
+                                <i class="fas fa-phone me-2"></i>
+                                {% trans "Coordonnées" %}
+                            </h4>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.telephone.id_for_label }}" class="form-label required-field">
+                                        {{ form.telephone.label }}
+                                    </label>
+                                    {{ form.telephone|add_class:"form-control" }}
+                                    {% if form.telephone.errors %}
+                                        <div class="text-danger small mt-1">{{ form.telephone.errors.0 }}</div>
+                                    {% endif %}
+                                    <div class="form-help-text">{% trans "Format: +237 6XX XXX XXX" %}</div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label required-field">
+                                        {{ form.email.label }}
+                                    </label>
+                                    {{ form.email|add_class:"form-control" }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+                                    {% endif %}
+                                    <div class="form-help-text">{% trans "Adresse email valide et active" %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Section Professionnelle -->
+                        <div class="mb-4">
+                            <h4 class="form-section-title">
+                                <i class="fas fa-briefcase me-2"></i>
+                                {% trans "Informations professionnelles" %}
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.profession.id_for_label }}" class="form-label required-field">
+                                    {{ form.profession.label }}
+                                </label>
+                                {{ form.profession|add_class:"form-control" }}
+                                {% if form.profession.errors %}
+                                    <div class="text-danger small mt-1">{{ form.profession.errors.0 }}</div>
+                                {% endif %}
+                                <div class="form-help-text">{% trans "Votre profession actuelle ou domaine d'activité" %}</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.adresse.id_for_label }}" class="form-label required-field">
+                                    {{ form.adresse.label }}
+                                </label>
+                                {{ form.adresse|add_class:"form-control" }}
+                                {% if form.adresse.errors %}
+                                    <div class="text-danger small mt-1">{{ form.adresse.errors.0 }}</div>
+                                {% endif %}
+                                <div class="form-help-text">{% trans "Ville et pays de résidence" %}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Privacy Notice -->
+                        <div class="privacy-notice">
+                            <h6><i class="fas fa-shield-alt me-2"></i>{% trans "Protection des données" %}</h6>
+                            <p class="mb-2 small">
+                                {% trans "Vos informations personnelles sont protégées et utilisées uniquement dans le cadre des activités de l'association. Elles ne seront pas partagées avec des tiers sans votre consentement." %}
+                            </p>
+                        </div>
+                        
+                        <!-- Terms and Conditions -->
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                {% trans "J'accepte les" %} 
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">{% trans "statuts et le règlement intérieur" %}</a> 
+                                {% trans "de l'association A²ELBM2" %} <span class="text-danger">*</span>
+                            </label>
+                        </div>
+                        
+                        <!-- Newsletter subscription -->
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="newsletter" checked>
+                            <label class="form-check-label" for="newsletter">
+                                {% trans "Je souhaite recevoir la newsletter de l'association" %}
+                            </label>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                {% trans "Envoyer ma demande d'adhésion" %}
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <small class="text-muted">
+                                {% trans "Votre demande sera examinée par notre bureau dans un délai de 48h" %}
+                            </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terms Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">
+                    <i class="fas fa-file-contract me-2"></i>
+                    {% trans "Statuts et Règlement Intérieur" %}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>{% trans "Article 1 : Objectifs de l'association" %}</h6>
+                <p>{% trans "L'Association des Anciens Élèves du Lycée Bilingue de Melong 2 (A²ELBM2) a pour objectifs de..." %}</p>
+                
+                <h6>{% trans "Article 2 : Conditions d'adhésion" %}</h6>
+                <p>{% trans "Peut devenir membre toute personne ayant fréquenté le Lycée Bilingue de Melong 2..." %}</p>
+                
+                <h6>{% trans "Article 3 : Droits et devoirs des membres" %}</h6>
+                <p>{% trans "Chaque membre a le droit de participer aux activités de l'association et le devoir de..." %}</p>
+                
+                <h6>{% trans "Article 4 : Cotisations" %}</h6>
+                <p>{% trans "Les cotisations annuelles sont fixées par l'assemblée générale..." %}</p>
+                
+                <!-- Ajoutez plus d'articles selon vos besoins -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fermer" %}</button>
+                <button type="button" class="btn btn-primary" onclick="acceptTerms()">{% trans "J'accepte" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Help Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+                <h3>{% trans "Besoin d'aide ?" %}</h3>
+                <p class="lead mb-4">
+                    {% trans "Notre équipe est là pour vous accompagner dans votre adhésion" %}
+                </p>
+                
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-phone fa-2x text-primary mb-3"></i>
+                                <h6>{% trans "Par téléphone" %}</h6>
+                                <a href="tel:+237673583241" class="btn btn-outline-primary btn-sm">
+                                    +237 6 73 58 32 41
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fab fa-whatsapp fa-2x text-success mb-3"></i>
+                                <h6>{% trans "Via WhatsApp" %}</h6>
+                                <a href="{% url 'whatsapp_redirect' %}?type=president&message={% trans 'Bonjour, j\'ai besoin d\'aide pour mon adhésion' %}" 
+                                   class="btn btn-outline-success btn-sm" target="_blank">
+                                    {% trans "Contacter" %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-envelope fa-2x text-info mb-3"></i>
+                                <h6>{% trans "Par email" %}</h6>
+                                <a href="{% url 'contact' %}" class="btn btn-outline-info btn-sm">
+                                    {% trans "Nous écrire" %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function acceptTerms() {
+        document.getElementById('terms').checked = true;
+        bootstrap.Modal.getInstance(document.getElementById('termsModal')).hide();
+    }
+    
+    // Form validation
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const requiredFields = this.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.classList.add('is-invalid');
+            } else {
+                field.classList.remove('is-invalid');
+            }
+        });
+        
+        if (!isValid) {
+            e.preventDefault();
+            alert('{% trans "Veuillez remplir tous les champs obligatoires" %}');
+        }
+    });
+    
+    // Real-time validation
+    document.querySelectorAll('input, select, textarea').forEach(field => {
+        field.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });
+    
+    // Phone number formatting
+    document.getElementById('id_telephone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.startsWith('237')) {
+            value = value.substring(3);
+        }
+        if (value.length >= 9) {
+            value = '+237 ' + value.substring(0, 1) + ' ' + value.substring(1, 3) + ' ' + value.substring(3, 6) + ' ' + value.substring(6, 9);
+        }
+        e.target.value = value;
+    });
+</script>
+{% endblock %}

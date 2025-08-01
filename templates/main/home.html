@@ -1,0 +1,2286 @@
+
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Accueil" %} - A²ELBM2{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<!-- Hero Section Premium -->
+<section class="hero-section-premium">
+    <!-- Background Effects -->
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-particles-bg"></div>
+    <div class="hero-geometric-shapes">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+        <div class="shape-3"></div>
+        <div class="shape-4"></div>
+        <div class="shape-5"></div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-icons">
+        <div class="float-icon icon-1"><i class="fas fa-graduation-cap"></i></div>
+        <div class="float-icon icon-2"><i class="fas fa-users"></i></div>
+        <div class="float-icon icon-3"><i class="fas fa-lightbulb"></i></div>
+        <div class="float-icon icon-4"><i class="fas fa-star"></i></div>
+        <div class="float-icon icon-5"><i class="fas fa-heart"></i></div>
+    </div>
+    
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-7 hero-content" data-aos="fade-right">
+                <!-- Hero Badge -->
+                <div class="hero-badge mb-4" data-aos="fade-down" data-aos-delay="200">
+                    <span class="badge-content">
+                        <i class="fas fa-award me-2"></i>
+                        {% trans "Excellence & Solidarité" %}
+                    </span>
+                </div>
+                
+                <!-- Hero Title -->
+                <h1 class="hero-title-premium mb-4" data-aos="fade-up" data-aos-delay="400">
+                    {% if site_settings.slogan_fr and LANGUAGE_CODE == 'fr' %}
+                        {{ site_settings.slogan_fr }}
+                    {% elif site_settings.slogan_en and LANGUAGE_CODE == 'en' %}
+                        {{ site_settings.slogan_en }}
+                    {% else %}
+                        {% trans "Ensemble pour" %}<br>
+                        <span class="text-gradient-hero">{% trans "l'Excellence" %}</span>
+                    {% endif %}
+                </h1>
+                
+                <!-- Hero Subtitle -->
+                <p class="hero-subtitle-premium mb-5" data-aos="fade-up" data-aos-delay="600">
+                    {% trans "Association des Anciens Élèves du Lycée Bilingue de Melong 2. Unis par le passé, construisons l'avenir ensemble à travers l'excellence, l'innovation et la solidarité." %}
+                </p>
+                
+                <!-- Next Event Preview -->
+                {% if featured_events.first %}
+                <div class="next-event-card mb-5" data-aos="fade-up" data-aos-delay="800">
+                    <div class="event-card-inner">
+                        <div class="event-badge">
+                            <i class="fas fa-calendar-star me-1"></i>
+                            {% trans "Prochain Événement" %}
+                        </div>
+                        <h6 class="event-title">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ featured_events.first.title_fr|truncatechars:35 }}
+                            {% else %}
+                                {{ featured_events.first.title_en|default:featured_events.first.title_fr|truncatechars:35 }}
+                            {% endif %}
+                        </h6>
+                        <div class="event-details">
+                            <div class="event-date">
+                                <i class="fas fa-calendar me-1"></i>
+                                {{ featured_events.first.date_event|date:"d M Y" }}
+                            </div>
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                {{ featured_events.first.location|truncatechars:20 }}
+                            </div>
+                        </div>
+                        <a href="{% url 'event_detail' featured_events.first.pk %}" class="event-btn">
+                            {% trans "Participer" %}
+                            <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Hero Buttons -->
+                <div class="hero-actions mb-5" data-aos="fade-up" data-aos-delay="1000">
+                    <a href="{% url 'member_registration' %}" class="btn-hero-primary me-3 mb-3">
+                        <span class="btn-content">
+                            <i class="fas fa-user-plus me-2"></i>
+                            {% trans "Rejoindre l'Association" %}
+                        </span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="{% url 'donations' %}" class="btn-hero-secondary me-3 mb-3">
+                        <span class="btn-content">
+                            <i class="fas fa-heart me-2"></i>
+                            {% trans "Faire un Don" %}
+                        </span>
+                        <div class="btn-glow"></div>
+                    </a>
+                    <a href="{% url 'about' %}" class="btn-hero-outline mb-3">
+                        <span class="btn-content">
+                            <i class="fas fa-info-circle me-2"></i>
+                            {% trans "En savoir plus" %}
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Stats Premium -->
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number counter" data-target="{{ total_members|default:'200' }}">0</div>
+                            <div class="stat-label">{% trans "Membres" %}</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number counter" data-target="{{ completed_projects|default:'15' }}">0</div>
+                            <div class="stat-label">{% trans "Projets" %}</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number counter" data-target="{{ ongoing_projects|default:'5' }}">0</div>
+                            <div class="stat-label">{% trans "En cours" %}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="500">
+                <!-- Hero Visual -->
+                <div class="hero-visual-container">
+                    <div class="logo-container">
+                        {% if site_settings.logo %}
+                            <img src="{{ site_settings.logo.url }}" alt="A²ELBM2 Logo" class="hero-logo-img">
+                        {% else %}
+                            <div class="hero-logo-placeholder">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Orbiting Elements -->
+                        <div class="orbit-elements">
+                            <div class="orbit-item orbit-1">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="orbit-item orbit-2">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="orbit-item orbit-3">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="orbit-item orbit-4">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Success Metrics Float -->
+                    <div class="success-metrics">
+                        <div class="metric-float metric-1">
+                            <div class="metric-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="metric-text">
+                                <span class="metric-number">100%</span>
+                                <span class="metric-label">{% trans "Engagement" %}</span>
+                            </div>
+                        </div>
+                        <div class="metric-float metric-2">
+                            <div class="metric-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="metric-text">
+                                <span class="metric-number">5★</span>
+                                <span class="metric-label">{% trans "Excellence" %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator Premium -->
+        <div class="scroll-indicator-hero" data-aos="fade-up" data-aos-delay="1500">
+            <a href="#featured-events" class="scroll-link">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+                <span class="scroll-text">{% trans "Découvrir" %}</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Featured Events Section -->
+{% if featured_events %}
+<section id="featured-events" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-calendar-star me-3"></i>
+                {% trans "Événements à venir" %}
+            </h2>
+            <p class="lead">{% trans "Ne manquez pas nos prochains événements !" %}</p>
+        </div>
+        
+        <div class="row">
+            {% for event in featured_events %}
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="card h-100 event-card">
+                    {% if event.image %}
+                        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title_fr }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" style="height: 250px;">
+                            <i class="fas fa-calendar text-white fa-3x"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span class="badge bg-primary rounded-pill">
+                                <i class="fas fa-clock me-1"></i>
+                                {{ event.date_event|date:"d M Y" }}
+                            </span>
+                            <span class="badge bg-secondary rounded-pill ms-2">
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                {{ event.location|truncatechars:15 }}
+                            </span>
+                        </div>
+                        
+                        <h5 class="card-title">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ event.title_fr }}
+                            {% else %}
+                                {{ event.title_en|default:event.title_fr }}
+                            {% endif %}
+                        </h5>
+                        
+                        <p class="card-text flex-grow-1">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ event.description_fr|striptags|truncatewords:20 }}
+                            {% else %}
+                                {{ event.description_en|default:event.description_fr|striptags|truncatewords:20 }}
+                            {% endif %}
+                        </p>
+                        
+                        <!-- Event Details -->
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-users me-1"></i>
+                                    {% trans "Participants inscrits" %}
+                                </small>
+                                <small class="text-muted">{{ event.registered_count }}</small>
+                            </div>
+                            {% if event.max_participants %}
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {% widthratio event.registered_count event.max_participants 100 %}%"></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar-check me-1"></i>
+                                    {{ event.date_event|date:"d M" }} à {{ event.date_event|time:"H:i" }}
+                                </small>
+                                <a href="{% url 'event_detail' event.pk %}" class="btn btn-primary btn-sm">
+                                    {% trans "Voir détails" %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4" data-aos="fade-up">
+            <a href="{% url 'events' %}" class="btn btn-outline-primary btn-lg">
+                {% trans "Voir tous les événements" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Featured Projects Section -->
+{% if featured_projects %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-project-diagram me-3"></i>
+                {% trans "Projets en vedette" %}
+            </h2>
+            <p class="lead">{% trans "Découvrez nos initiatives phares" %}</p>
+        </div>
+        
+        <div class="row">
+            {% for project in featured_projects %}
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="card h-100 project-card">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title_fr }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-gradient-secondary d-flex align-items-center justify-content-center" style="height: 250px;">
+                            <i class="fas fa-project-diagram text-white fa-3x"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            {% if project.status == 'ongoing' %}
+                                <span class="badge bg-warning text-dark rounded-pill">
+                                    <i class="fas fa-spinner me-1"></i>
+                                    {% trans "En cours" %}
+                                </span>
+                            {% elif project.status == 'completed' %}
+                                <span class="badge bg-success rounded-pill">
+                                    <i class="fas fa-check me-1"></i>
+                                    {% trans "Terminé" %}
+                                </span>
+                            {% elif project.status == 'planning' %}
+                                <span class="badge bg-info rounded-pill">
+                                    <i class="fas fa-clock me-1"></i>
+                                    {% trans "En planification" %}
+                                </span>
+                            {% endif %}
+                            
+                            {% if project.is_featured %}
+                                <span class="badge bg-danger ms-2">
+                                    <i class="fas fa-star me-1"></i>
+                                    {% trans "Prioritaire" %}
+                                </span>
+                            {% endif %}
+                        </div>
+                        
+                        <h5 class="card-title">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ project.title_fr }}
+                            {% else %}
+                                {{ project.title_en|default:project.title_fr }}
+                            {% endif %}
+                        </h5>
+                        
+                        <p class="card-text flex-grow-1">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ project.description_fr|striptags|truncatewords:20 }}
+                            {% else %}
+                                {{ project.description_en|default:project.description_fr|striptags|truncatewords:20 }}
+                            {% endif %}
+                        </p>
+                        
+                        <!-- Progress Bar -->
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted">{% trans "Progression" %}</small>
+                                <small class="text-muted">{{ project.progress_percentage|floatformat:0 }}%</small>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ project.progress_percentage }}%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-coins me-1"></i>
+                                    {{ project.budget_collected|floatformat:0 }} / {{ project.budget_required|floatformat:0 }} FCFA
+                                </small>
+                                <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary btn-sm">
+                                    {% trans "Voir détails" %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4" data-aos="fade-up">
+            <a href="{% url 'projects' %}" class="btn btn-outline-primary btn-lg">
+                {% trans "Voir tous les projets" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Bureau Members Section -->
+{% if bureau_members %}
+<section class="py-5 bg-light section-wrapper">
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-users-cog me-3 text-primary"></i>
+                {% trans "Notre bureau exécutif" %}
+            </h2>
+            <p class="lead text-muted">{% trans "L'équipe dirigeante de notre association" %}</p>
+            <div class="section-divider mx-auto" style="width: 100px;"></div>
+        </div>
+        
+        <div class="row">
+            {% for member in bureau_members|slice:":4" %}
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="card text-center h-100 member-card">
+                    <div class="card-body">
+                        <div class="member-avatar mb-3">
+                            {% if member.photo %}
+                                <img src="{{ member.photo.url }}" alt="{{ member.nom_prenom }}" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-gradient-primary rounded-circle d-inline-flex align-items-center justify-content-center text-white" style="width: 100px; height: 100px;">
+                                    <i class="fas fa-user fa-2x"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <h5 class="card-title fw-bold">{{ member.nom_prenom }}</h5>
+                        <p class="text-primary fw-bold mb-2">{{ member.poste_bureau }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <i class="fas fa-graduation-cap me-1"></i>
+                                {% trans "Promotion" %} {{ member.promotion }}
+                            </small><br>
+                            <small class="text-muted">
+                                <i class="fas fa-briefcase me-1"></i>
+                                {{ member.profession|truncatechars:30 }}
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="{% url 'members' %}" class="btn btn-outline-primary btn-lg">
+                {% trans "Voir tous les membres" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Recent News Section -->
+{% if recent_news %}
+<section class="py-5 section-wrapper">
+    <div class="floating-shapes">
+        <div class="shape shape-1" style="top: 20%; right: 20%;"></div>
+        <div class="shape shape-2" style="bottom: 30%; left: 10%;"></div>
+    </div>
+    
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-newspaper me-3 text-warning"></i>
+                {% trans "Actualités récentes" %}
+            </h2>
+            <p class="lead text-muted">{% trans "Restez informé de nos dernières activités" %}</p>
+            <div class="section-divider mx-auto" style="width: 100px;"></div>
+        </div>
+        
+        <div class="row">
+            {% for article in recent_news %}
+            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="card h-100 news-card">
+                    {% if article.image %}
+                        <div class="position-relative">
+                            <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title_fr }}" style="height: 200px; object-fit: cover;">
+                            <div class="position-absolute top-0 end-0 m-2">
+                                {% if article.is_featured %}
+                                    <span class="badge bg-warning">
+                                        <i class="fas fa-star me-1"></i>
+                                        {% trans "À la une" %}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="card-img-top bg-gradient-secondary d-flex align-items-center justify-content-center position-relative" style="height: 200px;">
+                            <i class="fas fa-newspaper text-white fa-3x"></i>
+                            {% if article.is_featured %}
+                                <span class="badge bg-warning position-absolute top-0 end-0 m-2">
+                                    <i class="fas fa-star me-1"></i>
+                                    {% trans "À la une" %}
+                                </span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-alt me-1 text-primary"></i>
+                                {{ article.publication_date|date:"d M Y" }}
+                            </small>
+                        </div>
+                        
+                        <h6 class="card-title fw-bold">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ article.title_fr|truncatechars:50 }}
+                            {% else %}
+                                {{ article.title_en|default:article.title_fr|truncatechars:50 }}
+                            {% endif %}
+                        </h6>
+                        
+                        <p class="card-text flex-grow-1 text-muted">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ article.content_fr|striptags|truncatewords:15 }}
+                            {% else %}
+                                {{ article.content_en|default:article.content_fr|striptags|truncatewords:15 }}
+                            {% endif %}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{% url 'news_detail' article.pk %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-book-open me-1"></i>
+                                {% trans "Lire la suite" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="{% url 'news' %}" class="btn btn-outline-primary btn-lg">
+                {% trans "Voir toutes les actualités" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Featured Gallery Section -->
+{% if featured_gallery %}
+<section class="py-5 bg-light section-wrapper">
+    <div class="floating-shapes">
+        <div class="shape shape-1" style="top: 15%; left: 20%;"></div>
+        <div class="shape shape-2" style="bottom: 25%; right: 15%;"></div>
+        <div class="shape shape-3" style="top: 40%; right: 5%;"></div>
+    </div>
+    
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-images me-3 text-secondary"></i>
+                {% trans "Galerie photo" %}
+            </h2>
+            <p class="lead text-muted">{% trans "Revivez nos meilleurs moments en images" %}</p>
+            <div class="section-divider mx-auto" style="width: 100px;"></div>
+        </div>
+        
+        <div class="row">
+            {% for item in featured_gallery %}
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="gallery-item position-relative overflow-hidden">
+                    {% if item.media_type == 'image' and item.image %}
+                        <a href="{{ item.image.url }}" class="glightbox" data-gallery="gallery">
+                            <img src="{{ item.image.url }}" alt="{{ item.title_fr }}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                            <div class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                <div class="text-center">
+                                    <i class="fas fa-search-plus text-white fa-2x mb-2"></i>
+                                    <p class="text-white mb-0">{% trans "Voir l'image" %}</p>
+                                </div>
+                            </div>
+                        </a>
+                    {% elif item.media_type == 'video' %}
+                        <div class="video-thumbnail position-relative">
+                            {% if item.video_file %}
+                                <video width="100%" height="250" style="object-fit: cover;">
+                                    <source src="{{ item.video_file.url }}" type="video/mp4">
+                                </video>
+                                <div class="gallery-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                                    <div class="text-center">
+                                        <i class="fas fa-play-circle text-white fa-3x mb-2"></i>
+                                        <p class="text-white mb-0">{% trans "Lire la vidéo" %}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="bg-gradient-secondary d-flex align-items-center justify-content-center" style="height: 250px;">
+                                    <i class="fas fa-video text-white fa-3x"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="gallery-info position-absolute bottom-0 start-0 w-100 p-3 text-white" style="background: linear-gradient(transparent, rgba(0,0,0,0.9));">
+                        <h6 class="mb-1 fw-bold">
+                            <i class="fas fa-camera me-2"></i>
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ item.title_fr }}
+                            {% else %}
+                                {{ item.title_en|default:item.title_fr }}
+                            {% endif %}
+                        </h6>
+                        <small class="opacity-75">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ item.description_fr|truncatechars:50 }}
+                            {% else %}
+                                {{ item.description_en|default:item.description_fr|truncatechars:50 }}
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="{% url 'gallery' %}" class="btn btn-outline-primary btn-lg">
+                {% trans "Voir toute la galerie" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action Section -->
+<section style="background-color: #2C5530;" class="py-5 text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <h2 class="mb-3">{% trans "Rejoignez notre communauté !" %}</h2>
+                <p class="lead mb-0">
+                    {% trans "Devenez membre de l'A²ELBM2 et participez à la construction d'un avenir meilleur pour notre lycée et notre communauté." %}
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end" data-aos="fade-left" data-aos-delay="200">
+                <a href="{% url 'member_registration' %}" class="btn btn-secondary btn-lg me-2 mb-2">
+                    <i class="fas fa-user-plus me-2"></i>
+                    {% trans "Devenir membre" %}
+                </a>
+                <a href="{% url 'donations' %}" class="btn btn-outline-light btn-lg mb-2">
+                    <i class="fas fa-heart me-2"></i>
+                    {% trans "Faire un don" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Partners Section -->
+<section class="partners-section py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title-partners">
+                <i class="fas fa-handshake me-3 text-primary"></i>
+                {% trans "Nos Partenaires" %}
+            </h2>
+            <p class="lead text-muted">
+                {% trans "Ils nous accompagnent dans notre mission d'excellence et de solidarité" %}
+            </p>
+        </div>
+        
+        <div class="row justify-content-center align-items-center g-4">
+            <!-- PropentaTech -->
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <div class="logo-placeholder">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="partner-content">
+                        <h5 class="partner-name">PropentaTech</h5>
+                        <p class="partner-description">{% trans "Solutions technologiques innovantes" %}</p>
+                        <a href="https://propentatech.com" target="_blank" class="partner-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            {% trans "Visiter" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Savins Solutions -->
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <div class="logo-placeholder">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                    <div class="partner-content">
+                        <h5 class="partner-name">Altrans </h5>
+                        <p class="partner-description">{% trans "Conseils et solutions d'affaires" %}</p>
+                        <a href="#" class="partner-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            {% trans "Visiter" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DF Consulting -->
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <div class="logo-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="partner-content">
+                        <h5 class="partner-name">DF Consulting</h5>
+                        <p class="partner-description">{% trans "accompagnement dans l'immigration  pour l'italie." %}</p>
+                        <a href="#" class="partner-link">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            {% trans "Visiter" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Partnership CTA -->
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="400">
+            <div class="partnership-cta">
+                <h4 class="mb-3">{% trans "Devenez Notre Partenaire" %}</h4>
+                <p class="text-muted mb-4">
+                    {% trans "Rejoignez-nous pour soutenir l'excellence éducative et le développement communautaire" %}
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-handshake me-2"></i>
+                    {% trans "Devenir Partenaire" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .animate-bounce {
+        animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+
+    /* Hero Section Premium Styles */
+    .hero-section-premium {
+        min-height: 100vh;
+        background-image: linear-gradient(135deg, rgba(44,85,48,0.9) 0%, rgba(74,124,89,0.8) 100%), url('{% if site_settings.hero_image %}{{ site_settings.hero_image.url }}{% else %}{% static 'images/hero-bg.jpg' %}{% endif %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="heroPattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.5" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="10" r="1" fill="rgba(255,215,0,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23heroPattern)"/></svg>') repeat;
+        opacity: 0.6;
+    }
+
+    .hero-particles-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="30" cy="30" r="2" fill="rgba(255,215,0,0.4)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/></circle><circle cx="170" cy="60" r="1.5" fill="rgba(255,215,0,0.3)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" begin="1s"/></circle><circle cx="80" cy="170" r="1" fill="rgba(255,215,0,0.2)" opacity="0"><animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite" begin="2s"/></circle></svg>') repeat;
+        animation: particles-drift 25s linear infinite;
+    }
+
+    @keyframes particles-drift {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(-100px) rotate(360deg); }
+    }
+
+    .hero-geometric-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+    }
+
+    .hero-geometric-shapes > div {
+        position: absolute;
+        background: rgba(255, 215, 0, 0.1);
+        animation: float-shapes 15s ease-in-out infinite;
+    }
+
+    .shape-1 {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+    }
+
+    .shape-2 {
+        width: 80px;
+        height: 80px;
+        top: 70%;
+        right: 10%;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        animation-delay: -5s;
+    }
+
+    .shape-3 {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        top: 30%;
+        right: 25%;
+        animation-delay: -10s;
+    }
+
+    .shape-4 {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        bottom: 30%;
+        left: 15%;
+        animation-delay: -7.5s;
+    }
+
+    .shape-5 {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        top: 50%;
+        left: 85%;
+        opacity: 0.05;
+        animation-delay: -12.5s;
+    }
+
+    @keyframes float-shapes {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    .floating-icons {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+    }
+
+    .float-icon {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 215, 0, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 1.2rem;
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        animation: orbit-float 20s linear infinite;
+    }
+
+    .icon-1 { top: 15%; left: 85%; animation-delay: 0s; }
+    .icon-2 { bottom: 25%; right: 85%; animation-delay: -4s; }
+    .icon-3 { bottom: 15%; left: 10%; animation-delay: -8s; }
+    .icon-4 { top: 25%; left: 5%; animation-delay: -12s; }
+    .icon-5 { top: 60%; right: 95%; animation-delay: -16s; }
+
+    @keyframes orbit-float {
+        0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+    }
+
+    /* Hero Content */
+    .hero-badge {
+        margin-bottom: 2rem;
+    }
+
+    .badge-content {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        display: inline-block;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-title-premium {
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        font-weight: 900;
+        color: white;
+        margin-bottom: 2rem;
+        line-height: 1.1;
+        text-shadow: 2px 4px 20px rgba(0, 0, 0, 0.3);
+        letter-spacing: -0.02em;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .text-gradient-hero {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(2px 2px 4px rgba(255, 215, 0, 0.3));
+    }
+
+    .hero-subtitle-premium {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        max-width: 90%;
+        text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Next Event Card */
+    .next-event-card {
+        max-width: 400px;
+    }
+
+    .event-card-inner {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 1.5rem;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .event-card-inner:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .event-badge {
+        background: rgba(255, 215, 0, 0.9);
+        color: #333;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .event-title {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .event-details {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .event-date,
+    .event-location {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .event-btn {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .event-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Hero Buttons */
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary,
+    .btn-hero-outline {
+        display: inline-flex;
+        align-items: center;
+        padding: 18px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border: none;
+        min-width: 220px;
+        justify-content: center;
+    }
+
+    .btn-hero-primary {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #333;
+        box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+    }
+
+    .btn-hero-secondary {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        box-shadow: 0 15px 40px rgba(231, 76, 60, 0.4);
+    }
+
+    .btn-hero-outline {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(15px);
+    }
+
+    .btn-hero-primary:hover,
+    .btn-hero-secondary:hover,
+    .btn-hero-outline:hover {
+        transform: translateY(-8px) scale(1.05);
+    }
+
+    .btn-hero-primary:hover {
+        box-shadow: 0 25px 60px rgba(255, 215, 0, 0.6);
+        color: #333;
+    }
+
+    .btn-hero-secondary:hover {
+        box-shadow: 0 25px 60px rgba(231, 76, 60, 0.6);
+        color: white;
+    }
+
+    .btn-hero-outline:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        color: white;
+    }
+
+    .btn-glow {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-hero-primary:hover .btn-glow,
+    .btn-hero-secondary:hover .btn-glow {
+        left: 100%;
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .stat-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: white;
+        transition: all 0.3s ease;
+        min-width: 140px;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 215, 0, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #FFD700;
+        display: block;
+        margin-bottom: 0.25rem;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+    }
+
+    /* Hero Visual */
+    .hero-visual-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo-container {
+        position: relative;
+        width: 350px;
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-logo-img {
+        max-width: 280px;
+        max-height: 280px;
+        filter: drop-shadow(0 25px 80px rgba(0, 0, 0, 0.3));
+        animation: logo-float 8s ease-in-out infinite;
+    }
+
+    .hero-logo-placeholder {
+        width: 280px;
+        height: 280px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(25px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFD700;
+        font-size: 6rem;
+        animation: logo-float 8s ease-in-out infinite;
+        border: 3px solid rgba(255, 215, 0, 0.3);
+    }
+
+    @keyframes logo-float {
+        0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+        50% { transform: translateY(-20px) rotate(5deg) scale(1.05); }
+    }
+
+    .orbit-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+    }
+
+    .orbit-item {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 1.5rem;
+        box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+        animation: orbit-rotation 20s linear infinite;
+    }
+
+    .orbit-1 { animation-delay: 0s; }
+    .orbit-2 { animation-delay: -5s; }
+    .orbit-3 { animation-delay: -10s; }
+    .orbit-4 { animation-delay: -15s; }
+
+    @keyframes orbit-rotation {
+        0% { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+    }
+
+    .success-metrics {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+    }
+
+    .metric-float {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: white;
+        animation: metric-float 8s ease-in-out infinite;
+    }
+
+    .metric-1 {
+        top: 20%;
+        left: -40px;
+        animation-delay: 0s;
+    }
+
+    .metric-2 {
+        bottom: 25%;
+        right: -40px;
+        animation-delay: -4s;
+    }
+
+    @keyframes metric-float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+    }
+
+    .metric-icon {
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 215, 0, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .metric-number {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #FFD700;
+        display: block;
+    }
+
+    .metric-label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator-hero {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+
+    .scroll-link {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .scroll-link:hover {
+        color: #FFD700;
+        transform: translateY(-5px);
+    }
+
+    .scroll-mouse {
+        width: 30px;
+        height: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        border-radius: 15px;
+        position: relative;
+        animation: bounce-scroll 2s infinite;
+    }
+
+    .scroll-wheel {
+        width: 4px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 2px;
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: scroll-wheel-move 2s infinite;
+    }
+
+    @keyframes scroll-wheel-move {
+        0%, 20% { opacity: 1; top: 8px; }
+        100% { opacity: 0; top: 28px; }
+    }
+
+    @keyframes bounce-scroll {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+
+    .scroll-text {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+        .orbit-elements,
+        .success-metrics {
+            display: none;
+        }
+        
+        .floating-icons .float-icon {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .hero-section-premium {
+            background-attachment: scroll;
+            min-height: 90vh;
+            padding: 2rem 0;
+        }
+        
+        .hero-title-premium {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle-premium {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-actions {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-hero-primary,
+        .btn-hero-secondary,
+        .btn-hero-outline {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-stats {
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .stat-card {
+            flex-direction: column;
+            text-align: center;
+            min-width: 120px;
+            padding: 1rem;
+        }
+        
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+        }
+        
+        .logo-container {
+            width: 280px;
+            height: 280px;
+            margin-top: 2rem;
+        }
+        
+        .hero-logo-img,
+        .hero-logo-placeholder {
+            max-width: 220px;
+            max-height: 220px;
+            width: 220px;
+            height: 220px;
+        }
+        
+        .next-event-card {
+            margin-bottom: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero-section-premium {
+            min-height: 85vh;
+            padding: 1rem 0;
+        }
+        
+        .hero-geometric-shapes > div {
+            display: none;
+        }
+        
+        .hero-title-premium {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        
+        .hero-subtitle-premium {
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .stat-card {
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .event-details {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .scroll-indicator-hero {
+            bottom: 20px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-section-premium {
+            min-height: 80vh;
+        }
+        
+        .badge-content {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .hero-title-premium {
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle-premium {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-hero-primary,
+        .btn-hero-secondary,
+        .btn-hero-outline {
+            padding: 15px 25px;
+            font-size: 1rem;
+        }
+        
+        .event-card-inner {
+            padding: 1rem;
+        }
+        
+        .event-title {
+            font-size: 1rem;
+        }
+        
+        .logo-container {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .hero-logo-img,
+        .hero-logo-placeholder {
+            max-width: 160px;
+            max-height: 160px;
+            width: 160px;
+            height: 160px;
+            font-size: 4rem;
+        }
+    }
+
+    /* Counter Animation */
+    .counter {
+        font-family: 'Playfair Display', serif;
+    }
+
+    /* Custom Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Performance Optimizations */
+    .hero-section-premium * {
+        will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-section-premium *,
+        .hero-section-premium *::before,
+        .hero-section-premium *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* Loading States */
+    .hero-logo-img {
+        opacity: 0;
+        animation: fadeInImage 1s ease forwards;
+        animation-delay: 0.5s;
+    }
+
+    @keyframes fadeInImage {
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .event-card:hover,
+    .project-card:hover,
+    .member-card:hover,
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-item {
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-overlay {
+        background: rgba(0,0,0,0.6);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+    
+    .gallery-item:hover {
+        transform: scale(1.05);
+    }
+    
+    .hero-buttons .btn {
+        transition: all 0.3s ease;
+    }
+    
+    .hero-buttons .btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .card {
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .section-title {
+        color: var(--bs-primary);
+        font-weight: 700;
+    }
+
+    /* Partners Section Styles */
+.partners-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.partners-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="partnersPattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(44,85,48,0.03)"/><circle cx="5" cy="15" r="0.5" fill="rgba(255,215,0,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23partnersPattern)"/></svg>') repeat;
+    opacity: 0.4;
+}
+
+.section-title-partners {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.section-title-partners::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #2C5530 0%, #4A7C59 100%);
+    border-radius: 2px;
+}
+
+.partner-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(44, 85, 48, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #2C5530 0%, #FFD700 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.partner-card:hover::before {
+    transform: scaleX(1);
+}
+
+.partner-logo {
+    margin-bottom: 1.5rem;
+}
+
+.logo-placeholder {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #2C5530 0%, #4A7C59 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+    font-size: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.partner-card:hover .logo-placeholder {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 25px rgba(44, 85, 48, 0.3);
+}
+
+.partner-card:hover .logo-placeholder::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+.partner-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.partner-description {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.partner-link {
+    color: #2C5530;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #2C5530;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.partner-link:hover {
+    background: #2C5530;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
+}
+
+.partnership-cta {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(44, 85, 48, 0.1);
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.partnership-cta::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #2C5530, #FFD700, #2C5530);
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.partnership-cta:hover::before {
+    opacity: 1;
+}
+
+.partnership-cta h4 {
+    color: #333;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+}
+
+.partnership-cta .btn {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.partnership-cta .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(44, 85, 48, 0.3);
+}
+
+/* Styles pour décorer les sections */
+.section-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-decoration {
+    position: absolute;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.decoration-circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--bs-primary), var(--bs-warning));
+}
+
+.decoration-triangle {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 150px solid var(--bs-primary);
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 20px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bs-primary), var(--bs-warning));
+    border-radius: 2px;
+}
+
+.member-card {
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bs-primary), var(--bs-warning));
+}
+
+.member-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.member-avatar {
+    position: relative;
+    display: inline-block;
+}
+
+.member-avatar::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--bs-primary), var(--bs-warning)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: exclude;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.member-card:hover .member-avatar::after {
+    opacity: 1;
+}
+
+.news-card {
+    border: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--bs-primary), var(--bs-secondary));
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(13,110,253,0.1), rgba(255,193,7,0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.gallery-overlay {
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.btn-outline-primary {
+    border-width: 2px;
+    font-weight: 600;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-outline-primary:hover::before {
+    left: 100%;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.03;
+}
+
+.shape-1 {
+    top: 10%;
+    right: 10%;
+    width: 60px;
+    height: 60px;
+    background: var(--bs-primary);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-2 {
+    bottom: 20%;
+    left: 15%;
+    width: 80px;
+    height: 80px;
+    background: var(--bs-warning);
+    border-radius: 20px;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    top: 50%;
+    left: 5%;
+    width: 40px;
+    height: 40px;
+    background: var(--bs-secondary);
+    transform: rotate(45deg);
+    animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, #0b5ed7 100%) !important;
+}
+
+.bg-gradient-secondary {
+    background: linear-gradient(135deg, var(--bs-secondary) 0%, #5a6268 100%) !important;
+}
+
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--bs-primary), transparent);
+    margin: 2rem 0;
+}
+
+/* Animation Classes */
+@keyframes float-partner {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.partner-card:nth-child(1) {
+    animation: float-partner 6s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.partner-card:nth-child(2) {
+    animation: float-partner 6s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.partner-card:nth-child(3) {
+    animation: float-partner 6s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title-partners {
+        font-size: 2rem;
+    }
+    
+    .partner-card {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .partnership-cta {
+        padding: 2rem 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .partnership-cta .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .partners-section {
+        padding: 3rem 0;
+    }
+    
+    .logo-placeholder {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .partner-name {
+        font-size: 1.2rem;
+    }
+}
+</style>
+
+
+<script>
+    // Counter Animation for Hero Stats
+    document.addEventListener('DOMContentLoaded', function() {
+        function initHeroCounters() {
+            const counters = document.querySelectorAll('.hero-stats .counter');
+            
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2500;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    counter.textContent = Math.floor(current);
+                    
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    }
+                }, 16);
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                        entry.target.classList.add('animated');
+                        setTimeout(() => {
+                            animateCounter(entry.target);
+                        }, 500);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+        
+        // Initialize counters
+        initHeroCounters();
+        
+        // Enhanced scroll indicator
+        const scrollLink = document.querySelector('.scroll-link');
+        if (scrollLink) {
+            scrollLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector('#featured-events');
+                if (target) {
+                    const offset = 100;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+        
+        // Parallax effect for hero elements (desktop only)
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                const particles = document.querySelector('.hero-particles-bg');
+                if (particles) {
+                    particles.style.transform = `translateY(${rate}px)`;
+                }
+                
+                const shapes = document.querySelectorAll('.hero-geometric-shapes > div');
+                shapes.forEach((shape, index) => {
+                    const speed = 0.1 + (index * 0.05);
+                    shape.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            }, { passive: true });
+        }
+        
+        // Button ripple effects
+        document.querySelectorAll('.btn-hero-primary, .btn-hero-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.5);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: button-ripple 0.6s linear;
+                    pointer-events: none;
+                    z-index: 10;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes button-ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+    </script>
+
+{% endblock %}

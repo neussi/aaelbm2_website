@@ -1,0 +1,644 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Inscription réussie" %} - A²ELBM2{% endblock %}
+
+{% block meta_description %}{% trans "Votre demande d'adhésion à l'Association des Anciens Élèves du Lycée Bilingue de Melong 2 a été envoyée avec succès." %}{% endblock %}
+
+{% block og_title %}{% trans "Inscription réussie" %} - A²ELBM2{% endblock %}
+{% block og_description %}{% trans "Merci pour votre demande d'adhésion. Notre équipe va l'examiner dans les plus brefs délais." %}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .success-hero {
+        background: linear-gradient(135deg, rgba(40, 167, 69, 0.9) 0%, rgba(25, 135, 84, 0.8) 100%), url('{% static "images/success-bg.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .success-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('{% static "images/success-pattern.svg" %}') repeat;
+        opacity: 0.1;
+        z-index: 1;
+    }
+    
+    .success-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .success-icon {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        animation: successPulse 2s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .success-icon i {
+        font-size: 3rem;
+        color: white;
+    }
+    
+    .success-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .success-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+    
+    .next-steps-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 5rem 0;
+    }
+    
+    .step-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid var(--primary-color);
+        height: 100%;
+    }
+    
+    .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(44,85,48,0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-cards {
+        background: var(--primary-color);
+        color: white;
+        padding: 4rem 0;
+    }
+    
+    .contact-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .contact-card:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-5px);
+    }
+    
+    .contact-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--secondary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--dark-color);
+        font-size: 1.8rem;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .timeline {
+        position: relative;
+        padding-left: 3rem;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--gradient-primary);
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -2.5rem;
+        top: 1.5rem;
+        width: 12px;
+        height: 12px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 0 0 3px var(--primary-color);
+    }
+    
+    .cta-section {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        padding: 4rem 0;
+        text-align: center;
+        color: var(--dark-color);
+    }
+    
+    .floating-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+    }
+    
+    .floating-element {
+        position: absolute;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    .floating-element:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+    
+    .floating-element:nth-child(2) {
+        top: 50%;
+        right: 15%;
+        animation-delay: 2s;
+    }
+    
+    .floating-element:nth-child(3) {
+        bottom: 20%;
+        left: 20%;
+        animation-delay: 4s;
+    }
+    
+    @keyframes successPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .success-title {
+            font-size: 2.2rem;
+        }
+        
+        .success-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .timeline {
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            left: -1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Success Hero Section -->
+<section class="success-hero">
+    <div class="floating-elements">
+        <div class="floating-element">
+            <i class="fas fa-graduation-cap fa-3x"></i>
+        </div>
+        <div class="floating-element">
+            <i class="fas fa-users fa-2x"></i>
+        </div>
+        <div class="floating-element">
+            <i class="fas fa-star fa-2x"></i>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 success-content" data-aos="fade-up">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                
+                <h1 class="success-title">
+                    {% trans "Félicitations !" %}
+                </h1>
+                
+                <p class="success-subtitle">
+                    {% trans "Votre demande d'adhésion à l'Association des Anciens Élèves du Lycée Bilingue de Melong 2 (A²ELBM2) a été envoyée avec succès." %}
+                </p>
+                
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{% url 'home' %}" class="btn btn-light btn-lg px-4">
+                        <i class="fas fa-home me-2"></i>
+                        {% trans "Retour à l'accueil" %}
+                    </a>
+                    <a href="{% url 'about' %}" class="btn btn-outline-light btn-lg px-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        {% trans "En savoir plus" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Next Steps Section -->
+<section class="next-steps-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="mb-4">
+                    <i class="fas fa-route me-3"></i>
+                    {% trans "Prochaines étapes" %}
+                </h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h5 class="text-primary">
+                            <i class="fas fa-envelope me-2"></i>
+                            {% trans "Confirmation par email" %}
+                        </h5>
+                        <p class="mb-1">{% trans "Vous recevrez un email de confirmation dans les prochaines minutes." %}</p>
+                        <small class="text-muted">{% trans "Immédiatement" %}</small>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h5 class="text-primary">
+                            <i class="fas fa-search me-2"></i>
+                            {% trans "Examen de votre dossier" %}
+                        </h5>
+                        <p class="mb-1">{% trans "Notre bureau va examiner votre demande d'adhésion." %}</p>
+                        <small class="text-muted">{% trans "Dans les 48 heures" %}</small>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h5 class="text-primary">
+                            <i class="fas fa-phone me-2"></i>
+                            {% trans "Contact et validation" %}
+                        </h5>
+                        <p class="mb-1">{% trans "Nous vous contacterons pour finaliser votre adhésion." %}</p>
+                        <small class="text-muted">{% trans "Sous 72 heures" %}</small>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h5 class="text-success">
+                            <i class="fas fa-user-check me-2"></i>
+                            {% trans "Bienvenue dans la famille !" %}
+                        </h5>
+                        <p class="mb-1">{% trans "Vous devenez officiellement membre de A²ELBM2." %}</p>
+                        <small class="text-muted">{% trans "Dès validation" %}</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="mb-4">
+                    <i class="fas fa-gift me-3"></i>
+                    {% trans "En attendant..." %}
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="step-card">
+                            <div class="step-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h5>{% trans "Restez informé" %}</h5>
+                            <p>{% trans "Suivez nos actualités et événements sur nos réseaux sociaux." %}</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-facebook me-1"></i>
+                                {% trans "Nous suivre" %}
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="step-card">
+                            <div class="step-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <h5>{% trans "Événements" %}</h5>
+                            <p>{% trans "Découvrez nos prochains événements et activités." %}</p>
+                            <a href="{% url 'events' %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-eye me-1"></i>
+                                {% trans "Voir les événements" %}
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="step-card">
+                            <div class="step-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h5>{% trans "Projets" %}</h5>
+                            <p>{% trans "Explorez les projets en cours et à venir de l'association." %}</p>
+                            <a href="{% url 'projects' %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-folder-open me-1"></i>
+                                {% trans "Voir les projets" %}
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="step-card">
+                            <div class="step-icon">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <h5>{% trans "Actualités" %}</h5>
+                            <p>{% trans "Lisez les dernières nouvelles de notre communauté." %}</p>
+                            <a href="{% url 'news' %}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-newspaper me-1"></i>
+                                {% trans "Lire les actualités" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-cards">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5" data-aos="fade-up">
+                <h2 class="text-white mb-3">
+                    <i class="fas fa-headset me-3"></i>
+                    {% trans "Une question ? Contactez-nous !" %}
+                </h2>
+                <p class="lead text-white-50">
+                    {% trans "Notre équipe est à votre disposition pour répondre à toutes vos questions" %}
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h5>{% trans "WhatsApp" %}</h5>
+                    <p>{% trans "Contactez notre président directement" %}</p>
+                    <a href="{% url 'whatsapp_redirect' %}?type=president&message={% trans 'Bonjour, je viens de m\'inscrire et j\'ai une question' %}" 
+                       class="btn btn-light" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i>
+                        {% trans "Écrire maintenant" %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h5>{% trans "Email" %}</h5>
+                    <p>{% trans "Envoyez-nous un message détaillé" %}</p>
+                    <a href="{% url 'contact' %}" class="btn btn-light">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        {% trans "Envoyer un email" %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h5>{% trans "Téléphone" %}</h5>
+                    <p>{% trans "Appelez-nous directement" %}</p>
+                    <a href="tel:+237673583241" class="btn btn-light">
+                        <i class="fas fa-phone me-2"></i>
+                        +237 6 73 58 32 41
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+                <h2 class="mb-4">
+                    <i class="fas fa-heart me-3"></i>
+                    {% trans "Merci de nous faire confiance !" %}
+                </h2>
+                <p class="lead mb-4">
+                    {% trans "Votre engagement envers notre communauté d'anciens élèves nous honore. Ensemble, nous continuerons à promouvoir l'excellence et la solidarité." %}
+                </p>
+                
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{% url 'about' %}" class="btn btn-dark btn-lg">
+                        <i class="fas fa-users me-2"></i>
+                        {% trans "Découvrir nos membres" %}
+                    </a>
+                    <a href="{% url 'donations' %}" class="btn btn-outline-dark btn-lg">
+                        <i class="fas fa-hand-holding-heart me-2"></i>
+                        {% trans "Soutenir nos projets" %}
+                    </a>
+                </div>
+                
+                <div class="mt-4">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        {% trans "Vous recevrez bientôt plus d'informations sur votre statut d'adhésion" %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Confetti animation pour célébrer l'inscription
+    function createConfetti() {
+        const colors = ['#2C5530', '#FFD700', '#FF6B35'];
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.top = '-10px';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = '50%';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    }
+    
+    // Ajouter l'animation CSS pour la chute des confettis
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Lancer les confettis après le chargement de la page
+    window.addEventListener('load', () => {
+        setTimeout(createConfetti, 500);
+    });
+    
+    // Smooth scroll pour les liens de navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Animation pour les compteurs si nécessaire
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const increment = target / 200;
+            
+            function updateCounter() {
+                const current = +counter.innerText;
+                if (current < target) {
+                    counter.innerText = Math.ceil(current + increment);
+                    setTimeout(updateCounter, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            }
+            
+            updateCounter();
+        });
+    }
+    
+    // Notification toast pour rappeler de vérifier les emails
+    setTimeout(() => {
+        if (window.bootstrap) {
+            const toastHTML = `
+                <div class="toast position-fixed top-0 end-0 m-3" role="alert" style="z-index: 1055;">
+                    <div class="toast-header">
+                        <i class="fas fa-envelope text-primary me-2"></i>
+                        <strong class="me-auto">{% trans "Rappel" %}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        {% trans "N'oubliez pas de vérifier votre boîte email (y compris les spams) pour la confirmation d'inscription." %}
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', toastHTML);
+            const toast = new bootstrap.Toast(document.querySelector('.toast'));
+            toast.show();
+        }
+    }, 3000);
+</script>
+{% endblock %}

@@ -1,0 +1,238 @@
+{% extends 'admin_dashboard/base.html' %}
+{% load static %}
+
+{% block page_title %}Gestion des événements{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="fas fa-calendar me-2"></i>
+        Gestion des événements
+    </h2>
+    <a href="{% url 'admin_event_create' %}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i>
+        Nouvel événement
+    </a>
+</div>
+
+<!-- Liste des événements -->
+<div class="table-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            Liste des événements ({{ events_page.paginator.count }} au total)
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        {% if events_page.object_list %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Titre</th>
+                            <th>Date & Lieu</th>
+                            <th>Inscriptions</th>
+                            <th>Limite inscription</th>
+                            <th>Statut</th>
+                            <th>Vedette</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events_page.object_list %}
+                            <tr>
+                                <td>
+                                    {% if event.image %}
+                                        <img src="{{ event.image.url }}" alt="{{ event.title_fr }}" 
+                                             class="rounded" width="50" height="50" style="object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-secondary rounded d-flex align-items-center justify-content-center" 
+                                             style="width: 50px; height: 50px;">
+                                            <i class="fas fa-calendar text-white"></i>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <strong>{{ event.title_fr }}</strong>
+                                    <br><small class="text-muted">{{ event.title_en }}</small>
+                                </td>
+                                <td>
+                                    <div class="text-nowrap">
+                                        <strong>{{ event.date_event|date:"d/m/Y" }}</strong><br>
+                                        <small class="text-muted">{{ event.date_event|date:"H:i" }}</small><br>
+                                        <small class="text-muted">
+                                            <i class="fas fa-map-marker-alt me-1"></i>
+                                            {{ event.location|truncatechars:20 }}
+                                        </small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-center">
+                                        <h6 class="mb-0">{{ event.registration_count }}</h6>
+                                        {% if event.max_participants %}
+                                            <small class="text-muted">/ {{ event.max_participants }}</small>
+                                            <div class="progress mt-1" style="height: 4px;">
+                                                {% widthratio event.registration_count event.max_participants 100 as percentage %}
+                                                <div class="progress-bar 
+                                                    {% if percentage >= 90 %}bg-danger
+                                                    {% elif percentage >= 75 %}bg-warning
+                                                    {% else %}bg-success
+                                                    {% endif %}" 
+                                                    style="width: {{ percentage }}%">
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <small class="text-muted">illimité</small>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <small>{{ event.registration_deadline|date:"d/m/Y H:i" }}</small>
+                                    {% now "Y-m-d H:i" as current_time %}
+                                    {% if event.registration_deadline|date:"Y-m-d H:i" < current_time %}
+                                        <br><span class="badge bg-danger">Fermée</span>
+                                    {% else %}
+                                        <br><span class="badge bg-success">Ouverte</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if event.is_active %}
+                                        <span class="badge bg-success">Actif</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Inactif</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if event.is_featured %}
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'admin_event_registrations' event.pk %}" 
+                                           class="btn btn-sm btn-outline-info" title="Voir les inscriptions">
+                                            <i class="fas fa-users"></i>
+                                            <span class="badge bg-info text-dark ms-1">{{ event.registration_count }}</span>
+                                        </a>
+                                        <a href="{% url 'admin_event_edit' event.pk %}" 
+                                           class="btn btn-sm btn-outline-primary" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{% url 'admin_event_delete' event.pk %}" 
+                                           class="btn btn-sm btn-outline-danger" title="Supprimer"
+                                           onclick="return confirm('Supprimer cet événement et toutes ses inscriptions ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-calendar fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Aucun événement trouvé</h5>
+                <p class="text-muted">Commencez par créer votre premier événement.</p>
+                <a href="{% url 'admin_event_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus me-1"></i>
+                    Créer un événement
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Pagination -->
+{% if events_page.has_other_pages %}
+    <nav aria-label="Navigation des pages" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if events_page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ events_page.previous_page_number }}">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for num in events_page.paginator.page_range %}
+                {% if events_page.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% elif num > events_page.number|add:'-3' and num < events_page.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if events_page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ events_page.next_page_number }}">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ events_page.paginator.num_pages }}">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<!-- Statistiques rapides -->
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-primary">{{ events_page.paginator.count }}</h4>
+            <p class="text-muted mb-0">Total événements</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-success">
+                {% for event in events_page.object_list %}
+                    {% if event.is_active %}{% if forloop.first %}{{ forloop.counter0|add:events_page.object_list|length }}{% endif %}{% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">Événements actifs</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-info">
+                {% now "Y-m-d" as today %}
+                {% for event in events_page.object_list %}
+                    {% if event.date_event|date:"Y-m-d" >= today %}
+                        {% if forloop.first %}{{ forloop.counter0|add:events_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">À venir</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-warning">
+                {% for event in events_page.object_list %}
+                    {% if event.is_featured %}{% if forloop.first %}{{ forloop.counter0|add:events_page.object_list|length }}{% endif %}{% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">En vedette</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

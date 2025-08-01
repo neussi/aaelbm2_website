@@ -1,0 +1,327 @@
+{% extends 'admin_dashboard/base.html' %}
+{% load static %}
+
+{% block page_title %}Messages de contact{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="fas fa-envelope me-2"></i>
+        Messages de contact
+    </h2>
+</div>
+
+<!-- Filtres -->
+<div class="table-card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Filtres</h5>
+    </div>
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-6">
+                <label for="status" class="form-label">Statut</label>
+                <select class="form-select" id="status" name="status">
+                    <option value="">Tous les messages</option>
+                    <option value="unread" {% if current_status == 'unread' %}selected{% endif %}>
+                        Non lus
+                    </option>
+                    <option value="read" {% if current_status == 'read' %}selected{% endif %}>
+                        Lus
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary me-2">
+                    <i class="fas fa-filter me-1"></i>
+                    Filtrer
+                </button>
+                <a href="{% url 'admin_messages_list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-1"></i>
+                    Reset
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Statistiques rapides -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <h4 class="text-primary">{{ messages_page.paginator.count }}</h4>
+            <p class="text-muted mb-0">Total messages</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <h4 class="text-warning">
+                {% for message in messages_page.object_list %}
+                    {% if not message.is_read %}
+                        {% if forloop.first %}{{ forloop.counter0|add:messages_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">Non lus</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <h4 class="text-success">
+                {% for message in messages_page.object_list %}
+                    {% if message.is_replied %}
+                        {% if forloop.first %}{{ forloop.counter0|add:messages_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">Répondus</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <h4 class="text-info">
+                {% now "Y-m-d" as today %}
+                {% for message in messages_page.object_list %}
+                    {% if message.created_at|date:"Y-m-d" == today %}
+                        {% if forloop.first %}{{ forloop.counter0|add:messages_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">Aujourd'hui</p>
+        </div>
+    </div>
+</div>
+
+<!-- Liste des messages -->
+<div class="table-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            Liste des messages
+            {% if current_status == 'unread' %}
+                (Non lus)
+            {% elif current_status == 'read' %}
+                (Lus)
+            {% endif %}
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        {% if messages_page.object_list %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Statut</th>
+                            <th>Expéditeur</th>
+                            <th>Sujet</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Répondu</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for message in messages_page.object_list %}
+                            <tr class="{% if not message.is_read %}table-warning{% endif %}">
+                                <td>
+                                    {% if message.is_read %}
+                                        <i class="fas fa-envelope-open text-success" title="Lu"></i>
+                                    {% else %}
+                                        <i class="fas fa-envelope text-warning" title="Non lu"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div>
+                                        <strong>{{ message.nom_prenom }}</strong>
+                                        <br>
+                                        <small class="text-muted">{{ message.email }}</small>
+                                        {% if message.telephone %}
+                                            <br>
+                                            <small class="text-muted">{{ message.telephone }}</small>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <strong>{{ message.sujet }}</strong>
+                                    {% if not message.is_read %}
+                                        <span class="badge bg-warning ms-1">Nouveau</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div style="max-width: 200px;">
+                                        {{ message.message|truncatewords:15 }}
+                                        {% if message.message|wordcount > 15 %}
+                                            <span class="text-muted">...</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-nowrap">
+                                        {{ message.created_at|date:"d/m/Y" }}
+                                        <br>
+                                        <small class="text-muted">{{ message.created_at|date:"H:i" }}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if message.is_replied %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-reply me-1"></i>
+                                            Répondu
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-clock me-1"></i>
+                                            En attente
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'admin_message_detail' message.pk %}" 
+                                           class="btn btn-sm btn-outline-primary" title="Voir le message">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="mailto:{{ message.email }}?subject=Re: {{ message.sujet }}" 
+                                           class="btn btn-sm btn-outline-success" title="Répondre par email">
+                                            <i class="fas fa-envelope"></i>
+                                        </a>
+                                        {% if message.telephone %}
+                                            <a href="https://wa.me/{{ message.telephone|cut:' '|cut:'+'|cut:'-' }}?text=Bonjour {{ message.nom_prenom }}, nous vous contactons suite à votre message concernant: {{ message.sujet }}" 
+                                               class="btn btn-sm btn-outline-success" title="Répondre par WhatsApp" target="_blank">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        {% endif %}
+                                        {% if not message.is_replied %}
+                                            <a href="{% url 'admin_mark_message_replied' message.pk %}" 
+                                               class="btn btn-sm btn-outline-info" title="Marquer comme répondu"
+                                               onclick="return confirm('Marquer ce message comme répondu ?')">
+                                                <i class="fas fa-check"></i>
+                                            </a>
+                                        {% endif %}
+                                        <a href="{% url 'admin_message_delete' message.pk %}" 
+                                           class="btn btn-sm btn-outline-danger" title="Supprimer"
+                                           onclick="return confirm('Supprimer ce message ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Aucun message trouvé</h5>
+                {% if current_status %}
+                    <p class="text-muted">Aucun message avec ce statut.</p>
+                    <a href="{% url 'admin_messages_list' %}" class="btn btn-primary">
+                        Voir tous les messages
+                    </a>
+                {% else %}
+                    <p class="text-muted">Aucun message de contact reçu pour le moment.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Pagination -->
+{% if messages_page.has_other_pages %}
+    <nav aria-label="Navigation des pages" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if messages_page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1{% if current_status %}&status={{ current_status }}{% endif %}">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ messages_page.previous_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for num in messages_page.paginator.page_range %}
+                {% if messages_page.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% elif num > messages_page.number|add:'-3' and num < messages_page.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}{% if current_status %}&status={{ current_status }}{% endif %}">
+                            {{ num }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if messages_page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ messages_page.next_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ messages_page.paginator.num_pages }}{% if current_status %}&status={{ current_status }}{% endif %}">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<!-- Actions rapides -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="table-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-bolt me-2"></i>
+                    Actions rapides
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_messages_list' %}?status=unread" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-envelope me-1"></i>
+                            Messages non lus
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_messages_list' %}?status=read" class="btn btn-outline-success w-100">
+                            <i class="fas fa-envelope-open me-1"></i>
+                            Messages lus
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-info w-100" onclick="markAllAsRead()">
+                            <i class="fas fa-check-double me-1"></i>
+                            Marquer tout comme lu
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{% url 'admin_dashboard_home' %}" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-arrow-left me-1"></i>
+                            Retour au dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function markAllAsRead() {
+    if (confirm('Marquer tous les messages comme lus ?')) {
+        // Cette fonction nécessiterait une vue AJAX pour être implémentée
+        alert('Fonctionnalité à implémenter avec AJAX');
+    }
+}
+</script>
+{% endblock %}

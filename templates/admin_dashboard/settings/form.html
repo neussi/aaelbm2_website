@@ -1,0 +1,580 @@
+{% extends 'admin_dashboard/base.html' %}
+{% load static %}
+
+{% block page_title %}Paramètres du site{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="fas fa-cog me-2"></i>
+        Paramètres du site
+    </h2>
+    <div>
+        <a href="{% url 'home' %}" target="_blank" class="btn btn-outline-info">
+            <i class="fas fa-external-link-alt me-1"></i>
+            Voir le site
+        </a>
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="row">
+        <!-- Informations générales -->
+        <div class="col-lg-8 mb-4">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Informations générales
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Nom du site -->
+                    <div class="mb-3">
+                        <label for="{{ form.site_name.id_for_label }}" class="form-label">
+                            Nom du site <span class="text-danger">*</span>
+                        </label>
+                        {{ form.site_name }}
+                        {% if form.site_name.errors %}
+                            <div class="text-danger small">{{ form.site_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Slogans -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="{{ form.slogan_fr.id_for_label }}" class="form-label">
+                                Slogan (Français) <span class="text-danger">*</span>
+                            </label>
+                            {{ form.slogan_fr }}
+                            {% if form.slogan_fr.errors %}
+                                <div class="text-danger small">{{ form.slogan_fr.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="{{ form.slogan_en.id_for_label }}" class="form-label">
+                                Slogan (Anglais) <span class="text-danger">*</span>
+                            </label>
+                            {{ form.slogan_en }}
+                            {% if form.slogan_en.errors %}
+                                <div class="text-danger small">{{ form.slogan_en.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Descriptions -->
+                    <div class="mb-3">
+                        <label for="{{ form.description_fr.id_for_label }}" class="form-label">
+                            Description de l'association (Français) <span class="text-danger">*</span>
+                        </label>
+                        {{ form.description_fr }}
+                        {% if form.description_fr.errors %}
+                            <div class="text-danger small">{{ form.description_fr.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.description_en.id_for_label }}" class="form-label">
+                            Description de l'association (Anglais) <span class="text-danger">*</span>
+                        </label>
+                        {{ form.description_en }}
+                        {% if form.description_en.errors %}
+                            <div class="text-danger small">{{ form.description_en.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Images -->
+        <div class="col-lg-4 mb-4">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-image me-2"></i>
+                        Images
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="mb-3">
+                        <label for="{{ form.logo.id_for_label }}" class="form-label">Logo</label>
+                        {{ form.logo }}
+                        {% if form.logo.errors %}
+                            <div class="text-danger small">{{ form.logo.errors }}</div>
+                        {% endif %}
+                        {% if form.instance.logo %}
+                            <div class="mt-2 text-center">
+                                <small class="text-muted">Logo actuel :</small><br>
+                                <img src="{{ form.instance.logo.url }}" alt="Logo" 
+                                     class="img-thumbnail" style="max-width: 150px; max-height: 100px;">
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Image hero -->
+                    <div class="mb-3">
+                        <label for="{{ form.hero_image.id_for_label }}" class="form-label">Image d'accueil</label>
+                        {{ form.hero_image }}
+                        {% if form.hero_image.errors %}
+                            <div class="text-danger small">{{ form.hero_image.errors }}</div>
+                        {% endif %}
+                        {% if form.instance.hero_image %}
+                            <div class="mt-2 text-center">
+                                <small class="text-muted">Image actuelle :</small><br>
+                                <img src="{{ form.instance.hero_image.url }}" alt="Image d'accueil" 
+                                     class="img-thumbnail" style="max-width: 200px; max-height: 120px;">
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Message du président -->
+        <div class="col-12 mb-4">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-user-tie me-2"></i>
+                        Message du président
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.president_message_fr.id_for_label }}" class="form-label">
+                                Message (Français)
+                            </label>
+                            {{ form.president_message_fr }}
+                            {% if form.president_message_fr.errors %}
+                                <div class="text-danger small">{{ form.president_message_fr.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.president_message_en.id_for_label }}" class="form-label">
+                                Message (Anglais)
+                            </label>
+                            {{ form.president_message_en }}
+                            {% if form.president_message_en.errors %}
+                                <div class="text-danger small">{{ form.president_message_en.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Réseaux sociaux -->
+        <div class="col-12 mb-4">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-share-alt me-2"></i>
+                        Réseaux sociaux
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.facebook_url.id_for_label }}" class="form-label">
+                                <i class="fab fa-facebook text-primary me-1"></i>
+                                Facebook
+                            </label>
+                            {{ form.facebook_url }}
+                            {% if form.facebook_url.errors %}
+                                <div class="text-danger small">{{ form.facebook_url.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.whatsapp_group_url.id_for_label }}" class="form-label">
+                                <i class="fab fa-whatsapp text-success me-1"></i>
+                                Groupe WhatsApp
+                            </label>
+                            {{ form.whatsapp_group_url }}
+                            {% if form.whatsapp_group_url.errors %}
+                                <div class="text-danger small">{{ form.whatsapp_group_url.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.linkedin_url.id_for_label }}" class="form-label">
+                                <i class="fab fa-linkedin text-info me-1"></i>
+                                LinkedIn
+                            </label>
+                            {{ form.linkedin_url }}
+                            {% if form.linkedin_url.errors %}
+                                <div class="text-danger small">{{ form.linkedin_url.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Boutons d'action -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Les modifications seront visibles immédiatement sur le site.
+                        </div>
+                        <div>
+                            <a href="{% url 'admin_dashboard_home' %}" class="btn btn-outline-secondary me-2">
+                                <i class="fas fa-arrow-left me-1"></i>
+                                Retour au dashboard
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i>
+                                Enregistrer les paramètres
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Aperçu des modifications -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="table-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-eye me-2"></i>
+                    Aperçu des informations actuelles
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Informations générales :</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Nom :</strong> {{ form.instance.site_name|default:"Non défini" }}</li>
+                            <li><strong>Slogan FR :</strong> {{ form.instance.slogan_fr|default:"Non défini" }}</li>
+                            <li><strong>Slogan EN :</strong> {{ form.instance.slogan_en|default:"Non défini" }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Force les styles sur TOUS les inputs */
+input[type="text"], 
+input[type="email"], 
+input[type="url"], 
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"],
+select,
+textarea {
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="url"]:focus, 
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
+    outline: none !important;
+    transform: translateY(-1px) !important;
+}
+
+/* File inputs */
+input[type="file"] {
+    border: 2px dashed #cbd5e1 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    background: #f8fafc !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+}
+
+input[type="file"]:hover {
+    border-color: #4f46e5 !important;
+    background: rgba(79, 70, 229, 0.05) !important;
+}
+
+/* Labels */
+.form-label {
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+/* Boutons */
+.btn {
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4f46e5, #6366f1) !important;
+    color: white !important;
+}
+
+.btn-outline-secondary {
+    border: 2px solid #6b7280 !important;
+    color: #6b7280 !important;
+    background: transparent !important;
+}
+
+.btn-outline-info {
+    border: 2px solid #0ea5e9 !important;
+    color: #0ea5e9 !important;
+    background: transparent !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Cards */
+.table-card {
+    border-radius: 12px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.card-body {
+    padding: 1.5rem !important;
+}
+
+/* Text areas */
+textarea.form-control {
+    min-height: 120px !important;
+    resize: vertical !important;
+}
+
+/* CKEditor styling */
+.django-ckeditor-widget {
+    width: 100% !important;
+}
+
+.django-ckeditor-widget iframe {
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+}
+
+/* Images */
+.img-thumbnail {
+    border-radius: 10px !important;
+    border: 2px solid #e2e8f0 !important;
+    padding: 4px !important;
+}
+
+/* Social media labels avec icônes */
+.form-label i.fab {
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+
+/* Validation des URLs */
+.is-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.field-error {
+    color: #ef4444 !important;
+    font-size: 0.875rem !important;
+    margin-top: 0.25rem !important;
+}
+
+/* Headers avec icônes */
+h2 i.fas {
+    color: #4f46e5;
+    margin-right: 0.5rem;
+}
+
+.card-header h5 i.fas {
+    color: #6b7280;
+    margin-right: 0.5rem;
+}
+
+/* Liste non stylée dans l'aperçu */
+.list-unstyled li {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.list-unstyled li:last-child {
+    border-bottom: none;
+}
+
+/* Info text */
+.text-muted i.fas {
+    color: #0ea5e9;
+}
+
+/* Form sections spacing */
+.row.mb-4 {
+    margin-bottom: 2rem !important;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    
+    .btn-outline-secondary.me-2 {
+        margin-right: 0 !important;
+        margin-bottom: 0.5rem !important;
+    }
+}
+
+/* Preview section styling */
+.mt-4 .table-card {
+    background: #f8fafc !important;
+    border: 2px dashed #cbd5e1 !important;
+}
+
+.mt-4 .card-header {
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Validation des URLs
+    const urlFields = ['{{ form.facebook_url.id_for_label }}', '{{ form.whatsapp_group_url.id_for_label }}', '{{ form.linkedin_url.id_for_label }}'];
+    
+    urlFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.addEventListener('blur', function() {
+                const url = this.value.trim();
+                if (url && !isValidUrl(url)) {
+                    this.classList.add('is-invalid');
+                    showFieldError(this, 'Veuillez entrer une URL valide (ex: https://example.com)');
+                } else {
+                    this.classList.remove('is-invalid');
+                    hideFieldError(this);
+                }
+            });
+        }
+    });
+    
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+    
+    function showFieldError(field, message) {
+        hideFieldError(field);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'text-danger small mt-1 field-error';
+        errorDiv.textContent = message;
+        field.parentNode.appendChild(errorDiv);
+    }
+    
+    function hideFieldError(field) {
+        const existingError = field.parentNode.querySelector('.field-error');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+    
+    // Aperçu en temps réel du nom du site
+    const siteNameField = document.getElementById('{{ form.site_name.id_for_label }}');
+    if (siteNameField) {
+        siteNameField.addEventListener('input', function() {
+            // Mise à jour en temps réel si nécessaire
+        });
+    }
+    
+    // Validation du formulaire avant soumission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const requiredFields = [
+            '{{ form.site_name.id_for_label }}',
+            '{{ form.slogan_fr.id_for_label }}',
+            '{{ form.slogan_en.id_for_label }}'
+        ];
+        
+        let hasErrors = false;
+        
+        requiredFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field && !field.value.trim()) {
+                field.classList.add('is-invalid');
+                showFieldError(field, 'Ce champ est obligatoire.');
+                hasErrors = true;
+            }
+        });
+        
+        if (hasErrors) {
+            e.preventDefault();
+            showNotification('Veuillez remplir tous les champs obligatoires.', 'danger');
+            return false;
+        }
+    });
+    
+    // Animation d'entrée pour les cards
+    const cards = document.querySelectorAll('.table-card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 150);
+    });
+});
+</script>
+{% endblock %}

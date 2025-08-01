@@ -1,0 +1,1204 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Événements" %} - A²ELBM2{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="events-hero position-relative overflow-hidden" style="min-height: 70vh; background: linear-gradient(135deg, rgba(44,85,48,0.95) 0%, rgba(74,124,89,0.9) 100%), url('{% static 'images/events-hero.jpg' %}'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('{% static 'images/calendar-pattern.svg' %}') repeat; opacity: 0.1;"></div>
+    <br> <br> <br> <br> <br>
+    <!-- Floating Calendar Elements -->
+    <div class="floating-calendars position-absolute w-100 h-100 top-0 start-0 pointer-events-none">
+        <div class="calendar-icon position-absolute text-warning opacity-20" style="top: 15%; left: 10%; font-size: 3rem; animation: float 6s ease-in-out infinite;">
+            <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="calendar-icon position-absolute text-white opacity-15" style="top: 60%; right: 15%; font-size: 2.5rem; animation: float 8s ease-in-out infinite reverse;">
+            <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="calendar-icon position-absolute text-warning opacity-25" style="top: 30%; right: 25%; font-size: 2rem; animation: float 7s ease-in-out infinite;">
+            <i class="fas fa-calendar-plus"></i>
+        </div>
+    </div>
+    
+    <div class="container h-100 d-flex align-items-center position-relative">
+        <div class="row w-100 align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white-50">{% trans "Accueil" %}</a></li>
+                        <li class="breadcrumb-item active text-white">{% trans "Événements" %}</li>
+                    </ol>
+                </nav>
+                
+                <div class="hero-badge mb-4">
+                    <span class="badge bg-warning text-dark rounded-pill px-4 py-2" style="font-size: 1.1rem;">
+                        <i class="fas fa-calendar-star me-2"></i>
+                        {% trans "Rencontres & Célébrations" %}
+                    </span>
+                </div>
+                
+                <h1 class="display-3 fw-bold text-white mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+                    {% trans "Nos" %} <span class="text-warning">{% trans "Événements" %}</span><br>
+                    {% trans "Rassemblent Notre Communauté" %}
+                </h1>
+                
+                <p class="lead text-white-50 mb-5" style="font-size: 1.3rem; max-width: 650px; line-height: 1.6;">
+                    {% trans "Découvrez nos événements qui renforcent les liens entre anciens élèves, créent des opportunités de networking et célèbrent nos réussites communes." %}
+                </p>
+                
+                <div class="hero-stats d-flex flex-wrap gap-4 mb-5">
+                    <div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop-blur">
+                        <h4 class="text-warning fw-bold mb-1">{{ upcoming_events.count|default:"8" }}</h4>
+                        <small class="text-white-50">{% trans "À venir" %}</small>
+                    </div>
+                    <div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop-blur">
+                        <h4 class="text-warning fw-bold mb-1">{{ past_events.count|default:"25" }}+</h4>
+                        <small class="text-white-50">{% trans "Organisés" %}</small>
+                    </div>
+                    <div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop-blur">
+                        <h4 class="text-warning fw-bold mb-1">500+</h4>
+                        <small class="text-white-50">{% trans "Participants" %}</small>
+                    </div>
+                </div>
+                
+                <div class="hero-actions d-flex flex-wrap gap-3">
+                    <a href="#upcoming-events" class="btn btn-warning btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-calendar-plus me-2"></i>
+                        {% trans "Événements à Venir" %}
+                    </a>
+                    <a href="#past-events" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-history me-2"></i>
+                        {% trans "Nos Réalisations" %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
+                <div class="hero-calendar-visual position-relative">
+                    <div class="calendar-container">
+                        <div class="main-calendar bg-white rounded-4 p-4 shadow-lg position-relative" style="transform: rotate(-8deg);">
+                            <div class="calendar-header bg-primary text-white rounded-3 p-3 mb-3 text-center">
+                                <h5 class="mb-0 fw-bold">{{ "now"|date:"F Y" }}</h5>
+                            </div>
+                            <div class="calendar-grid">
+                                <div class="row g-1 text-center small fw-bold text-muted mb-2">
+                                    <div class="col">D</div>
+                                    <div class="col">L</div>
+                                    <div class="col">M</div>
+                                    <div class="col">M</div>
+                                    <div class="col">J</div>
+                                    <div class="col">V</div>
+                                    <div class="col">S</div>
+                                </div>
+                                <div class="row g-1 text-center small">
+                                    <div class="col p-1">1</div>
+                                    <div class="col p-1">2</div>
+                                    <div class="col p-1">3</div>
+                                    <div class="col p-1">4</div>
+                                    <div class="col p-1">5</div>
+                                    <div class="col p-1">6</div>
+                                    <div class="col p-1">7</div>
+                                </div>
+                                <div class="row g-1 text-center small">
+                                    <div class="col p-1">8</div>
+                                    <div class="col p-1">9</div>
+                                    <div class="col p-1">10</div>
+                                    <div class="col p-1">11</div>
+                                    <div class="col p-1">12</div>
+                                    <div class="col p-1">13</div>
+                                    <div class="col p-1">14</div>
+                                </div>
+                                <div class="row g-1 text-center small">
+                                    <div class="col p-1">15</div>
+                                    <div class="col p-1">16</div>
+                                    <div class="col p-1">17</div>
+                                    <div class="col p-1">18</div>
+                                    <div class="col bg-warning rounded p-1 fw-bold">19</div>
+                                    <div class="col p-1">20</div>
+                                    <div class="col p-1">21</div>
+                                </div>
+                                <div class="row g-1 text-center small">
+                                    <div class="col p-1">22</div>
+                                    <div class="col p-1">23</div>
+                                    <div class="col p-1">24</div>
+                                    <div class="col p-1">25</div>
+                                    <div class="col p-1">26</div>
+                                    <div class="col p-1">27</div>
+                                    <div class="col p-1">28</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Event Cards -->
+                        <div class="floating-event-card position-absolute bg-success text-white rounded-3 p-2 shadow" style="top: -20px; right: -30px; width: 100px; animation: float 4s ease-in-out infinite;">
+                            <div class="text-center">
+                                <i class="fas fa-users mb-1"></i>
+                                <div class="small fw-bold">{% trans "Réunion" %}</div>
+                                <div class="tiny">{% trans "15 Mai" %}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-event-card position-absolute bg-info text-white rounded-3 p-2 shadow" style="bottom: -15px; left: -25px; width: 90px; animation: float 6s ease-in-out infinite reverse;">
+                            <div class="text-center">
+                                <i class="fas fa-graduation-cap mb-1"></i>
+                                <div class="small fw-bold">{% trans "Gala" %}</div>
+                                <div class="tiny">{% trans "20 Juin" %}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Event Filter -->
+<section class="py-4 bg-white shadow-sm sticky-top" style="z-index: 100;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="event-filter d-flex flex-wrap gap-3">
+                    <button class="btn btn-outline-primary active" data-filter="all">
+                        <i class="fas fa-calendar me-2"></i>
+                        {% trans "Tous les événements" %}
+                    </button>
+                    <button class="btn btn-outline-success" data-filter="upcoming">
+                        <i class="fas fa-clock me-2"></i>
+                        {% trans "À venir" %}
+                    </button>
+                    <button class="btn btn-outline-info" data-filter="past">
+                        <i class="fas fa-history me-2"></i>
+                        {% trans "Passés" %}
+                    </button>
+                    <button class="btn btn-outline-warning" data-filter="featured">
+                        <i class="fas fa-star me-2"></i>
+                        {% trans "En vedette" %}
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="event-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="{% trans 'Rechercher un événement...' %}" id="eventSearch">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Events -->
+{% if upcoming_events %}
+<section id="upcoming-events" class="py-6 bg-light" data-category="upcoming">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-success rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-calendar-plus me-2"></i>
+                {% trans "Prochainement" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Événements" %} <span class="text-success">{% trans "à Venir" %}</span>
+            </h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                {% trans "Ne manquez pas nos prochaines rencontres ! Inscrivez-vous dès maintenant pour réserver votre place." %}
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            {% for event in upcoming_events %}
+            <div class="col-lg-4 col-md-6 event-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="event-card bg-white rounded-4 shadow-sm overflow-hidden h-100 position-relative">
+                    <!-- Event Status -->
+                    <div class="position-absolute top-0 start-0 m-3 z-index-10">
+                        {% if event.is_registration_open %}
+                            <span class="badge bg-success rounded-pill px-3 py-2 pulse">
+                                <i class="fas fa-check-circle me-1"></i>
+                                {% trans "Inscriptions ouvertes" %}
+                            </span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark rounded-pill px-3 py-2">
+                                <i class="fas fa-lock me-1"></i>
+                                {% trans "Inscriptions fermées" %}
+                            </span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Event Image -->
+                    <div class="event-image position-relative overflow-hidden">
+                        {% if event.image %}
+                            <img src="{{ event.image.url }}" alt="{{ event.title_fr }}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-gradient-primary d-flex align-items-center justify-content-center text-white" style="height: 250px;">
+                                <i class="fas fa-calendar-star fa-3x"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Date Overlay -->
+                        <div class="event-date position-absolute top-0 end-0 m-3">
+                            <div class="bg-white rounded-3 p-3 text-center shadow">
+                                <div class="text-primary fw-bold" style="font-size: 1.5rem;">{{ event.date_event|date:"d" }}</div>
+                                <div class="text-muted small">{{ event.date_event|date:"M" }}</div>
+                                <div class="text-muted tiny">{{ event.date_event|date:"Y" }}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Countdown Timer -->
+                        {% if event.is_registration_open %}
+                        <div class="countdown-overlay position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                            <div class="countdown text-white text-center" data-date="{{ event.date_event|date:'c' }}">
+                                <div class="d-flex justify-content-center gap-3">
+                                    <div class="countdown-item">
+                                        <div class="countdown-number fw-bold"></div>
+                                        <div class="countdown-label small">{% trans "Jours" %}</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-number fw-bold"></div>
+                                        <div class="countdown-label small">{% trans "Heures" %}</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-number fw-bold"></div>
+                                        <div class="countdown-label small">{% trans "Minutes" %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Event Content -->
+                    <div class="card-body p-4">
+                        <div class="event-meta mb-3">
+                            <div class="d-flex align-items-center text-muted small mb-2">
+                                <i class="fas fa-clock me-2 text-primary"></i>
+                                <span>{{ event.date_event|date:"H:i" }} - {{ event.location|truncatechars:30 }}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="fas fa-users me-2 text-success"></i>
+                                <span>{{ event.registered_count }}/{{ event.max_participants|default:"∞" }} {% trans "participants" %}</span>
+                            </div>
+                        </div>
+                        
+                        <h5 class="card-title fw-bold mb-3">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ event.title_fr }}
+                            {% else %}
+                                {{ event.title_en|default:event.title_fr }}
+                            {% endif %}
+                        </h5>
+                        
+                        <p class="card-text text-muted mb-4">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ event.description_fr|striptags|truncatewords:20 }}
+                            {% else %}
+                                {{ event.description_en|default:event.description_fr|striptags|truncatewords:20 }}
+                            {% endif %}
+                        </p>
+                        
+                        <!-- Registration Progress -->
+                        {% if event.max_participants %}
+                        <div class="registration-progress mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted">{% trans "Places disponibles" %}</small>
+                                <small class="text-muted">{{ event.registered_count }}/{{ event.max_participants }}</small>
+                            </div>
+                            <div class="progress" style="height: 6px;">
+                                <div class="progress-bar bg-success" style="width: {% widthratio event.registered_count event.max_participants 100 %}%"></div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Actions -->
+                        <div class="event-actions d-flex gap-2">
+                            {% if event.is_registration_open %}
+                                <a href="{% url 'event_detail' event.pk %}" class="btn btn-success flex-fill">
+                                    <i class="fas fa-user-plus me-2"></i>
+                                    {% trans "S'inscrire" %}
+                                </a>
+                            {% else %}
+                                <a href="{% url 'event_detail' event.pk %}" class="btn btn-outline-primary flex-fill">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    {% trans "Voir détails" %}
+                                </a>
+                            {% endif %}
+                            <button class="btn btn-outline-secondary" data-bs-toggle="tooltip" title="{% trans 'Partager' %}">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% if not upcoming_events %}
+        <div class="text-center py-5" data-aos="fade-up">
+            <div class="empty-state">
+                <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">{% trans "Aucun événement à venir" %}</h5>
+                <p class="text-muted">{% trans "Restez connecté pour ne pas manquer nos prochaines annonces !" %}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Featured Event Spotlight -->
+{% if upcoming_events.0 %}
+<section  style="background-color:  #2C5530;" class="py-6 text-white position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('{% static 'images/spotlight-pattern.svg' %}') repeat; opacity: 0.1;"></div>
+    
+    <div class="container position-relative">
+        {% with featured_event=upcoming_events.0 %}
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="spotlight-content">
+                    <span class="badge bg-warning text-dark rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                        <i class="fas fa-star me-2"></i>
+                        {% trans "Événement Phare" %}
+                    </span>
+                    
+                    <h2 class="display-6 fw-bold mb-4">
+                        {% if LANGUAGE_CODE == 'fr' %}
+                            {{ featured_event.title_fr }}
+                        {% else %}
+                            {{ featured_event.title_en|default:featured_event.title_fr }}
+                        {% endif %}
+                    </h2>
+                    
+                    <p class="lead mb-4 opacity-90">
+                        {% if LANGUAGE_CODE == 'fr' %}
+                            {{ featured_event.description_fr|striptags|truncatewords:30 }}
+                        {% else %}
+                            {{ featured_event.description_en|default:featured_event.description_fr|striptags|truncatewords:30 }}
+                        {% endif %}
+                    </p>
+                    
+                    <div class="event-highlights mb-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="highlight-item d-flex align-items-center">
+                                    <div class="bg-warning text-dark rounded-circle me-3" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-calendar d-flex align-items-center justify-content-center h-100"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ featured_event.date_event|date:"d F Y" }}</div>
+                                        <small class="opacity-75">{{ featured_event.date_event|date:"H:i" }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="highlight-item d-flex align-items-center">
+                                    <div class="bg-warning text-dark rounded-circle me-3" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-map-marker-alt d-flex align-items-center justify-content-center h-100"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ featured_event.location }}</div>
+                                        <small class="opacity-75">{% trans "Lieu de l'événement" %}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="spotlight-actions">
+                        <a href="{% url 'event_detail' featured_event.pk %}" class="btn btn-warning btn-lg px-5 py-3 rounded-pill me-3">
+                            <i class="fas fa-ticket-alt me-2"></i>
+                            {% trans "Réserver ma place" %}
+                        </a>
+                        <a href="#upcoming-events" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                            {% trans "Autres événements" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+                <div class="spotlight-visual position-relative">
+                    {% if featured_event.image %}
+                        <div class="spotlight-image-container position-relative">
+                            <img src="{{ featured_event.image.url }}" alt="{{ featured_event.title_fr }}" class="img-fluid rounded-4 shadow-lg">
+                            
+                            <!-- Floating Stats -->
+                            <div class="position-absolute top-0 end-0 bg-warning text-dark rounded-3 p-3 shadow m-3" data-aos="zoom-in" data-aos-delay="800">
+                                <div class="text-center">
+                                    <h4 class="fw-bold mb-1">{{ featured_event.registered_count }}</h4>
+                                    <small>{% trans "Inscrits" %}</small>
+                                </div>
+                            </div>
+                            
+                            <div class="position-absolute bottom-0 start-0 bg-white text-dark rounded-3 p-3 shadow m-3" data-aos="zoom-in" data-aos-delay="1000">
+                                <div class="text-center">
+                                    <h4 class="fw-bold mb-1 countdown-days" data-date="{{ featured_event.date_event|date:'c' }}">--</h4>
+                                    <small>{% trans "Jours restants" %}</small>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Past Events -->
+{% if past_events %}
+<section id="past-events" class="py-6" data-category="past">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-info rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-history me-2"></i>
+                {% trans "Nos Réalisations" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Événements" %} <span class="text-info">{% trans "Réalisés" %}</span>
+            </h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                {% trans "Revivez les moments forts de nos précédents événements et découvrez l'impact de nos rassemblements." %}
+            </p>
+        </div>
+        
+        <div class="past-events-timeline">
+            {% for event in past_events %}
+            <div class="timeline-event position-relative" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:200 }}">
+                <div class="row align-items-center {% if forloop.counter|divisibleby:2 %}flex-row-reverse{% endif %}">
+                    <div class="col-lg-6">
+                        <div class="past-event-card bg-white rounded-4 p-4 shadow-sm h-100">
+                            <div class="event-date-badge mb-3">
+                                <span class="badge bg-info rounded-pill px-3 py-2">
+                                    <i class="fas fa-calendar-check me-2"></i>
+                                    {{ event.date_event|date:"d F Y" }}
+                                </span>
+                            </div>
+                            
+                            <h5 class="fw-bold mb-3">
+                                {% if LANGUAGE_CODE == 'fr' %}
+                                    {{ event.title_fr }}
+                                {% else %}
+                                    {{ event.title_en|default:event.title_fr }}
+                                {% endif %}
+                            </h5>
+                            
+                            <p class="text-muted mb-4">
+                                {% if LANGUAGE_CODE == 'fr' %}
+                                    {{ event.description_fr|striptags|truncatewords:25 }}
+                                {% else %}
+                                    {{ event.description_en|default:event.description_fr|striptags|truncatewords:25 }}
+                                {% endif %}
+                            </p>
+                            
+                            <div class="event-stats">
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="stat-item text-center">
+                                            <h6 class="text-info fw-bold mb-1">{{ event.registered_count|default:"45" }}</h6>
+                                            <small class="text-muted">{% trans "Participants" %}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-item text-center">
+                                            <h6 class="text-success fw-bold mb-1">{% trans "Réussi" %}</h6>
+                                            <small class="text-muted">{% trans "Statut" %}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <a href="{% url 'event_detail' event.pk %}" class="btn btn-outline-info">
+                                    <i class="fas fa-images me-2"></i>
+                                    {% trans "Voir les photos" %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 {% if forloop.counter|divisibleby:2 %}order-first{% endif %}">
+                        <div class="event-visual position-relative">
+                            {% if event.image %}
+                                <img src="{{ event.image.url }}" alt="{{ event.title_fr }}" class="img-fluid rounded-4 shadow">
+                            {% else %}
+                                <div class="bg-gradient-info rounded-4 d-flex align-items-center justify-content-center text-white" style="height: 300px;">
+                                    <i class="fas fa-camera fa-3x"></i>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Success Badge -->
+                            <div class="position-absolute top-0 start-0 m-3">
+                                <div class="bg-success text-white rounded-circle p-2" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-check d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Connector -->
+                {% if not forloop.last %}
+                <div class="timeline-connector position-absolute bg-info opacity-25" style="width: 2px; height: 80px; left: 50%; top: 100%; transform: translateX(-50%);"></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Event Categories -->
+<section class="py-6 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-primary rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-tags me-2"></i>
+                {% trans "Types d'Événements" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Nos Différentes" %} <span class="text-primary">{% trans "Activités" %}</span>
+            </h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                {% trans "Découvrez la diversité de nos événements, chacun conçu pour renforcer notre communauté d'anciens élèves." %}
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="category-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-primary opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="category-icon mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold mb-3">{% trans "Réunions Générales" %}</h5>
+                    <p class="text-muted mb-4">{% trans "Assemblées et rencontres officielles pour prendre les décisions importantes de l'association." %}</p>
+                    <div class="category-stats">
+                        <span class="badge bg-primary rounded-pill">4 {% trans "par an" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="category-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-warning opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <div class="category-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-glass-cheers fa-2x"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold mb-3">{% trans "Galas & Célébrations" %}</h5>
+                    <p class="text-muted mb-4">{% trans "Événements festifs pour célébrer nos réussites et renforcer les liens entre membres." %}</p>
+                    <div class="category-stats">
+                        <span class="badge bg-warning text-dark rounded-pill">2 {% trans "par an" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="category-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-success opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="category-icon mb-3">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold mb-3">{% trans "Formations & Ateliers" %}</h5>
+                    <p class="text-muted mb-4">{% trans "Sessions de développement professionnel et personnel pour nos membres." %}</p>
+                    <div class="category-stats">
+                        <span class="badge bg-success rounded-pill">6 {% trans "par an" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="category-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-info opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="category-icon mb-3">
+                        <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-hands-helping fa-2x"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold mb-3">{% trans "Actions Solidaires" %}</h5>
+                    <p class="text-muted mb-4">{% trans "Activités de soutien et d'entraide au bénéfice de notre communauté éducative." %}</p>
+                    <div class="category-stats">
+                        <span class="badge bg-info rounded-pill">{% trans "Régulières" %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Subscription -->
+<section class="py-6 bg-gradient-primary text-white position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: #2C5530;"></div>
+    
+    <div class="container position-relative text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="zoom-in">
+                <div class="newsletter-content">
+                    <i class="fas fa-bell fa-3x text-warning mb-4"></i>
+                    
+                    <h2 class="display-6 fw-bold mb-4">
+                        {% trans "Ne Manquez Plus Aucun" %} <span class="text-warning">{% trans "Événement !" %}</span>
+                    </h2>
+                    
+                    <p class="lead mb-5 opacity-90">
+                        {% trans "Inscrivez-vous à notre newsletter pour recevoir toutes les invitations et actualités de nos événements en avant-première." %}
+                    </p>
+                    
+                    <form class="newsletter-form" data-aos="fade-up" data-aos-delay="300">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="input-group input-group-lg">
+                                    <input type="email" class="form-control rounded-start-pill" placeholder="{% trans 'Votre adresse e-mail' %}" required>
+                                    <button class="btn btn-warning text-dark px-4 rounded-end-pill" type="submit">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        {% trans "S'abonner" %}
+                                    </button>
+                                </div>
+                                <small class="text-light opacity-75 mt-2 d-block">
+                                    {% trans "Nous respectons votre vie privée. Désabonnement possible à tout moment." %}
+                                </small>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="newsletter-benefits mt-5">
+                        <div class="row g-4">
+                            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                                <div class="benefit-item">
+                                    <i class="fas fa-rocket fa-2x text-warning mb-3"></i>
+                                    <h6 class="fw-semibold">{% trans "Invitations Prioritaires" %}</h6>
+                                    <small class="opacity-75">{% trans "Soyez les premiers informés" %}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                                <div class="benefit-item">
+                                    <i class="fas fa-gift fa-2x text-warning mb-3"></i>
+                                    <h6 class="fw-semibold">{% trans "Offres Exclusives" %}</h6>
+                                    <small class="opacity-75">{% trans "Tarifs préférentiels membres" %}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                                <div class="benefit-item">
+                                    <i class="fas fa-calendar-plus fa-2x text-warning mb-3"></i>
+                                    <h6 class="fw-semibold">{% trans "Rappels Personnalisés" %}</h6>
+                                    <small class="opacity-75">{% trans "N'oubliez plus jamais un événement" %}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-6 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <h2 class="display-6 fw-bold mb-4">
+                    {% trans "Organisez Votre Propre" %} <span class="text-primary">{% trans "Événement !" %}</span>
+                </h2>
+                <p class="lead text-muted mb-4">
+                    {% trans "Vous avez une idée d'événement pour notre communauté ? Proposez-nous votre projet et organisons ensemble un moment mémorable." %}
+                </p>
+                
+                <div class="cta-features">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="feature-item d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-lightbulb d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <span>{% trans "Support dans l'organisation" %}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-megaphone d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <span>{% trans "Promotion auprès des membres" %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 text-lg-end" data-aos="fade-left" data-aos-delay="300">
+                <div class="cta-actions">
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill mb-3 d-block">
+                        <i class="fas fa-calendar-plus me-2"></i>
+                        {% trans "Proposer un Événement" %}
+                    </a>
+                    <a href="{% url 'member_registration' %}" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill d-block">
+                        <i class="fas fa-user-plus me-2"></i>
+                        {% trans "Devenir Organisateur" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .py-6 {
+        padding: 6rem 0;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    .events-hero {
+        background-attachment: fixed;
+    }
+    
+    @media (max-width: 768px) {
+        .events-hero {
+            background-attachment: scroll;
+        }
+    }
+    
+    .event-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .event-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2) !important;
+    }
+    
+    .past-event-card {
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+    }
+    
+    .past-event-card:hover {
+        border-left-color: var(--info-color);
+        transform: translateX(10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+    
+    .category-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .category-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    }
+    
+    .category-card:hover .category-icon > div {
+        transform: scale(1.1) rotateY(10deg);
+    }
+    
+    .countdown {
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .countdown-number {
+        font-size: 1.5rem;
+        min-width: 40px;
+    }
+    
+    .pulse {
+        animation: pulse-glow 2s infinite;
+    }
+    
+    @keyframes pulse-glow {
+        0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+    }
+    
+    .main-calendar {
+        transition: all 0.3s ease;
+    }
+    
+    .calendar-container:hover .main-calendar {
+        transform: rotate(0deg) scale(1.05);
+    }
+    
+    .floating-event-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .floating-event-card:hover {
+        transform: scale(1.1);
+    }
+    
+    .event-filter .btn {
+        transition: all 0.3s ease;
+        border-radius: 25px;
+    }
+    
+    .event-filter .btn.active {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .event-search input {
+        border-radius: 25px 0 0 25px;
+        border-right: none;
+    }
+    
+    .event-search button {
+        border-radius: 0 25px 25px 0;
+        border-left: none;
+    }
+    
+    .timeline-connector {
+        z-index: 1;
+    }
+    
+    .timeline-event:hover .timeline-connector {
+        background: var(--info-color) !important;
+        opacity: 1 !important;
+        width: 4px !important;
+    }
+    
+    .newsletter-form input {
+        background: rgba(255,255,255,0.9);
+        border: none;
+        padding: 1rem 2rem;
+    }
+    
+    .newsletter-form input:focus {
+        background: white;
+        box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+    }
+    
+    .newsletter-form button {
+        padding: 1rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .newsletter-form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .benefit-item {
+        transition: all 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .benefit-item:hover i {
+        transform: scale(1.1);
+    }
+    
+    .feature-item {
+        transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        transform: translateX(5px);
+    }
+    
+    .spotlight-image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem;
+    }
+    
+    .spotlight-image-container img {
+        transition: all 0.3s ease;
+    }
+    
+    .spotlight-content:hover + .spotlight-visual img {
+        transform: scale(1.05);
+    }
+    
+    .empty-state {
+        padding: 3rem;
+    }
+    
+    .empty-state i {
+        opacity: 0.6;
+    }
+    
+    .backdrop-blur {
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .tiny {
+        font-size: 0.7rem;
+    }
+    
+    .calendar-grid .col {
+        padding: 0.25rem;
+        font-size: 0.8rem;
+    }
+    
+    @media (max-width: 768px) {
+        .py-6 {
+            padding: 4rem 0;
+        }
+        
+        .display-3 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-stats {
+            justify-content: center;
+        }
+        
+        .event-filter {
+            justify-content: center;
+        }
+        
+        .timeline-connector {
+            display: none;
+        }
+        
+        .newsletter-form .input-group {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .newsletter-form input,
+        .newsletter-form button {
+            border-radius: 25px !important;
+        }
+    }
+    
+    /* Loading animation for images */
+    .event-image img,
+    .spotlight-image-container img {
+        animation: fadeIn 0.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    /* Custom scrollbar */
+    .event-card::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .event-card::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    .event-card::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Countdown Timer
+    function initCountdowns() {
+        const countdowns = document.querySelectorAll('.countdown');
+        
+        countdowns.forEach(countdown => {
+            const eventDate = new Date(countdown.getAttribute('data-date')).getTime();
+            
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+                
+                if (distance < 0) {
+                    clearInterval(timer);
+                    countdown.innerHTML = '<div class="text-center"><small>Événement commencé</small></div>';
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                
+                const countdownItems = countdown.querySelectorAll('.countdown-item');
+                if (countdownItems.length >= 3) {
+                    countdownItems[0].querySelector('.countdown-number').textContent = days;
+                    countdownItems[1].querySelector('.countdown-number').textContent = hours;
+                    countdownItems[2].querySelector('.countdown-number').textContent = minutes;
+                }
+            }, 1000);
+        });
+        
+        // Simple countdown for spotlight
+        const spotlightCountdown = document.querySelector('.countdown-days');
+        if (spotlightCountdown) {
+            const eventDate = new Date(spotlightCountdown.getAttribute('data-date')).getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            spotlightCountdown.textContent = days > 0 ? days : '0';
+        }
+    }
+    
+    // Event Filtering
+    function initEventFiltering() {
+        const filterButtons = document.querySelectorAll('[data-filter]');
+        const eventItems = document.querySelectorAll('.event-item');
+        const sections = document.querySelectorAll('[data-category]');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show/hide sections
+                sections.forEach(section => {
+                    const category = section.getAttribute('data-category');
+                    if (filter === 'all' || filter === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Smooth scroll to first visible section
+                const firstVisible = document.querySelector(`[data-category="${filter === 'all' ? 'upcoming' : filter}"]`);
+                if (firstVisible) {
+                    firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    }
+    
+    // Event Search
+    function initEventSearch() {
+        const searchInput = document.getElementById('eventSearch');
+        const eventCards = document.querySelectorAll('.event-card, .past-event-card');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                eventCards.forEach(card => {
+                    const title = card.querySelector('h5').textContent.toLowerCase();
+                    const description = card.querySelector('.card-text').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.closest('.event-item, .timeline-event').style.display = 'block';
+                    } else {
+                        card.closest('.event-item, .timeline-event').style.display = 'none';
+                    }
+                });
+            });
+        }
+    }
+    
+    // Newsletter Form
+    function initNewsletterForm() {
+        const form = document.querySelector('.newsletter-form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = this.querySelector('input[type="email"]').value;
+                const button = this.querySelector('button');
+                const originalText = button.innerHTML;
+                
+                // Simulate subscription
+                button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Inscription...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-check me-2"></i>Inscrit !';
+                    button.classList.remove('btn-warning');
+                    button.classList.add('btn-success');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.classList.remove('btn-success');
+                        button.classList.add('btn-warning');
+                        button.disabled = false;
+                        this.reset();
+                    }, 2000);
+                }, 1500);
+            });
+        }
+    }
+    
+    // Enhanced hover effects
+    function initHoverEffects() {
+        const eventCards = document.querySelectorAll('.event-card, .past-event-card, .category-card');
+        
+        eventCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+                this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    }
+    
+    // Sticky filter bar
+    function initStickyFilter() {
+        const filterSection = document.querySelector('.sticky-top');
+        if (filterSection) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    filterSection.classList.add('shadow-lg');
+                } else {
+                    filterSection.classList.remove('shadow-lg');
+                }
+            });
+        }
+    }
+    
+    // Initialize all functions
+    initCountdowns();
+    initEventFiltering();
+    initEventSearch();
+    initNewsletterForm();
+    initHoverEffects();
+    initStickyFilter();
+    
+    // Parallax effect for hero
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.events-hero');
+        if (hero && window.innerWidth > 768) {
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+});
+</script>
+{% endblock %}

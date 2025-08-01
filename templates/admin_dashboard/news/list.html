@@ -1,0 +1,244 @@
+{% extends 'admin_dashboard/base.html' %}
+{% load static %}
+
+{% block page_title %}Gestion des actualités{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>
+        <i class="fas fa-newspaper me-2"></i>
+        Gestion des actualités
+    </h2>
+    <a href="{% url 'admin_news_create' %}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i>
+        Nouvelle actualité
+    </a>
+</div>
+
+<!-- Liste des actualités -->
+<div class="table-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            Liste des actualités ({{ news_page.paginator.count }} au total)
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        {% if news_page.object_list %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Date de publication</th>
+                            <th>Statut</th>
+                            <th>Vedette</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in news_page.object_list %}
+                            <tr>
+                                <td>
+                                    {% if article.image %}
+                                        <img src="{{ article.image.url }}" alt="{{ article.title_fr }}" 
+                                             class="rounded" width="50" height="50" style="object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-secondary rounded d-flex align-items-center justify-content-center" 
+                                             style="width: 50px; height: 50px;">
+                                            <i class="fas fa-newspaper text-white"></i>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <strong>{{ article.title_fr }}</strong>
+                                    <br><small class="text-muted">{{ article.title_en }}</small>
+                                    <br>
+                                    <small class="text-muted">
+                                        {{ article.content_fr|striptags|truncatewords:10 }}
+                                    </small>
+                                </td>
+                                <td>
+                                    {% if article.author %}
+                                        <div class="d-flex align-items-center">
+                                            {% if article.author.photo %}
+                                                <img src="{{ article.author.photo.url }}" alt="{{ article.author.nom_prenom }}" 
+                                                     class="rounded-circle me-2" width="25" height="25">
+                                            {% else %}
+                                                <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center me-2" 
+                                                     style="width: 25px; height: 25px;">
+                                                    <i class="fas fa-user text-white" style="font-size: 10px;"></i>
+                                                </div>
+                                            {% endif %}
+                                            <small>{{ article.author.nom_prenom }}</small>
+                                        </div>
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="text-nowrap">
+                                        {{ article.publication_date|date:"d/m/Y" }}
+                                        <br>
+                                        <small class="text-muted">{{ article.publication_date|date:"H:i" }}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if article.is_published %}
+                                        <span class="badge bg-success">Publié</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Brouillon</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if article.is_featured %}
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'admin_news_edit' article.pk %}" 
+                                           class="btn btn-sm btn-outline-primary" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{% url 'admin_news_delete' article.pk %}" 
+                                           class="btn btn-sm btn-outline-danger" title="Supprimer"
+                                           onclick="return confirm('Supprimer cette actualité ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Aucune actualité trouvée</h5>
+                <p class="text-muted">Commencez par créer votre première actualité.</p>
+                <a href="{% url 'admin_news_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus me-1"></i>
+                    Créer une actualité
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Pagination -->
+{% if news_page.has_other_pages %}
+    <nav aria-label="Navigation des pages" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if news_page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news_page.previous_page_number }}">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for num in news_page.paginator.page_range %}
+                {% if news_page.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% elif num > news_page.number|add:'-3' and num < news_page.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if news_page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news_page.next_page_number }}">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ news_page.paginator.num_pages }}">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<!-- Statistiques rapides -->
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-primary">{{ news_page.paginator.count }}</h4>
+            <p class="text-muted mb-0">Total actualités</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-success">
+                {% for article in news_page.object_list %}
+                    {% if article.is_published %}
+                        {% if forloop.first %}{{ forloop.counter0|add:news_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">Publiées</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-warning">
+                {% for article in news_page.object_list %}
+                    {% if not article.is_published %}
+                        {% if forloop.first %}{{ forloop.counter0|add:news_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">Brouillons</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card text-center">
+            <h4 class="text-info">
+                {% for article in news_page.object_list %}
+                    {% if article.is_featured %}
+                        {% if forloop.first %}{{ forloop.counter0|add:news_page.object_list|length }}{% endif %}
+                    {% endif %}
+                {% empty %}0{% endfor %}
+            </h4>
+            <p class="text-muted mb-0">En vedette</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function togglePublishStatus(articleId, publish) {
+    const action = publish ? 'publier' : 'dépublier';
+    if (confirm(`Voulez-vous vraiment ${action} cette actualité ?`)) {
+        // Cette fonction nécessiterait une vue AJAX pour être implémentée
+        alert(`Fonctionnalité à implémenter avec AJAX pour ${action} l'article ${articleId}`);
+    }
+}
+
+function deleteArticle(articleId) {
+    if (confirm('Voulez-vous vraiment supprimer cette actualité ? Cette action est irréversible.')) {
+        // Cette fonction nécessiterait une vue AJAX pour être implémentée
+        alert(`Fonctionnalité à implémenter avec AJAX pour supprimer l'article ${articleId}`);
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,927 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Nos Projets" %} - A²ELBM2{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<br> <br> <br>
+<section class="projects-hero position-relative overflow-hidden" style="min-height: 70vh; background: linear-gradient(135deg, rgba(44,85,48,0.95) 0%, rgba(74,124,89,0.9) 100%), url('{% static 'images/projects-hero.jpg' %}'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('{% static 'images/innovation-pattern.svg' %}') repeat; opacity: 0.1;"></div>
+    <br> <br> <br>
+
+    <!-- Animated Background Elements -->
+    <div class="hero-shapes position-absolute w-100 h-100 top-0 start-0 pointer-events-none">
+        <div class="shape shape-1 position-absolute bg-warning opacity-20 rounded-circle" style="width: 150px; height: 150px; top: 10%; left: 10%; animation: float 8s ease-in-out infinite;"></div>
+        <div class="shape shape-2 position-absolute bg-white opacity-10 rounded-circle" style="width: 100px; height: 100px; top: 70%; right: 15%; animation: float 10s ease-in-out infinite reverse;"></div>
+        <div class="shape shape-3 position-absolute bg-warning opacity-15" style="width: 80px; height: 80px; top: 30%; right: 25%; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); animation: float 6s ease-in-out infinite;"></div>
+    </div>
+    
+    <div class="container h-100 d-flex align-items-center position-relative">
+        <div class="row w-100 align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white-50">{% trans "Accueil" %}</a></li>
+                        <li class="breadcrumb-item active text-white">{% trans "Nos Projets" %}</li>
+                    </ol>
+                </nav>
+                
+                <div class="hero-badge mb-4">
+                    <span class="badge bg-warning text-dark rounded-pill px-4 py-2" style="font-size: 1.1rem;">
+                        <i class="fas fa-rocket me-2"></i>
+                        {% trans "Innovation & Impact" %}
+                    </span>
+                </div>
+                
+                <h1 class="display-3 fw-bold text-white mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+                    {% trans "Nos" %} <span class="text-warning">{% trans "Projets" %}</span><br>
+                    {% trans "Transforment l'Avenir" %}
+                </h1>
+                
+                <p class="lead text-white-50 mb-5" style="font-size: 1.3rem; max-width: 650px; line-height: 1.6;">
+                    {% trans "Découvrez comment notre association concrétise sa vision à travers des projets innovants qui impactent positivement notre communauté éducative et sociale." %}
+                </p>
+                
+                <div class="hero-actions d-flex flex-wrap gap-3">
+                    <a href="#ongoing-projects" class="btn btn-warning btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-play me-2"></i>
+                        {% trans "Projets en Cours" %}
+                    </a>
+                    <a href="{% url 'donations' %}" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-heart me-2"></i>
+                        {% trans "Soutenir un Projet" %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
+                <div class="hero-visual position-relative">
+                    <div class="projects-icon-container">
+                        <div class="main-icon bg-white rounded-4 p-4 shadow-lg d-inline-block position-relative" style="transform: rotate(-5deg);">
+                            <i class="fas fa-project-diagram text-primary" style="font-size: 4rem;"></i>
+                        </div>
+                        
+                        <!-- Floating sub-icons -->
+                        <div class="floating-icon position-absolute bg-warning text-dark rounded-circle shadow" style="width: 60px; height: 60px; top: -10px; right: -10px; animation: float 4s ease-in-out infinite;">
+                            <div class="d-flex align-items-center justify-content-center h-100">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-icon position-absolute bg-success text-white rounded-circle shadow" style="width: 50px; height: 50px; bottom: -5px; left: -15px; animation: float 6s ease-in-out infinite reverse;">
+                            <div class="d-flex align-items-center justify-content-center h-100">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="floating-icon position-absolute bg-info text-white rounded-circle shadow" style="width: 45px; height: 45px; top: 50%; left: -20px; animation: float 5s ease-in-out infinite;">
+                            <div class="d-flex align-items-center justify-content-center h-100">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4" data-aos="fade-up" data-aos-delay="1000">
+        <a href="#project-stats" class="text-white text-decoration-none">
+            <div class="scroll-indicator">
+                <div class="scroll-dot"></div>
+                <div class="scroll-text mt-2">{% trans "Découvrir" %}</div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Project Statistics -->
+<section id="project-stats" class="py-6 bg-light position-relative overflow-hidden">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-primary opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-icon mb-3">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold text-success mb-2 counter" data-target="{{ completed_projects.count|default:'12' }}">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "Projets Terminés" %}</h6>
+                    <p class="text-muted small mb-0">{% trans "Réalisations concrètes pour la communauté" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-warning opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                    <div class="stat-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-spinner fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold text-warning mb-2 counter" data-target="{{ ongoing_projects.count|default:'5' }}">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "En Cours" %}</h6>
+                    <p class="text-muted small mb-0">{% trans "Projets actuellement en développement" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-info opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-icon mb-3">
+                        <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-clock fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold text-info mb-2 counter" data-target="{{ planning_projects.count|default:'3' }}">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "En Planification" %}</h6>
+                    <p class="text-muted small mb-0">{% trans "Futurs projets en préparation" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-card bg-white rounded-4 p-4 text-center h-100 shadow-sm position-relative overflow-hidden">
+                    <div class="position-absolute top-0 end-0 text-danger opacity-10" style="font-size: 4rem; transform: translate(20px, -20px);">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-icon mb-3">
+                        <div class="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-coins fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold text-danger mb-2">50M+</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "Budget Total" %}</h6>
+                    <p class="text-muted small mb-0">{% trans "Investissement global (FCFA)" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ongoing Projects -->
+{% if ongoing_projects %}
+<section id="ongoing-projects" class="py-6">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-warning text-dark rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-rocket me-2"></i>
+                {% trans "Actuellement" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Projets" %} <span class="text-warning">{% trans "en Cours" %}</span>
+            </h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                {% trans "Nos initiatives actuelles qui transforment activement notre communauté éducative et sociale." %}
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            {% for project in ongoing_projects %}
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}">
+                <div class="project-card bg-white rounded-4 shadow-sm h-100 position-relative overflow-hidden">
+                    <!-- Project Status Badge -->
+                    <div class="position-absolute top-0 end-0 m-3 z-index-10">
+                        <span class="badge bg-warning text-dark rounded-pill px-3 py-2">
+                            <i class="fas fa-spinner me-1"></i>
+                            {% trans "En cours" %}
+                        </span>
+                    </div>
+                    
+                    <!-- Project Image -->
+                    <div class="project-image position-relative overflow-hidden">
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title_fr }}" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-gradient-warning d-flex align-items-center justify-content-center text-dark" style="height: 250px;">
+                                <i class="fas fa-project-diagram fa-3x"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Progress Overlay -->
+                        <div class="progress-overlay position-absolute bottom-0 start-0 w-100 p-3" style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                            <div class="progress progress-modern mb-2" style="height: 8px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ project.progress_percentage }}%">
+                                    <span class="progress-glow"></span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between text-white small">
+                                <span>{% trans "Progression" %}</span>
+                                <span class="fw-bold">{{ project.progress_percentage|floatformat:0 }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project Content -->
+                    <div class="card-body p-4">
+                        <div class="project-meta mb-3">
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="fas fa-calendar me-2"></i>
+                                <span>{% trans "Début" %}: {{ project.start_date|date:"M Y" }}</span>
+                                {% if project.end_date %}
+                                    <span class="mx-2">•</span>
+                                    <span>{% trans "Fin prévue" %}: {{ project.end_date|date:"M Y" }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <h5 class="card-title fw-bold mb-3">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ project.title_fr }}
+                            {% else %}
+                                {{ project.title_en|default:project.title_fr }}
+                            {% endif %}
+                        </h5>
+                        
+                        <p class="card-text text-muted mb-4">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ project.description_fr|striptags|truncatewords:20 }}
+                            {% else %}
+                                {{ project.description_en|default:project.description_fr|striptags|truncatewords:20 }}
+                            {% endif %}
+                        </p>
+                        
+                        <!-- Budget Information -->
+                        <div class="budget-info bg-light rounded-3 p-3 mb-4">
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <div class="budget-item">
+                                        <h6 class="text-success fw-bold mb-1">{{ project.budget_collected|floatformat:0 }}</h6>
+                                        <small class="text-muted">{% trans "Collecté (FCFA)" %}</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="budget-item">
+                                        <h6 class="text-primary fw-bold mb-1">{{ project.budget_required|floatformat:0 }}</h6>
+                                        <small class="text-muted">{% trans "Objectif (FCFA)" %}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="project-actions d-flex gap-2">
+                            <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary flex-fill">
+                                <i class="fas fa-eye me-1"></i>
+                                {% trans "Voir Détails" %}
+                            </a>
+                            <a href="{% url 'donations' %}?project={{ project.id }}" class="btn btn-outline-warning">
+                                <i class="fas fa-heart"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Completed Projects -->
+{% if completed_projects %}
+<section class="py-6 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-success rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-check-circle me-2"></i>
+                {% trans "Réussites" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Projets" %} <span class="text-success">{% trans "Réalisés" %}</span>
+            </h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                {% trans "Nos réalisations concrètes qui témoignent de notre engagement et de notre impact positif." %}
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            {% for project in completed_projects %}
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:150 }}">
+                <div class="completed-project-card bg-white rounded-4 shadow-sm overflow-hidden h-100">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-5">
+                            <div class="project-image-container position-relative h-100">
+                                {% if project.image %}
+                                    <img src="{{ project.image.url }}" alt="{{ project.title_fr }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-gradient-success d-flex align-items-center justify-content-center text-white h-100">
+                                        <i class="fas fa-check-circle fa-3x"></i>
+                                    </div>
+                                {% endif %}
+                                
+                                <!-- Success Badge -->
+                                <div class="position-absolute top-0 start-0 m-3">
+                                    <span class="badge bg-success rounded-pill px-3 py-2">
+                                        <i class="fas fa-check me-1"></i>
+                                        {% trans "Terminé" %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-7">
+                            <div class="card-body p-4 h-100 d-flex flex-column">
+                                <div class="project-header mb-3">
+                                    <h5 class="card-title fw-bold mb-2">
+                                        {% if LANGUAGE_CODE == 'fr' %}
+                                            {{ project.title_fr }}
+                                        {% else %}
+                                            {{ project.title_en|default:project.title_fr }}
+                                        {% endif %}
+                                    </h5>
+                                    
+                                    <div class="project-dates text-muted small">
+                                        <i class="fas fa-calendar-check me-2"></i>
+                                        {{ project.start_date|date:"M Y" }} - {{ project.end_date|date:"M Y"|default:"Présent" }}
+                                    </div>
+                                </div>
+                                
+                                <p class="card-text text-muted flex-grow-1">
+                                    {% if LANGUAGE_CODE == 'fr' %}
+                                        {{ project.description_fr|striptags|truncatewords:15 }}
+                                    {% else %}
+                                        {{ project.description_en|default:project.description_fr|striptags|truncatewords:15 }}
+                                    {% endif %}
+                                </p>
+                                
+                                <!-- Achievement Stats -->
+                                <div class="achievement-stats bg-light rounded-3 p-3 mb-3">
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <div class="stat-item">
+                                                <h6 class="text-success fw-bold mb-1">100%</h6>
+                                                <small class="text-muted">{% trans "Réalisé" %}</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="stat-item">
+                                                <h6 class="text-primary fw-bold mb-1">{{ project.budget_required|floatformat:0 }}</h6>
+                                                <small class="text-muted">{% trans "Budget (FCFA)" %}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-auto">
+                                    <a href="{% url 'project_detail' project.pk %}" class="btn btn-outline-success">
+                                        <i class="fas fa-eye me-2"></i>
+                                        {% trans "Voir les Résultats" %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Planning Projects -->
+{% if planning_projects %}
+<section class="py-6">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-info rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-lightbulb me-2"></i>
+                {% trans "Vision" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Projets" %} <span class="text-info">{% trans "en Planification" %}</span>
+            </h2>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                {% trans "Nos futures initiatives qui façonneront l'avenir de notre communauté éducative." %}
+            </p>
+        </div>
+        
+        <div class="planning-timeline">
+            {% for project in planning_projects %}
+            <div class="timeline-item position-relative" data-aos="fade-right" data-aos-delay="{{ forloop.counter0|mul:200 }}">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 text-center">
+                        <div class="timeline-marker bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 80px; height: 80px;">
+                            <i class="fas fa-calendar-plus fa-2x"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-10">
+                        <div class="planning-card bg-white rounded-4 p-4 shadow-sm position-relative overflow-hidden">
+                            <!-- Planning Badge -->
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <span class="badge bg-info rounded-pill px-3 py-2">
+                                    <i class="fas fa-clock me-1"></i>
+                                    {% trans "Planifié" %}
+                                </span>
+                            </div>
+                            
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="fw-bold mb-3">
+                                        {% if LANGUAGE_CODE == 'fr' %}
+                                            {{ project.title_fr }}
+                                        {% else %}
+                                            {{ project.title_en|default:project.title_fr }}
+                                        {% endif %}
+                                    </h5>
+                                    
+                                    <p class="text-muted mb-4">
+                                        {% if LANGUAGE_CODE == 'fr' %}
+                                            {{ project.description_fr|striptags|truncatewords:25 }}
+                                        {% else %}
+                                            {{ project.description_en|default:project.description_fr|striptags|truncatewords:25 }}
+                                        {% endif %}
+                                    </p>
+                                    
+                                    <div class="project-planning-info">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="info-item">
+                                                    <i class="fas fa-calendar text-info me-2"></i>
+                                                    <span class="fw-semibold">{% trans "Début prévu" %}:</span>
+                                                    <span class="text-muted">{{ project.start_date|date:"M Y" }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="info-item">
+                                                    <i class="fas fa-coins text-warning me-2"></i>
+                                                    <span class="fw-semibold">{% trans "Budget" %}:</span>
+                                                    <span class="text-muted">{{ project.budget_required|floatformat:0 }} FCFA</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 text-center">
+                                    {% if project.image %}
+                                        <img src="{{ project.image.url }}" alt="{{ project.title_fr }}" class="img-fluid rounded-3 shadow-sm" style="max-height: 120px; object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-gradient-info text-white rounded-3 d-inline-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+                                            <i class="fas fa-lightbulb fa-2x"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="planning-actions mt-4 pt-3 border-top">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="funding-needed">
+                                        <small class="text-muted">{% trans "Financement recherché" %}</small>
+                                        <div class="progress mt-1" style="height: 6px;">
+                                            <div class="progress-bar bg-info" style="width: {{ project.progress_percentage }}%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="action-buttons">
+                                        <a href="{% url 'project_detail' project.pk %}" class="btn btn-outline-info btn-sm me-2">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            {% trans "En savoir plus" %}
+                                        </a>
+                                        <a href="{% url 'donations' %}?project={{ project.id }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-hand-holding-heart me-1"></i>
+                                            {% trans "Soutenir" %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Line -->
+                {% if not forloop.last %}
+                <div class="timeline-line position-absolute bg-info opacity-25" style="width: 2px; height: 60px; left: 50px; top: 100%;"></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Impact Section -->
+<section class="py-6 bg-gradient-primary text-white position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color:  rgba(74,124,89,0.8);"></div>
+    
+    <div class="container position-relative">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-warning text-dark rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+                <i class="fas fa-chart-line me-2"></i>
+                {% trans "Impact Communautaire" %}
+            </span>
+            <h2 class="display-5 fw-bold mb-4">
+                {% trans "Notre" %} <span class="text-warning">{% trans "Impact" %}</span>
+            </h2>
+            <p class="lead opacity-90 mx-auto" style="max-width: 700px;">
+                {% trans "Mesurez l'impact tangible de nos projets sur l'éducation et le développement social." %}
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="impact-card text-center bg-white bg-opacity-10 rounded-4 p-4 h-100 backdrop-blur">
+                    <div class="impact-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-user-graduate fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold mb-2 counter" data-target="500">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "Étudiants Aidés" %}</h6>
+                    <p class="opacity-75 small mb-0">{% trans "Bénéficiaires de nos programmes de soutien scolaire" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="impact-card text-center bg-white bg-opacity-10 rounded-4 p-4 h-100 backdrop-blur">
+                    <div class="impact-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-building fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold mb-2 counter" data-target="8">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "Infrastructures" %}</h6>
+                    <p class="opacity-75 small mb-0">{% trans "Salles de classe et équipements construits ou rénovés" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="impact-card text-center bg-white bg-opacity-10 rounded-4 p-4 h-100 backdrop-blur">
+                    <div class="impact-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-laptop fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold mb-2 counter" data-target="150">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "Équipements" %}</h6>
+                    <p class="opacity-75 small mb-0">{% trans "Ordinateurs et matériel pédagogique fournis" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="impact-card text-center bg-white bg-opacity-10 rounded-4 p-4 h-100 backdrop-blur">
+                    <div class="impact-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-book fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="display-6 fw-bold mb-2 counter" data-target="25">0</h3>
+                    <h6 class="fw-semibold mb-2">{% trans "Programmes" %}</h6>
+                    <p class="opacity-75 small mb-0">{% trans "Ateliers de formation et sessions de mentorat" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-6 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <h2 class="display-6 fw-bold mb-4">
+                    {% trans "Participez à Notre" %} <span class="text-primary">{% trans "Mission" %}</span>
+                </h2>
+                <p class="lead text-muted mb-4">
+                    {% trans "Votre soutien peut transformer des vies et créer un impact durable dans notre communauté éducative. Chaque contribution compte." %}
+                </p>
+                
+                <div class="cta-benefits">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="benefit-item d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-check d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <span>{% trans "Impact direct et mesurable" %}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-item d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-eye d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <span>{% trans "Transparence totale des fonds" %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 text-lg-end" data-aos="fade-left" data-aos-delay="300">
+                <div class="cta-actions">
+                    <a href="{% url 'donations' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill mb-3 d-block">
+                        <i class="fas fa-heart me-2"></i>
+                        {% trans "Soutenir un Projet" %}
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill d-block">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        {% trans "Proposer un Projet" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .py-6 {
+        padding: 6rem 0;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    .projects-hero {
+        background-attachment: fixed;
+    }
+    
+    @media (max-width: 768px) {
+        .projects-hero {
+            background-attachment: scroll;
+        }
+    }
+    
+    .project-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .project-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.2) !important;
+    }
+    
+    .completed-project-card {
+        transition: all 0.3s ease;
+    }
+    
+    .completed-project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    }
+    
+    .planning-card {
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
+    }
+    
+    .planning-card:hover {
+        border-left-color: var(--info-color);
+        transform: translateX(10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+    
+    .timeline-marker {
+        transition: all 0.3s ease;
+        z-index: 10;
+        position: relative;
+    }
+    
+    .timeline-item:hover .timeline-marker {
+        transform: scale(1.2);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    .progress-modern {
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .progress-modern .progress-bar {
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .progress-glow {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        animation: progress-shine 2s infinite;
+    }
+    
+    @keyframes progress-shine {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+    
+    .stat-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    }
+    
+    .impact-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .impact-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255,255,255,0.15) !important;
+    }
+    
+    .backdrop-blur {
+        backdrop-filter: blur(10px);
+    }
+    
+    .scroll-indicator {
+        animation: bounce 2s infinite;
+        cursor: pointer;
+    }
+    
+    .scroll-dot {
+        width: 6px;
+        height: 30px;
+        background: rgba(255,255,255,0.8);
+        border-radius: 3px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .scroll-dot::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: #fff;
+        border-radius: 3px;
+        animation: scroll-move 2s infinite;
+    }
+    
+    @keyframes scroll-move {
+        0% { transform: translateY(-8px); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(30px); opacity: 0; }
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+    
+    .counter {
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .bg-gradient-warning {
+        background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+    }
+    
+    .bg-gradient-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    }
+    
+    .bg-gradient-info {
+        background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
+    }
+    
+    .floating-icon {
+        animation-duration: 4s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+    
+    .projects-icon-container {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .main-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .projects-icon-container:hover .main-icon {
+        transform: rotate(0deg) scale(1.1);
+    }
+    
+    @media (max-width: 768px) {
+        .py-6 {
+            padding: 4rem 0;
+        }
+        
+        .display-3 {
+            font-size: 2.5rem;
+        }
+        
+        .timeline-item {
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-line {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Counter animation
+    const counters = document.querySelectorAll('.counter');
+    
+    const animateCounter = (counter) => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            counter.textContent = Math.floor(current);
+            
+            if (current >= target) {
+                counter.textContent = target;
+                clearInterval(timer);
+            }
+        }, 16);
+    };
+    
+    // Intersection Observer for counters
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                entry.target.classList.add('animated');
+                animateCounter(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+    
+    // Progress bar animation
+    const progressBars = document.querySelectorAll('.progress-bar');
+    
+    const progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                const width = progressBar.style.width;
+                progressBar.style.width = '0%';
+                
+                setTimeout(() => {
+                    progressBar.style.transition = 'width 1.5s ease-in-out';
+                    progressBar.style.width = width;
+                }, 100);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    progressBars.forEach(bar => progressObserver.observe(bar));
+    
+    // Enhanced hover effects
+    const projectCards = document.querySelectorAll('.project-card, .completed-project-card, .planning-card');
+    
+    projectCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) scale(1.02)';
+            this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Scroll indicator click
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            document.querySelector('#project-stats').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

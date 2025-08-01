@@ -1,0 +1,1213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Actualités" %} - A²ELBM2{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<br> <br> <br> 
+<section class="news-hero position-relative overflow-hidden" style="min-height: 70vh; background: linear-gradient(135deg, rgba(44,85,48,0.95) 0%, rgba(74,124,89,0.9) 100%), url('{% static 'images/news-hero.jpg' %}'); background-size: cover; background-position: center; background-attachment: fixed;">
+<div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('{% static 'images/news-pattern.svg' %}') repeat; opacity: 0.1;"></div>
+
+<!-- Floating News Elements -->
+<div class="floating-news position-absolute w-100 h-100 top-0 start-0 pointer-events-none">
+<div class="news-icon position-absolute text-warning opacity-20" style="top: 15%; left: 8%; font-size: 3rem; animation: float 6s ease-in-out infinite; transform: rotate(-15deg);">
+<i class="fas fa-newspaper"></i>
+</div>
+<div class="news-icon position-absolute text-white opacity-15" style="top: 60%; right: 12%; font-size: 2.5rem; animation: float 8s ease-in-out infinite reverse; transform: rotate(20deg);">
+<i class="fas fa-rss"></i>
+</div>
+<div class="news-icon position-absolute text-warning opacity-25" style="top: 30%; right: 25%; font-size: 2rem; animation: float 7s ease-in-out infinite; transform: rotate(10deg);">
+<i class="fas fa-bullhorn"></i>
+</div>
+</div>
+
+<div class="container h-100 d-flex align-items-center position-relative">
+<div class="row w-100 align-items-center">
+<div class="col-lg-8" data-aos="fade-right">
+<nav aria-label="breadcrumb" class="mb-4">
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white-50">{% trans "Accueil" %}</a></li>
+    <li class="breadcrumb-item active text-white">{% trans "Actualités" %}</li>
+</ol>
+</nav>
+
+<div class="hero-badge mb-4">
+<span class="badge bg-warning text-dark rounded-pill px-4 py-2" style="font-size: 1.1rem;">
+    <i class="fas fa-newspaper me-2"></i>
+    {% trans "Informations & Nouvelles" %}
+</span>
+</div>
+
+<h1 class="display-3 fw-bold text-white mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+{% trans "Restez" %} <span class="text-warning">{% trans "Informés" %}</span><br>
+{% trans "de Notre Actualité" %}
+</h1>
+
+<p class="lead text-white-50 mb-5" style="font-size: 1.3rem; max-width: 650px; line-height: 1.6;">
+{% trans "Découvrez les dernières nouvelles, annonces importantes et moments marquants de notre association d'anciens élèves." %}
+</p>
+
+<div class="hero-stats d-flex flex-wrap gap-4 mb-5">
+<div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop-blur">
+    <h4 class="text-warning fw-bold mb-1">{{ news_page.paginator.count|default:"45" }}</h4>
+    <small class="text-white-50">{% trans "Articles" %}</small>
+</div>
+<div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop-blur">
+    <h4 class="text-warning fw-bold mb-1">12</h4>
+    <small class="text-white-50">{% trans "Catégories" %}</small>
+</div>
+<div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop
+
+
+<div class="stat-item text-center bg-white bg-opacity-10 rounded-3 p-3 backdrop-blur">
+    <h4 class="text-warning fw-bold mb-1">5</h4>
+    <small class="text-white-50">{% trans "Cette semaine" %}</small>
+</div>
+</div>
+
+<div class="hero-actions d-flex flex-wrap gap-3">
+<a href="#latest-news" class="btn btn-warning btn-lg px-5 py-3 rounded-pill">
+    <i class="fas fa-fire me-2"></i>
+    {% trans "Dernières News" %}
+</a>
+<a href="#newsletter" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+    <i class="fas fa-envelope me-2"></i>
+    {% trans "S'abonner" %}
+</a>
+</div>
+</div>
+
+<div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
+<div class="hero-news-visual position-relative">
+<div class="news-stack">
+    <!-- Main Newspaper -->
+    <div class="newspaper-item bg-white rounded-4 p-4 shadow-lg position-relative" style="transform: rotate(-8deg);">
+        <div class="newspaper-header border-bottom pb-3 mb-3">
+            <h5 class="fw-bold text-primary mb-1">A²ELBM2 NEWS</h5>
+            <small class="text-muted">{{ "now"|date:"d F Y" }}</small>
+        </div>
+        <div class="newspaper-content">
+            <h6 class="fw-bold mb-2">{% trans "Grande Réunion Annuelle" %}</h6>
+            <div class="fake-text">
+                <div class="bg-secondary" style="height: 4px; width: 100%; margin-bottom: 4px; opacity: 0.3;"></div>
+                <div class="bg-secondary" style="height: 4px; width: 80%; margin-bottom: 4px; opacity: 0.3;"></div>
+                <div class="bg-secondary" style="height: 4px; width: 90%; margin-bottom: 8px; opacity: 0.3;"></div>
+            </div>
+            <div class="bg-primary" style="height: 60px; width: 100%; border-radius: 8px; opacity: 0.1;"></div>
+        </div>
+    </div>
+    
+    <!-- Overlapping Articles */}
+    <div class="article-item position-absolute bg-white rounded-3 p-3 shadow" style="top: 20px; right: -30px; transform: rotate(15deg); z-index: 2; width: 120px;">
+        <div class="text-center">
+            <i class="fas fa-star text-warning fa-2x mb-2"></i>
+            <h6 class="small fw-bold">{% trans "Article Vedette" %}</h6>
+            <div class="bg-warning" style="height: 3px; width: 100%; border-radius: 2px; opacity: 0.3;"></div>
+        </div>
+    </div>
+    
+    <div class="breaking-news position-absolute bg-danger text-white rounded-3 p-2 shadow" style="bottom: -15px; left: -25px; transform: rotate(-20deg); z-index: 3;">
+        <div class="text-center">
+            <i class="fas fa-bolt mb-1"></i>
+            <div class="small fw-bold">{% trans "BREAKING" %}</div>
+        </div>
+    </div>
+    
+    <!-- Notification Badge -->
+    <div class="notification-badge position-absolute bg-success text-white rounded-circle d-flex align-items-center justify-content-center shadow" style="top: -10px; right: -10px; width: 40px; height: 40px; z-index: 4;">
+        <span class="fw-bold small">{{ news_page.object_list.count|default:"5" }}</span>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- News Filter -->
+<section class="py-4 bg-black shadow-sm sticky-top" style="z-index: 100;">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-8">
+<div class="news-filter d-flex flex-wrap gap-3">
+<button class="btn btn-outline-primary active news-filter-btn" data-filter="all">
+    <i class="fas fa-globe me-2"></i>
+    {% trans "Toutes les actualités" %}
+</button>
+<button class="btn btn-outline-success news-filter-btn" data-filter="events">
+    <i class="fas fa-calendar me-2"></i>
+    {% trans "Événements" %}
+</button>
+<button class="btn btn-outline-info news-filter-btn" data-filter="projects">
+    <i class="fas fa-project-diagram me-2"></i>
+    {% trans "Projets" %}
+</button>
+<button class="btn btn-outline-warning news-filter-btn" data-filter="announcements">
+    <i class="fas fa-bullhorn me-2"></i>
+    {% trans "Annonces" %}
+</button>
+<button class="btn btn-outline-danger news-filter-btn" data-filter="featured">
+    <i class="fas fa-star me-2"></i>
+    {% trans "À la une" %}
+</button>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="news-search">
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="{% trans 'Rechercher dans les actualités...' %}" id="newsSearch">
+    <button class="btn btn-outline-secondary" type="button">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Featured News -->
+{% if news_page.object_list %}
+<section id="latest-news" class="py-6 bg-light">
+<div class="container">
+<!-- Hero Article -->
+{% with hero_article=news_page.object_list.0 %}
+{% if hero_article.is_featured %}
+<div class="hero-article mb-6" data-aos="fade-up">
+<div class="row align-items-center">
+<div class="col-lg-6">
+<div class="hero-article-image position-relative overflow-hidden rounded-4">
+    {% if hero_article.image %}
+        <img src="{{ hero_article.image.url }}" alt="{{ hero_article.title_fr }}" class="img-fluid w-100" style="height: 400px; object-fit: cover;">
+    {% else %}
+        <div class="bg-gradient-primary d-flex align-items-center justify-content-center text-white" style="height: 400px;">
+            <i class="fas fa-newspaper fa-4x"></i>
+        </div>
+    {% endif %}
+    
+    <!-- Breaking News Badge -->
+    <div class="position-absolute top-0 start-0 m-3">
+        <span class="badge bg-danger rounded-pill px-3 py-2 breaking-badge">
+            <i class="fas fa-bolt me-1"></i>
+            {% trans "À LA UNE" %}
+        </span>
+    </div>
+    
+    <!-- Category Badge -->
+    <div class="position-absolute bottom-0 start-0 m-3">
+        <span class="badge bg-primary rounded-pill px-3 py-2">
+            <i class="fas fa-tag me-1"></i>
+            {% trans "Actualité" %}
+        </span>
+    </div>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="hero-article-content ps-lg-4">
+    <div class="article-meta mb-3">
+        <div class="d-flex align-items-center text-muted">
+            <i class="fas fa-calendar me-2"></i>
+            <span>{{ hero_article.publication_date|date:"d F Y" }}</span>
+            <span class="mx-2">•</span>
+            <i class="fas fa-user me-2"></i>
+            <span>{{ hero_article.author.nom_prenom|default:"A²ELBM2" }}</span>
+            <span class="mx-2">•</span>
+            <i class="fas fa-clock me-2"></i>
+            <span>{% trans "5 min de lecture" %}</span>
+        </div>
+    </div>
+    
+    <h2 class="display-6 fw-bold mb-4">
+        {% if LANGUAGE_CODE == 'fr' %}
+            {{ hero_article.title_fr }}
+        {% else %}
+            {{ hero_article.title_en|default:hero_article.title_fr }}
+        {% endif %}
+    </h2>
+    
+    <p class="lead text-muted mb-4">
+        {% if LANGUAGE_CODE == 'fr' %}
+            {{ hero_article.content_fr|striptags|truncatewords:30 }}
+        {% else %}
+            {{ hero_article.content_en|default:hero_article.content_fr|striptags|truncatewords:30 }}
+        {% endif %}
+    </p>
+    
+    <div class="article-actions d-flex gap-3">
+        <a href="{% url 'news_detail' hero_article.pk %}" class="btn btn-primary btn-lg px-4 py-3 rounded-pill">
+            <i class="fas fa-book-open me-2"></i>
+            {% trans "Lire l'article" %}
+        </a>
+        <button class="btn btn-outline-secondary btn-lg px-4 py-3 rounded-pill" onclick="shareArticle('{{ hero_article.title_fr }}', '{% url 'news_detail' hero_article.pk %}')">
+            <i class="fas fa-share-alt me-2"></i>
+            {% trans "Partager" %}
+        </button>
+    </div>
+    
+    <!-- Article Stats -->
+    <div class="article-stats mt-4 pt-4 border-top">
+        <div class="row text-center">
+            <div class="col-4">
+                <div class="stat-item">
+                    <h6 class="text-primary fw-bold mb-1">{{ hero_article.views|default:"1.2K" }}</h6>
+                    <small class="text-muted">{% trans "Vues" %}</small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="stat-item">
+                    <h6 class="text-success fw-bold mb-1">{{ hero_article.likes|default:"85" }}</h6>
+                    <small class="text-muted">{% trans "J'aime" %}</small>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="stat-item">
+                    <h6 class="text-warning fw-bold mb-1">{{ hero_article.shares|default:"23" }}</h6>
+                    <small class="text-muted">{% trans "Partages" %}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+{% endwith %}
+
+<!-- Latest News Grid -->
+<div class="section-header text-center mb-5" data-aos="fade-up">
+<span class="badge bg-primary rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+<i class="fas fa-newspaper me-2"></i>
+{% trans "Dernières Actualités" %}
+</span>
+<h2 class="display-5 fw-bold mb-4">
+{% trans "Restez au" %} <span class="text-primary">{% trans "Courant" %}</span>
+</h2>
+<p class="lead text-muted mx-auto" style="max-width: 700px;">
+{% trans "Découvrez nos dernières nouvelles, annonces importantes et actualités de l'association." %}
+</p>
+</div>
+
+<div class="news-grid row g-4">
+{% for article in news_page.object_list %}
+{% if not article.is_featured or not forloop.first %}
+<div class="col-lg-4 col-md-6 news-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}" data-category="{% if article.is_featured %}featured{% else %}general{% endif %}">
+<article class="news-card bg-white rounded-4 shadow-sm overflow-hidden h-100 position-relative">
+<!-- Article Image -->
+<div class="news-image position-relative overflow-hidden">
+    {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.title_fr }}" class="img-fluid w-100" style="height: 250px; object-fit: cover; transition: all 0.3s ease;">
+    {% else %}
+        <div class="bg-gradient-secondary d-flex align-items-center justify-content-center text-dark" style="height: 250px;">
+            <i class="fas fa-newspaper fa-3x"></i>
+        </div>
+    {% endif %}
+    
+    <!-- Article Category -->
+    <div class="position-absolute top-0 start-0 m-3">
+        {% if article.is_featured %}
+            <span class="badge bg-warning text-dark rounded-pill px-3 py-2">
+                <i class="fas fa-star me-1"></i>
+                {% trans "Vedette" %}
+            </span>
+        {% else %}
+            <span class="badge bg-info rounded-pill px-3 py-2">
+                <i class="fas fa-tag me-1"></i>
+                {% trans "News" %}
+            </span>
+        {% endif %}
+    </div>
+    
+    <!-- Read Time -->
+    <div class="position-absolute top-0 end-0 m-3">
+        <span class="badge bg-dark rounded-pill px-3 py-2">
+            <i class="fas fa-clock me-1"></i>
+            {% trans "3 min" %}
+        </span>
+    </div>
+    
+    <!-- Hover Overlay -->
+    <div class="news-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.7); opacity: 0; transition: all 0.3s ease;">
+        <div class="overlay-content">
+            <a href="{% url 'news_detail' article.pk %}" class="btn btn-light btn-lg rounded-circle">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Article Content -->
+<div class="news-content p-4">
+    <div class="article-meta mb-3">
+        <div class="d-flex align-items-center text-muted small">
+            <i class="fas fa-calendar me-2"></i>
+            <span>{{ article.publication_date|date:"d M Y" }}</span>
+            {% if article.author %}
+                <span class="mx-2">•</span>
+                <i class="fas fa-user me-2"></i>
+                <span>{{ article.author.nom_prenom }}</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <h5 class="news-title fw-bold mb-3">
+        <a href="{% url 'news_detail' article.pk %}" class="text-decoration-none text-dark">
+            {% if LANGUAGE_CODE == 'fr' %}
+                {{ article.title_fr|truncatechars:60 }}
+            {% else %}
+                {{ article.title_en|default:article.title_fr|truncatechars:60 }}
+            {% endif %}
+        </a>
+    </h5>
+    
+    <p class="news-excerpt text-muted mb-4">
+        {% if LANGUAGE_CODE == 'fr' %}
+            {{ article.content_fr|striptags|truncatewords:15 }}
+        {% else %}
+            {{ article.content_en|default:article.content_fr|striptags|truncatewords:15 }}
+        {% endif %}
+    </p>
+    
+    <!-- Article Footer -->
+    <div class="article-footer d-flex justify-content-between align-items-center">
+        <div class="article-engagement">
+            <button class="btn btn-sm btn-outline-primary me-2" onclick="likeArticle({{ article.id }})">
+                <i class="fas fa-heart"></i>
+                <span class="like-count">{{ article.likes|default:"0" }}</span>
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="shareArticle('{{ article.title_fr }}', '{% url 'news_detail' article.pk %}')">
+                <i class="fas fa-share-alt"></i>
+            </button>
+        </div>
+        
+        <a href="{% url 'news_detail' article.pk %}" class="btn btn-primary btn-sm">
+            {% trans "Lire plus" %}
+            <i class="fas fa-arrow-right ms-1"></i>
+        </a>
+    </div>
+</div>
+</article>
+</div>
+{% endif %}
+{% empty %}
+<div class="col-12">
+<div class="text-center py-5">
+<i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+<h5 class="text-muted">{% trans "Aucune actualité disponible" %}</h5>
+<p class="text-muted">{% trans "Les actualités seront bientôt publiées." %}</p>
+</div>
+</div>
+{% endfor %}
+</div>
+
+<!-- Pagination -->
+{% if news_page.has_other_pages %}
+<div class="news-pagination mt-5" data-aos="fade-up">
+<nav aria-label="{% trans 'Navigation des actualités' %}">
+<ul class="pagination justify-content-center">
+{% if news_page.has_previous %}
+    <li class="page-item">
+        <a class="page-link rounded-pill me-2" href="?page={{ news_page.previous_page_number }}">
+            <i class="fas fa-chevron-left me-2"></i>
+            {% trans "Précédent" %}
+        </a>
+    </li>
+{% endif %}
+
+{% for num in news_page.paginator.page_range %}
+    {% if news_page.number == num %}
+        <li class="page-item active">
+            <span class="page-link rounded-circle">{{ num }}</span>
+        </li>
+    {% elif num > news_page.number|add:'-3' and num < news_page.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link rounded-circle" href="?page={{ num }}">{{ num }}</a>
+        </li>
+    {% endif %}
+{% endfor %}
+
+{% if news_page.has_next %}
+    <li class="page-item">
+        <a class="page-link rounded-pill ms-2" href="?page={{ news_page.next_page_number }}">
+            {% trans "Suivant" %}
+            <i class="fas fa-chevron-right ms-2"></i>
+        </a>
+    </li>
+{% endif %}
+</ul>
+</nav>
+</div>
+{% endif %}
+</div>
+</section>
+{% endif %}
+
+<!-- Newsletter Subscription -->
+<section id="newsletter" class="py-6 bg-gradient-primary text-white position-relative overflow-hidden">
+<div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: #1a1a1a; opacity: 0.4;"></div>
+
+<div class="container position-relative text-center">
+<div class="row justify-content-center">
+<div class="col-lg-8" data-aos="zoom-in">
+<div class="newsletter-content">
+<i class="fas fa-envelope-open-text fa-3x text-warning mb-4"></i>
+
+<h2 class="display-6 fw-bold mb-4">
+    {% trans "Ne Manquez Plus Aucune" %} <span class="text-warning">{% trans "Actualité !" %}</span>
+</h2>
+
+<p class="lead mb-5 opacity-90">
+    {% trans "Recevez notre newsletter hebdomadaire avec toutes les dernières nouvelles, événements et annonces importantes de l'association." %}
+</p>
+
+<form class="newsletter-form row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+    <div class="col-md-8">
+        <div class="input-group input-group-lg">
+            <input type="email" class="form-control rounded-start-pill" placeholder="{% trans 'Votre adresse e-mail' %}" required>
+            <button class="btn btn-warning text-dark px-4 rounded-end-pill" type="submit">
+                <i class="fas fa-paper-plane me-2"></i>
+                {% trans "S'abonner Gratuitement" %}
+            </button>
+        </div>
+        <small class="text-light opacity-75 mt-2 d-block">
+            {% trans "Plus de 500 membres déjà abonnés • Désabonnement en un clic" %}
+        </small>
+    </div>
+</form>
+
+<div class="newsletter-features mt-5">
+    <div class="row g-4">
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-item">
+                <i class="fas fa-clock fa-2x text-warning mb-3"></i>
+                <h6 class="fw-semibold">{% trans "Hebdomadaire" %}</h6>
+                <small class="opacity-75">{% trans "Chaque vendredi matin" %}</small>
+            </div>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="500">
+            <div class="feature-item">
+                <i class="fas fa-star fa-2x text-warning mb-3"></i>
+                <h6 class="fw-semibold">{% trans "Contenu Exclusif" %}</h6>
+                <small class="opacity-75">{% trans "Accès privilégié aux news" %}</small>
+            </div>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">
+            <div class="feature-item">
+                <i class="fas fa-mobile-alt fa-2x text-warning mb-3"></i>
+                <h6 class="fw-semibold">{% trans "Mobile Friendly" %}</h6>
+                <small class="opacity-75">{% trans "Optimisé pour mobile" %}</small>
+            </div>
+        </div>
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="700">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt fa-2x text-warning mb-3"></i>
+                <h6 class="fw-semibold">{% trans "Zéro Spam" %}</h6>
+                <small class="opacity-75">{% trans "Données protégées" %}</small>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Trending Topics -->
+<section class="py-6 bg-light">
+<div class="container">
+<div class="text-center mb-5" data-aos="fade-up">
+<span class="badge bg-danger rounded-pill px-4 py-2 mb-3" style="font-size: 1.1rem;">
+<i class="fas fa-fire me-2"></i>
+{% trans "Trending" %}
+</span>
+<h2 class="display-5 fw-bold mb-4">
+{% trans "Sujets" %} <span class="text-danger">{% trans "Populaires" %}</span>
+</h2>
+<p class="lead text-muted mx-auto" style="max-width: 700px;">
+{% trans "Les sujets qui font le buzz dans notre communauté d'anciens élèves." %}
+</p>
+</div>
+
+<div class="trending-topics">
+<div class="row g-4">
+<div class="col-lg-6" data-aos="fade-right">
+<div class="trending-card bg-white rounded-4 p-4 shadow-sm h-100">
+    <div class="d-flex align-items-start">
+        <div class="trending-number bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; font-size: 1.2rem; font-weight: bold;">
+            1
+        </div>
+        <div class="flex-grow-1">
+            <h5 class="fw-bold mb-2">{% trans "Nouveau Campus Melong 2" %}</h5>
+            <p class="text-muted mb-3">{% trans "Les travaux d'extension du lycée progressent rapidement avec le soutien de notre association." %}</p>
+            <div class="d-flex align-items-center justify-content-between">
+                <span class="badge bg-danger rounded-pill">{% trans "🔥 Très populaire" %}</span>
+                <small class="text-muted">{% trans "125 discussions" %}</small>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+<div class="trending-card bg-white rounded-4 p-4 shadow-sm h-100">
+    <div class="d-flex align-items-start">
+        <div class="trending-number bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; font-size: 1.2rem; font-weight: bold;">
+            2
+        </div>
+        <div class="flex-grow-1">
+            <h5 class="fw-bold mb-2">{% trans "Bourses d'Excellence 2025" %}</h5>
+            <p class="text-muted mb-3">{% trans "Programme de bourses pour les élèves méritants grâce aux contributions des anciens." %}</p>
+            <div class="d-flex align-items-center justify-content-between">
+                <span class="badge bg-warning rounded-pill">{% trans "⭐ Tendance" %}</span>
+                <small class="text-muted">{% trans "89 discussions" %}</small>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+<div class="trending-card bg-white rounded-4 p-4 shadow-sm h-100">
+    <div class="d-flex align-items-start">
+        <div class="trending-number bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">
+            3
+        </div>
+        <div class="flex-grow-1">
+            <h6 class="fw-bold mb-2">{% trans "Gala Annuel 2025" %}</h6>
+            <p class="text-muted small mb-2">{% trans "Préparatifs du grand gala de fin d'année." %}</p>
+            <span class="badge bg-success rounded-pill small">{% trans "45 mentions" %}</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+<div class="trending-card bg-white rounded-4 p-4 shadow-sm h-100">
+    <div class="d-flex align-items-start">
+        <div class="trending-number bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">
+            4
+        </div>
+        <div class="flex-grow-1">
+            <h6 class="fw-bold mb-2">{% trans "Réseau Professionnel" %}</h6>
+            <p class="text-muted small mb-2">{% trans "Plateforme d'entraide professionnelle." %}</p>
+            <span class="badge bg-info rounded-pill small">{% trans "38 mentions" %}</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+<div class="trending-card bg-white rounded-4 p-4 shadow-sm h-100">
+    <div class="d-flex align-items-start">
+        <div class="trending-number bg-purple text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold; background: #6f42c1;">
+            5
+        </div>
+        <div class="flex-grow-1">
+            <h6 class="fw-bold mb-2">{% trans "Innovation Technologique" %}</h6>
+            <p class="text-muted small mb-2">{% trans "Laboratoire informatique moderne." %}</p>
+            <span class="badge rounded-pill small" style="background: #6f42c1; color: white;">{% trans "32 mentions" %}</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-6">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-8" data-aos="fade-right">
+<h2 class="display-6 fw-bold mb-4">
+{% trans "Partagez Votre" %} <span class="text-primary">{% trans "Actualité !" %}</span>
+</h2>
+<p class="lead text-muted mb-4">
+{% trans "Vous avez une information importante à partager avec la communauté ? Proposez votre article pour publication sur notre site." %}
+</p>
+
+<div class="cta-benefits">
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="benefit-item d-flex align-items-center">
+            <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px;">
+                <i class="fas fa-edit d-flex align-items-center justify-content-center h-100"></i>
+            </div>
+            <span>{% trans "Publication rapide et gratuite" %}</span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="benefit-item d-flex align-items-center">
+            <div class="bg-primary text-white rounded-circle me-3" style="width: 40px; height: 40px;">
+                <i class="fas fa-users d-flex align-items-center justify-content-center h-100"></i>
+            </div>
+            <span>{% trans "Audience de 500+ membres" %}</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 text-lg-end" data-aos="fade-left" data-aos-delay="300">
+<div class="cta-actions">
+<a href="{% url 'contact' %}?subject=Proposition d'article" class="btn btn-primary btn-lg px-5 py-3 rounded-pill mb-3 d-block">
+    <i class="fas fa-pencil-alt me-2"></i>
+    {% trans "Proposer un Article" %}
+</a>
+<a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill d-block">
+    <i class="fas fa-camera me-2"></i>
+    {% trans "Devenir Correspondant" %}
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.py-6 {
+padding: 6rem 0;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0px) rotate(0deg); }
+50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.news-hero {
+background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+.news-hero {
+background-attachment: scroll;
+}
+}
+
+.news-card {
+transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+border: 1px solid rgba(0,0,0,0.05);
+}
+
+.news-card:hover {
+transform: translateY(-15px) scale(1.02);
+box-shadow: 0 25px 50px rgba(0,0,0,0.2) !important;
+}
+
+.news-card:hover .news-image img {
+transform: scale(1.1);
+}
+
+.news-card:hover .news-overlay {
+opacity: 1 !important;
+}
+
+.trending-card {
+transition: all 0.3s ease;
+border: 1px solid rgba(0,0,0,0.05);
+}
+
+.trending-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.trending-number {
+transition: all 0.3s ease;
+}
+
+.trending-card:hover .trending-number {
+transform: scale(1.1) rotateY(10deg);
+}
+
+.news-filter-btn {
+transition: all 0.3s ease;
+border-radius: 25px;
+}
+
+.news-filter-btn.active {
+background: var(--primary-color);
+border-color: var(--primary-color);
+color: white;
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.news-search input {
+border-radius: 25px 0 0 25px;
+border-right: none;
+}
+
+.news-search button {
+border-radius: 0 25px 25px 0;
+border-left: none;
+}
+
+.hero-article {
+margin-bottom: 4rem;
+}
+
+.hero-article-image img {
+transition: all 0.3s ease;
+}
+
+.hero-article:hover .hero-article-image img {
+transform: scale(1.05);
+}
+
+.breaking-badge {
+animation: pulse-breaking 2s infinite;
+}
+
+@keyframes pulse-breaking {
+0% { 
+box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+transform: scale(1);
+}
+70% { 
+box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+transform: scale(1.05);
+}
+100% { 
+box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+transform: scale(1);
+}
+}
+
+.newsletter-form input {
+background: rgba(255,255,255,0.9);
+border: none;
+padding: 1rem 2rem;
+}
+
+.newsletter-form input:focus {
+background: white;
+box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+}
+
+.newsletter-form button {
+padding: 1rem 2rem;
+font-weight: 600;
+transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.feature-item {
+transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+transform: translateY(-5px);
+}
+
+.feature-item:hover i {
+transform: scale(1.1);
+}
+
+.benefit-item {
+transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+transform: translateX(5px);
+}
+
+.backdrop-blur {
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.2);
+}
+
+.news-stack {
+position: relative;
+display: inline-block;
+}
+
+.newspaper-item {
+transition: all 0.3s ease;
+}
+
+.news-stack:hover .newspaper-item {
+transform: rotate(0deg) scale(1.05);
+}
+
+.article-item {
+transition: all 0.3s ease;
+}
+
+.news-stack:hover .article-item {
+transform: scale(1.1) rotate(5deg) !important;
+}
+
+.pagination .page-link {
+border: none;
+margin: 0 5px;
+padding: 10px 15px;
+color: var(--primary-color);
+transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+background: var(--primary-color);
+color: white;
+transform: translateY(-2px);
+}
+
+.pagination .page-item.active .page-link {
+background: var(--primary-color);
+border-color: var(--primary-color);
+transform: scale(1.1);
+}
+
+.news-title a {
+transition: all 0.3s ease;
+}
+
+.news-title a:hover {
+color: var(--primary-color) !important;
+}
+
+.fake-text {
+opacity: 0.4;
+}
+
+.notification-badge {
+animation: bounce-notification 2s infinite;
+}
+
+@keyframes bounce-notification {
+0%, 20%, 50%, 80%, 100% {
+transform: translateY(0);
+}
+40% {
+transform: translateY(-10px);
+}
+60% {
+transform: translateY(-5px);
+}
+}
+
+.mb-6 {
+margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+.py-6 {
+padding: 4rem 0;
+}
+
+.display-3 {
+font-size: 2.5rem;
+}
+
+.hero-stats {
+justify-content: center;
+}
+
+.news-filter {
+justify-content: center;
+}
+
+.newsletter-form .input-group {
+flex-direction: column;
+gap: 1rem;
+}
+
+.newsletter-form input,
+.newsletter-form button {
+border-radius: 25px !important;
+}
+
+.mb-6 {
+margin-bottom: 3rem;
+}
+}
+
+/* Loading animation */
+.loading {
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid rgba(255,255,255,.3);
+border-radius: 50%;
+border-top-color: #fff;
+animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+to { transform: rotate(360deg); }
+}
+
+/* Article engagement buttons */
+.article-engagement .btn {
+border-radius: 20px;
+transition: all 0.3s ease;
+}
+
+.article-engagement .btn:hover {
+transform: translateY(-2px);
+}
+
+.article-engagement .btn.liked {
+background: #dc3545;
+border-color: #dc3545;
+color: white;
+}
+
+/* Smooth transitions for filtering */
+.news-item {
+transition: all 0.5s ease;
+}
+
+.news-item.hidden {
+opacity: 0;
+transform: scale(0.8);
+pointer-events: none;
+}
+
+.news-item.fade-in {
+animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+from {
+opacity: 0;
+transform: scale(0.8) translateY(30px);
+}
+to {
+opacity: 1;
+transform: scale(1) translateY(0);
+}
+}
+</style>
+{% endblock %}
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// News filtering
+function initNewsFiltering() {
+const filterButtons = document.querySelectorAll('.news-filter-btn');
+const newsItems = document.querySelectorAll('.news-item');
+
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+const filter = this.getAttribute('data-filter');
+
+// Update active button
+filterButtons.forEach(btn => btn.classList.remove('active'));
+this.classList.add('active');
+
+// Filter items
+newsItems.forEach(item => {
+const category = item.getAttribute('data-category');
+
+if (filter === 'all' || category === filter) {
+    item.classList.remove('hidden');
+    item.classList.add('fade-in');
+} else {
+    item.classList.add('hidden');
+    item.classList.remove('fade-in');
+}
+});
+});
+});
+}
+
+// News search
+function initNewsSearch() {
+const searchInput = document.getElementById('newsSearch');
+const newsCards = document.querySelectorAll('.news-card');
+
+if (searchInput) {
+searchInput.addEventListener('input', function() {
+const searchTerm = this.value.toLowerCase();
+
+newsCards.forEach(card => {
+const title = card.querySelector('.news-title').textContent.toLowerCase();
+const excerpt = card.querySelector('.news-excerpt').textContent.toLowerCase();
+
+if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+    card.closest('.news-item').style.display = 'block';
+} else {
+    card.closest('.news-item').style.display = 'none';
+}
+});
+});
+}
+}
+
+// Newsletter form
+function initNewsletterForm() {
+const form = document.querySelector('.newsletter-form');
+if (form) {
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+
+const email = this.querySelector('input[type="email"]').value;
+const button = this.querySelector('button');
+const originalText = button.innerHTML;
+
+// Simulate subscription
+button.innerHTML = '<span class="loading"></span> {% trans "Inscription..." %}';
+button.disabled = true;
+
+setTimeout(() => {
+button.innerHTML = '<i class="fas fa-check me-2"></i>{% trans "Inscrit !" %}';
+button.classList.remove('btn-warning');
+button.classList.add('btn-success');
+
+setTimeout(() => {
+    button.innerHTML = originalText;
+    button.classList.remove('btn-success');
+    button.classList.add('btn-warning');
+    button.disabled = false;
+    this.reset();
+}, 2000);
+}, 1500);
+});
+}
+}
+
+// Enhanced hover effects
+function initHoverEffects() {
+const newsCards = document.querySelectorAll('.news-card, .trending-card');
+
+newsCards.forEach(card => {
+card.addEventListener('mouseenter', function() {
+this.style.transform = 'translateY(-15px) scale(1.02)';
+this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+});
+
+card.addEventListener('mouseleave', function() {
+this.style.transform = 'translateY(0) scale(1)';
+});
+});
+}
+
+// Smooth scrolling for anchor links
+function initSmoothScrolling() {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+});
+}
+});
+});
+}
+
+// Initialize all functions
+initNewsFiltering();
+initNewsSearch();
+initNewsletterForm();
+initHoverEffects();
+initSmoothScrolling();
+
+// Parallax effect for hero
+window.addEventListener('scroll', function() {
+const scrolled = window.pageYOffset;
+const hero = document.querySelector('.news-hero');
+if (hero && window.innerWidth > 768) {
+hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+}
+});
+});
+
+// Like article function
+function likeArticle(articleId) {
+const likeBtn = event.target.closest('button');
+const likeCount = likeBtn.querySelector('.like-count');
+let count = parseInt(likeCount.textContent);
+
+likeBtn.classList.toggle('btn-outline-primary');
+likeBtn.classList.toggle('liked');
+
+if (likeBtn.classList.contains('liked')) {
+count++;
+likeBtn.style.background = '#dc3545';
+likeBtn.style.borderColor = '#dc3545';
+likeBtn.style.color = 'white';
+} else {
+count--;
+likeBtn.style.background = '';
+likeBtn.style.borderColor = '';
+likeBtn.style.color = '';
+}
+
+likeCount.textContent = count;
+
+// Add animation
+likeBtn.style.transform = 'scale(1.1)';
+setTimeout(() => {
+likeBtn.style.transform = 'scale(1)';
+}, 200);
+}
+
+// Share article function
+function shareArticle(title, url) {
+if (navigator.share) {
+navigator.share({
+title: title,
+url: window.location.origin + url
+});
+} else {
+// Fallback to copy to clipboard
+const fullUrl = window.location.origin + url;
+navigator.clipboard.writeText(fullUrl).then(() => {
+// Show temporary notification
+const notification = document.createElement('div');
+notification.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+notification.style.zIndex = '9999';
+notification.innerHTML = '<i class="fas fa-check me-2"></i>{% trans "Lien copié !" %}';
+document.body.appendChild(notification);
+
+setTimeout(() => {
+notification.remove();
+}, 3000);
+});
+}
+}
+
+// Reading progress indicator
+function initReadingProgress() {
+const progressBar = document.createElement('div');
+progressBar.className = 'reading-progress';
+progressBar.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+width: 0%;
+height: 3px;
+background: linear-gradient(to right, var(--primary-color), var(--warning-color));
+z-index: 9999;
+transition: width 0.3s ease;
+`;
+document.body.appendChild(progressBar);
+
+window.addEventListener('scroll', function() {
+const scrollTop = window.pageYOffset;
+const docHeight = document.body.scrollHeight - window.innerHeight;
+const scrollPercent = (scrollTop / docHeight) * 100;
+progressBar.style.width = scrollPercent + '%';
+});
+}
+
+// Initialize reading progress
+initReadingProgress();
+</script>

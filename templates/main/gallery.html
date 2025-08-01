@@ -1,0 +1,1884 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Galerie" %} - A²ELBM2{% endblock %}
+
+{% block meta_description %}{% trans "Découvrez notre galerie de photos et vidéos de l'Association des Anciens Élèves du Lycée Bilingue de Melong 2." %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+
+<style>
+    /* Variables CSS personnalisées */
+    :root {
+        --gallery-primary: #2C5530;
+        --gallery-secondary: #FFD700;
+        --gallery-success: #28a745;
+        --gallery-info: #17a2b8;
+        --gallery-warning: #ffc107;
+        --gallery-danger: #dc3545;
+        --gallery-dark: #343a40;
+        --gallery-light: #f8f9fa;
+        --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    }
+
+    /* Espacement personnalisé */
+    .py-6 {
+        padding: 6rem 0;
+    }
+
+    /* Section Hero */
+    .gallery-hero {
+        min-height: 80vh;
+        background: linear-gradient(135deg, rgba(44,85,48,0.95) 0%, rgba(74,124,89,0.9) 100%), url('{% static "images/gallery-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    .gallery-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('{% static "images/photo-pattern.svg" %}') repeat;
+        opacity: 0.1;
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .breadcrumb-item a {
+        color: rgba(255, 255, 255, 0.7) !important;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: white !important;
+    }
+
+    .hero-badge .badge {
+        font-size: 1.1rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        max-width: 650px;
+    }
+
+    /* Animations flottantes */
+    @keyframes float {
+        0%, 100% { 
+            transform: translateY(0px) rotate(0deg); 
+        }
+        50% { 
+            transform: translateY(-20px) rotate(5deg); 
+        }
+    }
+
+    .floating-photo {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-photo:nth-child(2) {
+        animation-delay: 2s;
+        animation-duration: 8s;
+    }
+
+    .floating-photo:nth-child(3) {
+        animation-delay: 4s;
+        animation-duration: 7s;
+    }
+
+    /* Statistiques du hero */
+    .hero-stats {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+    }
+
+    .stat-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 1rem;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        min-width: 100px;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--gallery-secondary);
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Section de filtres */
+    .gallery-filter-section {
+        background: white;
+        padding: 1.5rem 0;
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .gallery-filter {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gallery-filter-btn {
+        border-radius: 25px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 2px solid #e9ecef;
+        background: white;
+        color: var(--gallery-dark);
+    }
+
+    .gallery-filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+    }
+
+    .gallery-filter-btn.active {
+        background: var(--gallery-primary);
+        border-color: var(--gallery-primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+    }
+
+    .view-options {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+
+    .view-btn {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: 2px solid #e9ecef;
+        background: white;
+        color: var(--gallery-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .view-btn:hover,
+    .view-btn.active {
+        background: var(--gallery-primary);
+        border-color: var(--gallery-primary);
+        color: white;
+        transform: scale(1.1);
+    }
+
+    /* Galerie de photos */
+    .photo-gallery-section {
+        background: var(--gallery-light);
+        padding: 6rem 0;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .section-badge {
+        font-size: 1.1rem;
+        padding: 0.75rem 1.5rem;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--gallery-dark);
+        margin-bottom: 1.5rem;
+    }
+
+    .section-description {
+        font-size: 1.2rem;
+        color: #6c757d;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* Grille de galerie */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .gallery-grid.masonry {
+        grid-template-rows: masonry;
+    }
+
+    .gallery-item {
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .gallery-item.hidden {
+        display: none;
+    }
+
+    .gallery-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(0,0,0,0.05);
+        height: 100%;
+        position: relative;
+    }
+
+    .gallery-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .gallery-image-container {
+        position: relative;
+        overflow: hidden;
+        height: 300px;
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .gallery-card:hover .gallery-image {
+        transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+        opacity: 1;
+    }
+
+    .overlay-content {
+        text-align: center;
+        color: white;
+    }
+
+    .overlay-content .btn {
+        margin: 0.25rem;
+    }
+
+    .gallery-info {
+        padding: 1.5rem;
+    }
+
+    .gallery-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--gallery-dark);
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    .gallery-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+    }
+
+    .gallery-meta {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        font-size: 0.875rem;
+    }
+
+    .gallery-date {
+        color: #6c757d;
+    }
+
+    .gallery-actions .btn {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    /* Galerie vidéo */
+    .video-gallery-section {
+        background: white;
+        padding: 6rem 0;
+    }
+
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .video-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+        height: 100%;
+    }
+
+    .video-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .video-thumbnail {
+        position: relative;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .video-thumbnail video,
+    .video-thumbnail iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .video-play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .video-play-overlay:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .play-button {
+        width: 80px;
+        height: 80px;
+        background: var(--gallery-danger);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    .video-play-overlay:hover .play-button {
+        transform: scale(1.1);
+    }
+
+    .video-duration {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 15px;
+        font-size: 0.75rem;
+    }
+
+    .video-info {
+        padding: 1.5rem;
+    }
+
+    .video-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--gallery-dark);
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    .video-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+    }
+
+    .video-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .video-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Section vedette */
+    .featured-section {
+        background: linear-gradient(135deg, var(--gallery-primary) 0%, #4A7C59 100%);
+        color: white;
+        padding: 6rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .featured-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('{% static "images/collection-pattern.svg" %}') repeat;
+        opacity: 0.1;
+        z-index: 1;
+    }
+
+    .featured-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .featured-swiper {
+        padding: 2rem 0;
+    }
+
+    .featured-item {
+        transition: all 0.3s ease;
+    }
+
+    .featured-item:hover {
+        transform: translateY(-10px);
+    }
+
+    .featured-image-container {
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        height: 400px;
+    }
+
+    .featured-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .featured-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    }
+
+    .featured-title {
+        color: white;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .featured-description {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 1rem;
+    }
+
+    /* Statistiques */
+    .stats-section {
+        background: var(--gallery-light);
+        padding: 6rem 0;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        height: 100%;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .stat-icon {
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-icon-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon-circle {
+        transform: scale(1.1) rotateY(10deg);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .stat-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--gallery-dark);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    /* Section de partage */
+    .upload-section {
+        background: white;
+        padding: 6rem 0;
+    }
+
+    .upload-benefits {
+        margin-bottom: 2rem;
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+        transform: translateX(5px);
+    }
+
+    .benefit-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: white;
+    }
+
+    .upload-actions .btn {
+        margin-bottom: 1rem;
+    }
+
+    /* Modales */
+    .modal-content.bg-dark {
+        background: #1a1a1a !important;
+        border: none;
+    }
+
+    .modal-header.border-0 {
+        border-bottom: 1px solid #444 !important;
+    }
+
+    .modal-footer.border-0 {
+        border-top: 1px solid #444 !important;
+    }
+
+    .modal-title {
+        color: white !important;
+    }
+
+    #lightboxImage {
+        max-height: 80vh;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    /* Swiper customisation */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: var(--gallery-secondary) !important;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        width: 50px !important;
+        height: 50px !important;
+        margin-top: -25px !important;
+        transition: all 0.3s ease;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background: rgba(255,255,255,0.2);
+        transform: scale(1.1);
+    }
+
+    .swiper-pagination-bullet {
+        background: rgba(255,255,255,0.5) !important;
+        opacity: 1 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--gallery-secondary) !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .py-6 {
+            padding: 4rem 0;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .video-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-stats {
+            justify-content: center;
+        }
+
+        .gallery-filter {
+            justify-content: center;
+        }
+
+        .view-options {
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .gallery-hero {
+            background-attachment: scroll;
+        }
+
+        .featured-swiper {
+            padding: 1rem 0;
+        }
+    }
+
+    /* États de chargement */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Badge vedette */
+    .featured-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 10;
+        background: var(--gallery-warning);
+        color: var(--gallery-dark);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    /* Placeholder pour images manquantes */
+    .image-placeholder {
+        background: linear-gradient(135deg, var(--gallery-success), #20c997);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        height: 100%;
+    }
+
+    .video-placeholder {
+        background: linear-gradient(135deg, var(--gallery-danger), #e83e8c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        height: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->           
+<br> <br> <br>
+<section class="gallery-hero">
+    <!-- Éléments flottants -->
+    <div class="position-absolute w-100 h-100 top-0 start-0" style="pointer-events: none; z-index: 1;">
+        <div class="floating-photo position-absolute bg-white rounded-3 p-2 shadow" 
+             style="top: 15%; left: 8%; width: 80px; height: 80px; transform: rotate(-15deg);">
+            <div class="bg-primary rounded-2 d-flex align-items-center justify-content-center h-100">
+                <i class="fas fa-camera text-white"></i>
+            </div>
+        </div>
+        
+        <div class="floating-photo position-absolute bg-white rounded-3 p-2 shadow" 
+             style="top: 60%; right: 12%; width: 70px; height: 70px; transform: rotate(20deg);">
+            <div class="bg-warning rounded-2 d-flex align-items-center justify-content-center h-100">
+                <i class="fas fa-images text-dark"></i>
+            </div>
+        </div>
+        
+        <div class="floating-photo position-absolute bg-white rounded-3 p-2 shadow" 
+             style="top: 30%; right: 25%; width: 60px; height: 60px; transform: rotate(10deg);">
+            <div class="bg-success rounded-2 d-flex align-items-center justify-content-center h-100">
+                <i class="fas fa-video text-white"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="container hero-content">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'home' %}">{% trans "Accueil" %}</a>
+                        </li>
+                        <li class="breadcrumb-item active">{% trans "Galerie" %}</li>
+                    </ol>
+                </nav>
+                
+                <!-- Badge -->
+                <div class="hero-badge mb-4">
+                    <span class="badge bg-warning text-dark rounded-pill">
+                        <i class="fas fa-camera-retro me-2"></i>
+                        {% trans "Souvenirs & Moments" %}
+                    </span>
+                </div>
+                
+                <!-- Titre -->
+                <h1 class="hero-title mb-4">
+                    {% trans "Notre" %} <span class="text-warning">{% trans "Galerie" %}</span><br>
+                    {% trans "Raconte Notre Histoire" %}
+                </h1>
+                
+                <!-- Description -->
+                <p class="hero-subtitle mb-4">
+                    {% trans "Plongez dans l'univers visuel de notre association à travers nos photos et vidéos qui immortalisent nos plus beaux moments et réalisations." %}
+                </p>
+                
+                <!-- Statistiques -->
+                <div class="hero-stats mb-5">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ images.count|default:"150" }}+</span>
+                        <div class="stat-label">{% trans "Photos" %}</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ videos.count|default:"25" }}+</span>
+                        <div class="stat-label">{% trans "Vidéos" %}</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <div class="stat-label">{% trans "Années" %}</div>
+                    </div>
+                </div>
+                
+                <!-- Boutons d'action -->
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#photo-gallery" class="btn btn-warning btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-images me-2"></i>
+                        {% trans "Explorer les Photos" %}
+                    </a>
+                    <a href="#video-gallery" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-play-circle me-2"></i>
+                        {% trans "Voir les Vidéos" %}
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 text-center d-none d-lg-block" data-aos="fade-left" data-aos-delay="300">
+                <!-- Prévisualisation de galerie -->
+                <div class="position-relative">
+                    <div class="rounded-4 p-3 shadow-lg" style="transform: rotate(-5deg); max-width: 300px; margin: 0 auto;">
+                        <div class="bg-gradient-primary rounded-3 p-3 text-white text-center">
+                            <h6 class="fw-bold mb-2">A²ELBM2</h6>
+                            <p class="small mb-3">{% trans "Galerie Photos & Vidéos" %}</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <i class="fas fa-camera"></i>
+                                <i class="fas fa-images"></i>
+                                <i class="fas fa-video"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section de filtres -->
+<section class="gallery-filter-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="gallery-filter">
+                    <button class="gallery-filter-btn active" data-filter="all">
+                        <i class="fas fa-th me-2"></i>
+                        {% trans "Tout voir" %}
+                    </button>
+                    <button class="gallery-filter-btn" data-filter="images">
+                        <i class="fas fa-images me-2"></i>
+                        {% trans "Photos" %} ({{ images.count|default:"150" }})
+                    </button>
+                    <button class="gallery-filter-btn" data-filter="videos">
+                        <i class="fas fa-video me-2"></i>
+                        {% trans "Vidéos" %} ({{ videos.count|default:"25" }})
+                    </button>
+                    <button class="gallery-filter-btn" data-filter="featured">
+                        <i class="fas fa-star me-2"></i>
+                        {% trans "En vedette" %}
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="view-options">
+                    <button class="view-btn active" data-view="grid" title="{% trans 'Vue grille' %}">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="masonry" title="{% trans 'Vue mosaïque' %}">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="view-btn" data-view="slideshow" title="{% trans 'Diaporama' %}">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Galerie Photos -->
+<section id="photo-gallery" class="photo-gallery-section" data-category="images">
+    <div class="container">
+        <!-- En-tête -->
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-badge badge bg-success text-white rounded-pill">
+                <i class="fas fa-camera me-2"></i>
+                {% trans "Photothèque" %}
+            </span>
+            <h2 class="section-title">
+                {% trans "Nos Plus Belles" %} <span class="text-success">{% trans "Photos" %}</span>
+            </h2>
+            <p class="section-description">
+                {% trans "Revivez nos événements, rencontres et moments marquants à travers cette collection de photos soigneusement sélectionnées." %}
+            </p>
+        </div>
+        
+        <!-- Grille de photos -->
+        <div class="gallery-grid" id="photo-grid">
+            {% for item in images %}
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|mul:50 }}" 
+                 data-type="image" {% if item.is_featured %}data-featured="true"{% endif %}>
+                <div class="gallery-card">
+                    <!-- Badge vedette -->
+                    {% if item.is_featured %}
+                    <div class="featured-badge">
+                        <i class="fas fa-star me-1"></i>
+                        {% trans "Vedette" %}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Container image -->
+                    <div class="gallery-image-container">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" 
+                                 alt="{% if LANGUAGE_CODE == 'fr' %}{{ item.title_fr }}{% else %}{{ item.title_en|default:item.title_fr }}{% endif %}" 
+                                 class="gallery-image">
+                        {% else %}
+                            <div class="image-placeholder">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Overlay au survol -->
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <button class="btn btn-light btn-lg rounded-circle mb-3" 
+                                        onclick="openLightbox('{{ item.image.url }}', '{% if LANGUAGE_CODE == 'fr' %}{{ item.title_fr }}{% else %}{{ item.title_en|default:item.title_fr }}{% endif %}')">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-outline-light btn-sm" onclick="shareImage('{{ item.image.url }}')">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <button class="btn btn-outline-light btn-sm" onclick="downloadImage('{{ item.image.url }}')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Informations de l'image -->
+                    <div class="gallery-info">
+                        <h6 class="gallery-title">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ item.title_fr|truncatechars:40 }}
+                            {% else %}
+                                {{ item.title_en|default:item.title_fr|truncatechars:40 }}
+                            {% endif %}
+                        </h6>
+                        
+                        {% if item.description_fr or item.description_en %}
+                        <p class="gallery-description">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ item.description_fr|truncatechars:60 }}
+                            {% else %}
+                                {{ item.description_en|default:item.description_fr|truncatechars:60 }}
+                            {% endif %}
+                        </p>
+                        {% endif %}
+                        
+                        <div class="gallery-meta">
+                            <small class="gallery-date">
+                                <i class="fas fa-calendar me-1"></i>
+                                {{ item.created_at|date:"d M Y" }}
+                            </small>
+                            <div class="gallery-actions">
+                                <button class="btn btn-outline-primary btn-sm" onclick="likeImage({{ item.id }})">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">{{ item.likes|default:"0" }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-images fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">{% trans "Aucune photo disponible" %}</h5>
+                    <p class="text-muted">{% trans "Les photos seront bientôt ajoutées à notre galerie." %}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Bouton Charger plus -->
+        {% if images.count > 12 %}
+        <div class="text-center mt-5" data-aos="fade-up">
+            <button class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill" id="loadMorePhotos">
+                <i class="fas fa-plus me-2"></i>
+                {% trans "Charger Plus de Photos" %}
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Section Galerie Vidéos -->
+<section id="video-gallery" class="video-gallery-section" data-category="videos">
+    <div class="container">
+        <!-- En-tête -->
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-badge badge bg-danger text-white rounded-pill">
+                <i class="fas fa-video me-2"></i>
+                {% trans "Vidéothèque" %}
+            </span>
+            <h2 class="section-title">
+                {% trans "Nos" %} <span class="text-danger">{% trans "Vidéos" %}</span> {% trans "Mémorables" %}
+            </h2>
+            <p class="section-description">
+                {% trans "Découvrez nos événements en mouvement et plongez dans l'ambiance de nos rassemblements à travers ces vidéos captivantes." %}
+            </p>
+        </div>
+        
+        <!-- Grille de vidéos -->
+        <div class="video-grid">
+            {% for item in videos %}
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|mul:100 }}" 
+                 data-type="video" {% if item.is_featured %}data-featured="true"{% endif %}>
+                <div class="video-card">
+                    <!-- Badge vedette -->
+                    {% if item.is_featured %}
+                    <div class="featured-badge">
+                        <i class="fas fa-star me-1"></i>
+                        {% trans "Vedette" %}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Miniature vidéo -->
+                    <div class="video-thumbnail">
+                        {% if item.video_file %}
+                            <video preload="metadata">
+                                <source src="{{ item.video_file.url }}" type="video/mp4">
+                            </video>
+                        {% elif item.video_url %}
+                            <iframe src="{{ item.video_url }}" allowfullscreen></iframe>
+                        {% else %}
+                            <div class="video-placeholder">
+                                <i class="fas fa-video"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Overlay de lecture -->
+                        <div class="video-play-overlay" onclick="playVideoModal('{{ item.video_file.url|default:item.video_url }}', '{% if LANGUAGE_CODE == 'fr' %}{{ item.title_fr }}{% else %}{{ item.title_en|default:item.title_fr }}{% endif %}')">
+                            <div class="play-button">
+                                <i class="fas fa-play" style="margin-left: 3px;"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Durée vidéo -->
+                        <div class="video-duration">
+                            <i class="fas fa-clock me-1"></i>
+                            {{ item.duration|default:"2:30" }}
+                        </div>
+                    </div>
+                    
+                    <!-- Informations vidéo -->
+                    <div class="video-info">
+                        <h6 class="video-title">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ item.title_fr|truncatechars:50 }}
+                            {% else %}
+                                {{ item.title_en|default:item.title_fr|truncatechars:50 }}
+                            {% endif %}
+                        </h6>
+                        
+                        {% if item.description_fr or item.description_en %}
+                        <p class="video-description">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ item.description_fr|truncatechars:80 }}
+                            {% else %}
+                                {{ item.description_en|default:item.description_fr|truncatechars:80 }}
+                            {% endif %}
+                        </p>
+                        {% endif %}
+                        
+                        <div class="video-stats">
+                            <div class="d-flex gap-3">
+                                <small>
+                                    <i class="fas fa-eye me-1"></i>
+                                    {{ item.views|default:"245" }}
+                                </small>
+                                <small>
+                                    <i class="fas fa-heart me-1"></i>
+                                    {{ item.likes|default:"12" }}
+                                </small>
+                            </div>
+                            <small>
+                                {{ item.created_at|date:"d M Y" }}
+                            </small>
+                        </div>
+                        
+                        <div class="video-actions">
+                            <button class="btn btn-danger btn-sm flex-fill" 
+                                    onclick="playVideoModal('{{ item.video_file.url|default:item.video_url }}', '{% if LANGUAGE_CODE == 'fr' %}{{ item.title_fr }}{% else %}{{ item.title_en|default:item.title_fr }}{% endif %}')">
+                                <i class="fas fa-play me-1"></i>
+                                {% trans "Regarder" %}
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="shareVideo('{{ item.video_file.url|default:item.video_url }}')">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-video fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">{% trans "Aucune vidéo disponible" %}</h5>
+                    <p class="text-muted">{% trans "Les vidéos seront bientôt ajoutées à notre galerie." %}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Section Collection Vedette -->
+<section class="featured-section">
+    <div class="container featured-content">
+        <!-- En-tête -->
+        <div class="section-header text-center" data-aos="fade-up">
+            <span class="section-badge badge bg-warning text-dark rounded-pill">
+                <i class="fas fa-crown me-2"></i>
+                {% trans "Collection Spéciale" %}
+            </span>
+            <h2 class="section-title text-white">
+                {% trans "Moments" %} <span class="text-warning">{% trans "d'Exception" %}</span>
+            </h2>
+            <p class="section-description text-white-50">
+                {% trans "Une sélection exclusive de nos plus beaux souvenirs qui marquent l'histoire de notre association." %}
+            </p>
+        </div>
+        
+        <!-- Slider de collection vedette -->
+        <div class="featured-slider" data-aos="fade-up" data-aos-delay="300">
+            <div class="swiper featured-swiper">
+                <div class="swiper-wrapper">
+                    {% for item in images|slice:":6" %}
+                    {% if item.is_featured %}
+                    <div class="swiper-slide">
+                        <div class="featured-item">
+                            <div class="featured-image-container">
+                                {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="{{ item.title_fr }}" class="featured-image">
+                                {% else %}
+                                    <div class="image-placeholder">
+                                        <i class="fas fa-image fa-3x"></i>
+                                    </div>
+                                {% endif %}
+                                
+                                <div class="featured-overlay">
+                                    <h5 class="featured-title">
+                                        {% if LANGUAGE_CODE == 'fr' %}
+                                            {{ item.title_fr }}
+                                        {% else %}
+                                            {{ item.title_en|default:item.title_fr }}
+                                        {% endif %}
+                                    </h5>
+                                    <p class="featured-description">
+                                        {% if LANGUAGE_CODE == 'fr' %}
+                                            {{ item.description_fr|truncatechars:80 }}
+                                        {% else %}
+                                            {{ item.description_en|default:item.description_fr|truncatechars:80 }}
+                                        {% endif %}
+                                    </p>
+                                    <button class="btn btn-warning btn-sm" onclick="openLightbox('{{ item.image.url }}', '{{ item.title_fr }}')">
+                                        <i class="fas fa-expand me-1"></i>
+                                        {% trans "Voir en grand" %}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% empty %}
+                    <div class="swiper-slide">
+                        <div class="featured-item">
+                            <div class="featured-image-container d-flex align-items-center justify-content-center bg-white bg-opacity-10">
+                                <div class="text-center">
+                                    <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                                    <h5>{% trans "Bientôt disponible" %}</h5>
+                                    <p class="opacity-75">{% trans "Collection en préparation" %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Statistiques -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <div class="stat-icon-circle bg-primary">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <span class="stat-number text-primary counter" data-target="{{ images.count|default:'150' }}">0</span>
+                    <div class="stat-label">{% trans "Photos Totales" %}</div>
+                    <p class="stat-description">{% trans "Moments capturés depuis notre création" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <div class="stat-icon-circle bg-danger">
+                            <i class="fas fa-video"></i>
+                        </div>
+                    </div>
+                    <span class="stat-number text-danger counter" data-target="{{ videos.count|default:'25' }}">0</span>
+                    <div class="stat-label">{% trans "Vidéos Publiées" %}</div>
+                    <p class="stat-description">{% trans "Heures de contenu vidéo de qualité" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <div class="stat-icon-circle bg-success">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                    </div>
+                    <span class="stat-number text-success counter" data-target="35">0</span>
+                    <div class="stat-label">{% trans "Événements Couverts" %}</div>
+                    <p class="stat-description">{% trans "Rencontres immortalisées en images" %}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <div class="stat-icon-circle bg-warning">
+                            <i class="fas fa-download text-dark"></i>
+                        </div>
+                    </div>
+                    <span class="stat-number text-warning counter" data-target="2500">0</span>
+                    <div class="stat-label">{% trans "Téléchargements" %}</div>
+                    <p class="stat-description">{% trans "Photos partagées avec nos membres" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Partage -->
+<section class="upload-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <h2 class="section-title">
+                    {% trans "Partagez Vos" %} <span class="text-primary">{% trans "Souvenirs !" %}</span>
+                </h2>
+                <p class="section-description">
+                    {% trans "Vous avez des photos ou vidéos de nos événements ? Partagez-les avec la communauté pour enrichir notre galerie collective." %}
+                </p>
+                
+                <div class="upload-benefits">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="benefit-item">
+                                <div class="benefit-icon bg-primary">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <span>{% trans "Upload facile et rapide" %}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="benefit-item">
+                                <div class="benefit-icon bg-primary">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <span>{% trans "Modération et qualité garanties" %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 text-lg-end" data-aos="fade-left" data-aos-delay="300">
+                <div class="upload-actions">
+                    <a href="{% url 'contact' %}?subject=Partage de médias" class="btn btn-primary btn-lg px-5 py-3 rounded-pill d-block">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>
+                        {% trans "Partager des Médias" %}
+                    </a>
+                    <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg px-5 py-3 rounded-pill d-block">
+                        <i class="fas fa-camera me-2"></i>
+                        {% trans "Devenir Photographe" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Lightbox -->
+<div class="modal fade" id="lightboxModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="lightboxTitle">{% trans "Aperçu de l'image" %}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0 text-center">
+                <img id="lightboxImage" src="" alt="" class="img-fluid">
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button class="btn btn-outline-light" onclick="downloadCurrentImage()">
+                    <i class="fas fa-download me-2"></i>
+                    {% trans "Télécharger" %}
+                </button>
+                <button class="btn btn-outline-light" onclick="shareCurrentImage()">
+                    <i class="fas fa-share-alt me-2"></i>
+                    {% trans "Partager" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Vidéo -->
+<div class="modal fade" id="videoModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="videoTitle">{% trans "Lecture vidéo" %}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="stopVideo()"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="ratio ratio-16x9">
+                    <video id="modalVideo" controls class="w-100">
+                        <source id="modalVideoSource" src="" type="video/mp4">
+                        {% trans "Votre navigateur ne supporte pas la lecture vidéo." %}
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser Swiper pour la collection vedette
+    const featuredSwiper = new Swiper('.featured-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2,
+            },
+            1024: {
+                slidesPerView: 3,
+            },
+        },
+    });
+
+    // Initialiser les fonctionnalités
+    initGalleryFiltering();
+    initViewModes();
+    initCounters();
+    initLoadMore();
+    initHoverEffects();
+    initParallaxEffect();
+});
+
+// Système de filtrage de galerie
+function initGalleryFiltering() {
+    const filterButtons = document.querySelectorAll('.gallery-filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Mettre à jour le bouton actif
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filtrer les éléments
+            galleryItems.forEach(item => {
+                const itemType = item.getAttribute('data-type');
+                const isFeatured = item.getAttribute('data-featured') === 'true';
+                
+                let shouldShow = false;
+                
+                if (filter === 'all') {
+                    shouldShow = true;
+                } else if (filter === 'featured') {
+                    shouldShow = isFeatured;
+                } else {
+                    shouldShow = itemType === filter;
+                }
+                
+                if (shouldShow) {
+                    item.classList.remove('hidden');
+                    item.style.display = 'block';
+                } else {
+                    item.classList.add('hidden');
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// Modes d'affichage
+function initViewModes() {
+    const viewButtons = document.querySelectorAll('.view-btn');
+    const galleryGrid = document.getElementById('photo-grid');
+    
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const view = this.getAttribute('data-view');
+            
+            // Mettre à jour le bouton actif
+            viewButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Appliquer le mode d'affichage
+            if (galleryGrid) {
+                galleryGrid.className = 'gallery-grid';
+                if (view === 'masonry') {
+                    galleryGrid.classList.add('masonry');
+                } else if (view === 'slideshow') {
+                    startSlideshow();
+                }
+            }
+        });
+    });
+}
+
+// Animation des compteurs
+function initCounters() {
+    const counters = document.querySelectorAll('.counter');
+    
+    const animateCounter = (counter) => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            counter.textContent = Math.floor(current);
+            
+            if (current >= target) {
+                counter.textContent = target;
+                clearInterval(timer);
+            }
+        }, 16);
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                entry.target.classList.add('animated');
+                animateCounter(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// Fonctionnalité "Charger plus"
+function initLoadMore() {
+    const loadMoreBtn = document.getElementById('loadMorePhotos');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            const button = this;
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="loading"></span> {% trans "Chargement..." %}';
+            button.disabled = true;
+            
+            // Simuler le chargement
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+                // Ici vous pourriez charger plus de photos via AJAX
+            }, 2000);
+        });
+    }
+}
+
+// Effets de survol améliorés
+function initHoverEffects() {
+    const cards = document.querySelectorAll('.gallery-card, .video-card, .stat-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-15px) scale(1.02)';
+            this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// Effet parallax
+function initParallaxEffect() {
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.gallery-hero');
+        if (hero && window.innerWidth > 768) {
+            hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+    });
+}
+
+// Fonctions Lightbox
+function openLightbox(imageSrc, title) {
+    const modal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+    document.getElementById('lightboxImage').src = imageSrc;
+    document.getElementById('lightboxTitle').textContent = title;
+    modal.show();
+}
+
+function downloadCurrentImage() {
+    const imageSrc = document.getElementById('lightboxImage').src;
+    downloadImage(imageSrc);
+}
+
+function shareCurrentImage() {
+    const imageSrc = document.getElementById('lightboxImage').src;
+    shareImage(imageSrc);
+}
+
+function downloadImage(imageSrc) {
+    const link = document.createElement('a');
+    link.href = imageSrc;
+    link.download = 'A2ELBM2_photo.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function shareImage(imageSrc) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Photo A²ELBM2',
+            url: imageSrc
+        });
+    } else {
+        navigator.clipboard.writeText(imageSrc).then(() => {
+            // Animation de confirmation
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+            notification.style.zIndex = '9999';
+            notification.innerHTML = '<i class="fas fa-check me-2"></i>{% trans "Lien copié dans le presse-papiers !" %}';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        });
+    }
+}
+
+// Fonctions Vidéo
+function playVideoModal(videoSrc, title) {
+    const modal = new bootstrap.Modal(document.getElementById('videoModal'));
+    document.getElementById('modalVideoSource').src = videoSrc;
+    document.getElementById('videoTitle').textContent = title;
+    document.getElementById('modalVideo').load();
+    modal.show();
+}
+
+function stopVideo() {
+    const video = document.getElementById('modalVideo');
+    video.pause();
+    video.currentTime = 0;
+}
+
+function shareVideo(videoSrc) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Vidéo A²ELBM2',
+            url: videoSrc
+        });
+    } else {
+        navigator.clipboard.writeText(videoSrc).then(() => {
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+            notification.style.zIndex = '9999';
+            notification.innerHTML = '<i class="fas fa-check me-2"></i>{% trans "Lien vidéo copié !" %}';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        });
+    }
+}
+
+// Fonctionnalité "J'aime"
+function likeImage(imageId) {
+    const likeBtn = event.target.closest('button');
+    const likeCount = likeBtn.querySelector('.like-count');
+    const heartIcon = likeBtn.querySelector('i');
+    let count = parseInt(likeCount.textContent);
+
+    // Basculer entre "aimé" et "pas aimé"
+    if (heartIcon.classList.contains('far')) {
+        // Aimer
+        count++;
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas');
+        likeBtn.classList.remove('btn-outline-primary');
+        likeBtn.classList.add('btn-primary');
+    } else {
+        // Ne plus aimer
+        count--;
+        heartIcon.classList.remove('fas');
+        heartIcon.classList.add('far');
+        likeBtn.classList.remove('btn-primary');
+        likeBtn.classList.add('btn-outline-primary');
+    }
+
+    likeCount.textContent = count;
+
+    // Animation du cœur
+    heartIcon.style.transform = 'scale(1.3)';
+    setTimeout(() => {
+        heartIcon.style.transform = 'scale(1)';
+    }, 200);
+
+    // Ici vous pourriez envoyer une requête AJAX pour sauvegarder le "like"
+    // fetch(`/api/like-image/${imageId}/`, { method: 'POST' })
+}
+
+// Mode diaporama
+function startSlideshow() {
+    const images = document.querySelectorAll('.gallery-item[data-type="image"]:not(.hidden) .gallery-image');
+    if (images.length === 0) {
+        alert('{% trans "Aucune image disponible pour le diaporama" %}');
+        return;
+    }
+
+    let currentIndex = 0;
+    let slideshowInterval;
+
+    function showNextImage() {
+        if (currentIndex < images.length) {
+            const currentImage = images[currentIndex];
+            const title = currentImage.alt || 'Image A²ELBM2';
+            
+            openLightbox(currentImage.src, title);
+            currentIndex++;
+            
+            // Programmer la prochaine image
+            slideshowInterval = setTimeout(() => {
+                document.querySelector('#lightboxModal .btn-close').click();
+                setTimeout(showNextImage, 500);
+            }, 3000);
+        } else {
+            // Fin du diaporama
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-info position-fixed top-0 end-0 m-3';
+            notification.style.zIndex = '9999';
+            notification.innerHTML = '<i class="fas fa-info-circle me-2"></i>{% trans "Fin du diaporama" %}';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    }
+
+    // Arrêter le diaporama si modal fermée manuellement
+    document.getElementById('lightboxModal').addEventListener('hidden.bs.modal', function() {
+        if (slideshowInterval) {
+            clearTimeout(slideshowInterval);
+        }
+    });
+
+    showNextImage();
+}
+
+// Gestion des erreurs d'images
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.gallery-image, .featured-image');
+    
+    images.forEach(img => {
+        img.addEventListener('error', function() {
+            this.parentNode.innerHTML = '<div class="image-placeholder"><i class="fas fa-image fa-3x"></i></div>';
+        });
+    });
+
+    const videos = document.querySelectorAll('video');
+    
+    videos.forEach(video => {
+        video.addEventListener('error', function() {
+            this.parentNode.innerHTML = '<div class="video-placeholder"><i class="fas fa-video fa-3x"></i></div>';
+        });
+    });
+});
+
+// Navigation clavier dans lightbox
+document.addEventListener('keydown', function(e) {
+    const lightboxModal = document.getElementById('lightboxModal');
+    const videoModal = document.getElementById('videoModal');
+    
+    if (lightboxModal.classList.contains('show')) {
+        if (e.key === 'Escape') {
+            bootstrap.Modal.getInstance(lightboxModal).hide();
+        }
+    }
+    
+    if (videoModal.classList.contains('show') && e.key === 'Escape') {
+        bootstrap.Modal.getInstance(videoModal).hide();
+        stopVideo();
+    }
+});
+
+// Optimisation du chargement des images (lazy loading)
+function initLazyLoading() {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Initialiser le lazy loading
+initLazyLoading();
+
+// Export des fonctions globales pour utilisation dans les templates
+window.openLightbox = openLightbox;
+window.playVideoModal = playVideoModal;
+window.shareImage = shareImage;
+window.shareVideo = shareVideo;
+window.downloadImage = downloadImage;
+window.likeImage = likeImage;
+window.stopVideo = stopVideo;
+window.downloadCurrentImage = downloadCurrentImage;
+window.shareCurrentImage = shareCurrentImage;
+</script>
+{% endblock %}

@@ -1,0 +1,300 @@
+{% extends 'admin_dashboard/base.html' %}
+{% load static %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Statistiques générales -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="text-primary">{{ stats.total_members }}</h3>
+                    <p class="text-muted mb-0">Membres actifs</p>
+                </div>
+                <div class="text-primary">
+                    <i class="fas fa-users fa-2x"></i>
+                </div>
+            </div>
+            {% if stats.pending_members > 0 %}
+                <small class="text-warning">
+                    <i class="fas fa-clock"></i>
+                    {{ stats.pending_members }} en attente
+                </small>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="text-success">{{ stats.ongoing_projects }}</h3>
+                    <p class="text-muted mb-0">Projets en cours</p>
+                </div>
+                <div class="text-success">
+                    <i class="fas fa-project-diagram fa-2x"></i>
+                </div>
+            </div>
+            <small class="text-muted">{{ stats.total_projects }} projets au total</small>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="text-info">{{ stats.upcoming_events }}</h3>
+                    <p class="text-muted mb-0">Événements à venir</p>
+                </div>
+                <div class="text-info">
+                    <i class="fas fa-calendar fa-2x"></i>
+                </div>
+            </div>
+            <small class="text-muted">{{ stats.total_events }} événements au total</small>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card text-center">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h3 class="text-warning">{{ stats.unread_messages }}</h3>
+                    <p class="text-muted mb-0">Messages non lus</p>
+                </div>
+                <div class="text-warning">
+                    <i class="fas fa-envelope fa-2x"></i>
+                </div>
+            </div>
+            {% if stats.unread_messages > 0 %}
+                <a href="{% url 'admin_messages_list' %}?status=unread" class="btn btn-sm btn-outline-warning mt-2">
+                    Voir les messages
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Messages récents non lus -->
+    <div class="col-lg-6 mb-4">
+        <div class="table-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-envelope me-2"></i>
+                    Messages récents
+                </h5>
+                <a href="{% url 'admin_messages_list' %}" class="btn btn-sm btn-outline-primary">Voir tout</a>
+            </div>
+            <div class="card-body">
+                {% if recent_messages %}
+                    <div class="list-group list-group-flush">
+                        {% for message in recent_messages %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ message.nom_prenom }}</h6>
+                                    <small class="text-muted">{{ message.created_at|date:"d/m/Y H:i" }}</small>
+                                </div>
+                                <p class="mb-1">{{ message.sujet }}</p>
+                                <small class="text-muted">{{ message.message|truncatewords:10 }}</small>
+                                <div class="mt-2">
+                                    <a href="{% url 'admin_message_detail' message.pk %}" class="btn btn-sm btn-outline-primary">
+                                        Voir
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Aucun message non lu</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Événements à venir -->
+    <div class="col-lg-6 mb-4">
+        <div class="table-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-calendar me-2"></i>
+                    Événements à venir
+                </h5>
+                <a href="{% url 'admin_events_list' %}" class="btn btn-sm btn-outline-primary">Voir tout</a>
+            </div>
+            <div class="card-body">
+                {% if upcoming_events %}
+                    <div class="list-group list-group-flush">
+                        {% for event in upcoming_events %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ event.title_fr }}</h6>
+                                    <small class="text-muted">{{ event.date_event|date:"d/m/Y" }}</small>
+                                </div>
+                                <p class="mb-1">
+                                    <i class="fas fa-map-marker-alt text-muted me-1"></i>
+                                    {{ event.location }}
+                                </p>
+                                <small class="text-muted">
+                                    {{ event.registered_count }} inscriptions
+                                    {% if event.max_participants %}
+                                        / {{ event.max_participants }} max
+                                    {% endif %}
+                                </small>
+                                <div class="mt-2">
+                                    <a href="{% url 'admin_event_registrations' event.pk %}" class="btn btn-sm btn-outline-primary">
+                                        Inscriptions
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Aucun événement à venir</p>
+                        <a href="{% url 'admin_event_create' %}" class="btn btn-sm btn-primary">
+                            Créer un événement
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Projets en cours -->
+    <div class="col-lg-6 mb-4">
+        <div class="table-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-project-diagram me-2"></i>
+                    Projets en cours
+                </h5>
+                <a href="{% url 'admin_projects_list' %}" class="btn btn-sm btn-outline-primary">Voir tout</a>
+            </div>
+            <div class="card-body">
+                {% if ongoing_projects %}
+                    <div class="list-group list-group-flush">
+                        {% for project in ongoing_projects %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ project.title_fr }}</h6>
+                                    <span class="badge bg-success">{{ project.get_status_display }}</span>
+                                </div>
+                                <div class="progress mt-2 mb-2" style="height: 5px;">
+                                    <div class="progress-bar" style="width: {{ project.progress_percentage }}%"></div>
+                                </div>
+                                <small class="text-muted">
+                                    {{ project.progress_percentage|floatformat:1 }}% - 
+                                    {{ project.budget_collected|floatformat:0 }} / {{ project.budget_required|floatformat:0 }} FCFA
+                                </small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-project-diagram fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Aucun projet en cours</p>
+                        <a href="{% url 'admin_project_create' %}" class="btn btn-sm btn-primary">
+                            Créer un projet
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Inscriptions récentes -->
+    <div class="col-lg-6 mb-4">
+        <div class="table-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Inscriptions récentes aux événements
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if recent_registrations %}
+                    <div class="list-group list-group-flush">
+                        {% for registration in recent_registrations %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ registration.nom_prenom }}</h6>
+                                    <small class="text-muted">{{ registration.registration_date|date:"d/m/Y H:i" }}</small>
+                                </div>
+                                <p class="mb-1">{{ registration.event.title_fr }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">{{ registration.promotion }}</small>
+                                    {% if registration.is_confirmed %}
+                                        <span class="badge bg-success">Confirmé</span>
+                                    {% else %}
+                                        <div>
+                                            <a href="{% url 'admin_confirm_registration' registration.pk %}" 
+                                               class="btn btn-sm btn-outline-success">
+                                                Confirmer
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-user-plus fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Aucune inscription récente</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Actions rapides -->
+<div class="row">
+    <div class="col-12">
+        <div class="table-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-bolt me-2"></i>
+                    Actions rapides
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a href="{% url 'admin_project_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-plus-circle me-2"></i>
+                            Nouveau projet
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{% url 'admin_event_create' %}" class="btn btn-outline-success w-100">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            Nouvel événement
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{% url 'admin_news_create' %}" class="btn btn-outline-info w-100">
+                            <i class="fas fa-newspaper me-2"></i>
+                            Nouvelle actualité
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="{% url 'admin_gallery_create' %}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-image me-2"></i>
+                            Ajouter à la galerie
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

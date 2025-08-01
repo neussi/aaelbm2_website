@@ -1,0 +1,557 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}
+    {% if LANGUAGE_CODE == 'fr' %}
+        {{ event.title_fr }}
+    {% else %}
+        {{ event.title_en|default:event.title_fr }}
+    {% endif %} - A²ELBM2
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<br> <br> <br>
+<section class="event-hero position-relative overflow-hidden" style="min-height: 60vh; background: linear-gradient(135deg, rgba(44,85,48,0.95) 0%, rgba(74,124,89,0.9) 100%);">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('{% static 'images/events-pattern.svg' %}') repeat; opacity: 0.1;"></div>
+    <br> <br> <br>
+    
+    <div class="container h-100 d-flex align-items-center position-relative">
+        <div class="row w-100 align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-white-50">{% trans "Accueil" %}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'events' %}" class="text-white-50">{% trans "Événements" %}</a></li>
+                        <li class="breadcrumb-item active text-white">
+                            {% if LANGUAGE_CODE == 'fr' %}
+                                {{ event.title_fr|truncatechars:30 }}
+                            {% else %}
+                                {{ event.title_en|default:event.title_fr|truncatechars:30 }}
+                            {% endif %}
+                        </li>
+                    </ol>
+                </nav>
+                
+                <!-- Event Status Badge -->
+                <div class="mb-4">
+                    {% if event.date_event > now %}
+                        <span class="badge bg-warning text-dark rounded-pill px-4 py-2" style="font-size: 1.1rem;">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            {% trans "À Venir" %}
+                        </span>
+                    {% else %}
+                        <span class="badge bg-secondary rounded-pill px-4 py-2" style="font-size: 1.1rem;">
+                            <i class="fas fa-calendar-check me-2"></i>
+                            {% trans "Passé" %}
+                        </span>
+                    {% endif %}
+                    
+                    {% if event.is_featured %}
+                        <span class="badge bg-success rounded-pill px-3 py-2 ms-2">
+                            <i class="fas fa-star me-1"></i>
+                            {% trans "En Vedette" %}
+                        </span>
+                    {% endif %}
+                </div>
+                
+                <h1 class="display-4 fw-bold text-white mb-4" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+                    {% if LANGUAGE_CODE == 'fr' %}
+                        {{ event.title_fr }}
+                    {% else %}
+                        {{ event.title_en|default:event.title_fr }}
+                    {% endif %}
+                </h1>
+                
+                <p class="lead text-white-50 mb-5" style="font-size: 1.2rem; line-height: 1.6;">
+                    {% if LANGUAGE_CODE == 'fr' %}
+                        {{ event.description_fr|striptags|truncatewords:25 }}
+                    {% else %}
+                        {{ event.description_en|default:event.description_fr|striptags|truncatewords:25 }}
+                    {% endif %}
+                </p>
+                
+                <div class="event-actions d-flex flex-wrap gap-3">
+                    {% if can_register %}
+                        <a href="#registration-form" class="btn btn-warning btn-lg px-5 py-3 rounded-pill">
+                            <i class="fas fa-user-plus me-2"></i>
+                            {% trans "S'inscrire Maintenant" %}
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-info-circle me-2"></i>
+                        {% trans "Plus d'Infos" %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 text-center" data-aos="fade-left" data-aos-delay="300">
+                <div class="hero-visual position-relative">
+                    {% if event.image %}
+                        <img src="{{ event.image.url }}" alt="{{ event.title_fr }}" class="img-fluid rounded-4 shadow-lg" style="max-height: 350px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-white rounded-4 shadow-lg d-inline-flex align-items-center justify-content-center text-primary" style="width: 300px; height: 300px;">
+                            <i class="fas fa-calendar-alt fa-5x"></i>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Info Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Date & Time Card -->
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in">
+                <div class="info-card bg-white rounded-4 p-4 text-center h-100 shadow-sm">
+                    <div class="info-icon mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-clock fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">{% trans "Date & Heure" %}</h3>
+                    <p class="mb-2"><strong>{{ event.date_event|date:"d M Y" }}</strong></p>
+                    <p class="text-muted mb-0">{{ event.date_event|time:"H:i" }}</p>
+                </div>
+            </div>
+            
+            <!-- Location Card -->
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="info-card bg-white rounded-4 p-4 text-center h-100 shadow-sm">
+                    <div class="info-icon mb-3">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">{% trans "Lieu" %}</h3>
+                    <p class="mb-0">{{ event.location }}</p>
+                </div>
+            </div>
+            
+            <!-- Participants Card -->
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="info-card bg-white rounded-4 p-4 text-center h-100 shadow-sm">
+                    <div class="info-icon mb-3">
+                        <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">{% trans "Participants" %}</h3>
+                    <p class="mb-2"><strong>{{ event.registered_count }}</strong></p>
+                    {% if event.max_participants %}
+                        <p class="text-muted mb-0">{% trans "sur" %} {{ event.max_participants }}</p>
+                    {% else %}
+                        <p class="text-muted mb-0">{% trans "inscrits" %}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Registration Deadline Card -->
+            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="info-card bg-white rounded-4 p-4 text-center h-100 shadow-sm">
+                    <div class="info-icon mb-3">
+                        <div class="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-exclamation-triangle fa-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">{% trans "Date Limite" %}</h3>
+                    <p class="mb-2"><strong>{{ event.registration_deadline|date:"d M Y" }}</strong></p>
+                    <p class="text-muted mb-0">{{ event.registration_deadline|time:"H:i" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Details Section -->
+<section class="py-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8" data-aos="fade-right">
+                <div class="event-content bg-white rounded-4 p-5 shadow-sm">
+                    <h2 class="h3 fw-bold mb-4">{% trans "Description de l'Événement" %}</h2>
+                    <div class="content-rich">
+                        {% if LANGUAGE_CODE == 'fr' %}
+                            {{ event.description_fr|safe }}
+                        {% else %}
+                            {{ event.description_en|default:event.description_fr|safe }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                <!-- Event Summary Card -->
+                <div class="event-summary-card bg-white rounded-4 p-4 shadow-sm mb-4">
+                    <h3 class="h5 fw-bold mb-4">{% trans "Résumé de l'Événement" %}</h3>
+                    
+                    <div class="summary-item mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-calendar text-primary me-3 mt-1"></i>
+                            <div>
+                                <strong>{% trans "Date & Heure" %}</strong><br>
+                                <span class="text-muted">{{ event.date_event|date:"l d F Y à H:i" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-item mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-map-marker-alt text-success me-3 mt-1"></i>
+                            <div>
+                                <strong>{% trans "Lieu" %}</strong><br>
+                                <span class="text-muted">{{ event.location }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-item mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-clock text-warning me-3 mt-1"></i>
+                            <div>
+                                <strong>{% trans "Inscription jusqu'au" %}</strong><br>
+                                <span class="text-muted">{{ event.registration_deadline|date:"d F Y à H:i" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if event.max_participants %}
+                    <div class="summary-item mb-4">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-users text-info me-3 mt-1"></i>
+                            <div>
+                                <strong>{% trans "Places Disponibles" %}</strong><br>
+                                <span class="text-muted">{{ event.max_participants|add:event.registered_count|mul:-1|add:event.max_participants }} {% trans "sur" %} {{ event.max_participants }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if can_register %}
+                        <a href="#registration-form" class="btn btn-primary w-100 rounded-pill">
+                            <i class="fas fa-user-plus me-2"></i>
+                            {% trans "S'inscrire à l'Événement" %}
+                        </a>
+                    {% elif event.date_event > now %}
+                        <div class="alert alert-warning text-center">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            {% trans "Inscription fermée" %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-secondary text-center">
+                            <i class="fas fa-calendar-check me-2"></i>
+                            {% trans "Événement terminé" %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Share Card -->
+                <div class="share-card bg-light rounded-4 p-4">
+                    <h3 class="h6 fw-bold mb-3">{% trans "Partager cet Événement" %}</h3>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-primary btn-sm" onclick="shareEventOnWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm" onclick="shareEventOnFacebook()">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm" onclick="copyEventLink()">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Form Section -->
+{% if can_register %}
+<section id="registration-form" class="py-6 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="registration-form-card bg-white rounded-4 p-5 shadow-sm" data-aos="fade-up">
+                    <div class="text-center mb-5">
+                        <div class="registration-icon mb-3">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-user-plus fa-2x"></i>
+                            </div>
+                        </div>
+                        <h2 class="h3 fw-bold mb-3">{% trans "Inscription à l'Événement" %}</h2>
+                        <p class="text-muted">{% trans "Remplissez le formulaire ci-dessous pour vous inscrire" %}</p>
+                    </div>
+                    
+                    <form method="post" class="registration-form">
+                        {% csrf_token %}
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label for="{{ form.nom_prenom.id_for_label }}" class="form-label fw-semibold">
+                                    <i class="fas fa-user me-2 text-primary"></i>
+                                    {{ form.nom_prenom.label }}
+                                </label>
+                                {{ form.nom_prenom }}
+                                {% if form.nom_prenom.errors %}
+                                    <div class="text-danger small mt-1">{{ form.nom_prenom.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold">
+                                    <i class="fas fa-envelope me-2 text-primary"></i>
+                                    {{ form.email.label }}
+                                </label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="{{ form.telephone.id_for_label }}" class="form-label fw-semibold">
+                                    <i class="fas fa-phone me-2 text-primary"></i>
+                                    {{ form.telephone.label }}
+                                </label>
+                                {{ form.telephone }}
+                                {% if form.telephone.errors %}
+                                    <div class="text-danger small mt-1">{{ form.telephone.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="{{ form.promotion.id_for_label }}" class="form-label fw-semibold">
+                                    <i class="fas fa-graduation-cap me-2 text-primary"></i>
+                                    {{ form.promotion.label }}
+                                </label>
+                                {{ form.promotion }}
+                                {% if form.promotion.errors %}
+                                    <div class="text-danger small mt-1">{{ form.promotion.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-12">
+                                <label for="{{ form.message.id_for_label }}" class="form-label fw-semibold">
+                                    <i class="fas fa-comment me-2 text-primary"></i>
+                                    {{ form.message.label }}
+                                </label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                    <div class="text-danger small mt-1">{{ form.message.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 py-3 rounded-pill">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                {% trans "Confirmer mon Inscription" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Related Events Section -->
+<section class="py-6">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="h3 fw-bold mb-4">{% trans "Autres Événements" %}</h2>
+            <p class="text-muted">{% trans "Découvrez nos autres événements à venir" %}</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Vous pouvez ajouter ici la logique pour afficher d'autres événements -->
+            <div class="col-12 text-center">
+                <a href="{% url 'events' %}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    {% trans "Voir Tous les Événements" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .py-6 {
+        padding: 6rem 0;
+    }
+    
+    .event-hero {
+        background-attachment: fixed;
+    }
+    
+    @media (max-width: 768px) {
+        .event-hero {
+            background-attachment: scroll;
+        }
+    }
+    
+    .info-card,
+    .event-summary-card,
+    .share-card,
+    .registration-form-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .info-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    }
+    
+    .content-rich {
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .content-rich h1,
+    .content-rich h2,
+    .content-rich h3,
+    .content-rich h4,
+    .content-rich h5,
+    .content-rich h6 {
+        color: var(--bs-primary);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .content-rich p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+    }
+    
+    .content-rich ul,
+    .content-rich ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+    }
+    
+    .content-rich li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .summary-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .summary-item:last-child {
+        border-bottom: none;
+    }
+    
+    .registration-form .form-control,
+    .registration-form .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .registration-form .form-control:focus,
+    .registration-form .form-select:focus {
+        border-color: var(--bs-primary);
+        box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
+    }
+    
+    .registration-form textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .registration-form-card {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .registration-form-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--bs-primary), var(--bs-success));
+    }
+    
+    @media (max-width: 768px) {
+        .py-6 {
+            padding: 4rem 0;
+        }
+        
+        .display-4 {
+            font-size: 2.5rem;
+        }
+        
+        .event-content {
+            margin-top: 2rem;
+        }
+        
+        .info-card {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function shareEventOnWhatsApp() {
+    const title = "{{ event.title_fr|escapejs }}";
+    const date = "{{ event.date_event|date:'d M Y à H:i' }}";
+    const location = "{{ event.location|escapejs }}";
+    const url = window.location.href;
+    const text = `📅 Événement : ${title}\n🗓️ Date : ${date}\n📍 Lieu : ${location}\n\nPlus d'infos : ${url}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function shareEventOnFacebook() {
+    const url = window.location.href;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+}
+
+function copyEventLink() {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+        alert('{% trans "Lien copié dans le presse-papier!" %}');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll for registration form
+    const registrationButtons = document.querySelectorAll('a[href="#registration-form"]');
+    registrationButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector('#registration-form');
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Form validation enhancement
+    const form = document.querySelector('.registration-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>{% trans "Inscription en cours..." %}';
+        });
+    }
+});
+</script>
+{% endblock %}
