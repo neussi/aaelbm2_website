@@ -382,3 +382,10 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 MAX_IMAGE_SIZE = 5 * 1024 * 1024  # 5MB
 MAX_VIDEO_SIZE = 50 * 1024 * 1024  # 50MB
 MAX_DOCUMENT_SIZE = 10 * 1024 * 1024  # 10MB
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://a2elbm2.propentatech.com",
+    "https://www.a2elbm2.com",
+    "https://a2elbm2.com",
+    'http://185.218.126.7',
+]

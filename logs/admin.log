@@ -5310,3 +5310,11 @@ INFO 2025-08-01 18:16:52,957 autoreload 240007 135479735242752 /home/patrice/aae
 INFO 2025-08-01 18:16:53,168 autoreload 240097 136418922237952 Watching for file changes with StatReloader
 INFO 2025-08-01 18:16:58,291 autoreload 240097 136418922237952 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
 INFO 2025-08-01 18:16:58,536 autoreload 240244 134316921503744 Watching for file changes with StatReloader
+INFO 2025-08-01 19:07:28,340 autoreload 240244 134316921503744 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-01 19:07:29,298 autoreload 263951 137276440850432 Watching for file changes with StatReloader
+INFO 2025-08-01 19:07:45,530 autoreload 263951 137276440850432 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-01 19:07:45,734 autoreload 264182 137942208028672 Watching for file changes with StatReloader
+INFO 2025-08-01 19:07:50,880 autoreload 264182 137942208028672 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-01 19:07:51,074 autoreload 264334 139382123364352 Watching for file changes with StatReloader
+INFO 2025-08-01 19:07:55,180 autoreload 264334 139382123364352 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-01 19:07:55,390 autoreload 264521 136720248410112 Watching for file changes with StatReloader
