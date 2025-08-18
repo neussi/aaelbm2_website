@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Déploiement de a2elbm2.org sur le port 8336..."
+echo "🚀 Déploiement de a2elbm2.com sur le port 8336..."
 
 # Vérifier que le port 8336 est libre
 if sudo lsof -i :8336 | grep -v docker > /dev/null; then
@@ -42,7 +42,7 @@ sleep 5
 
 if curl -f http://localhost:8336 > /dev/null 2>&1; then
     echo "✅ Application en ligne sur le port 8336"
-    echo "🌐 Accessible via: http://a2elbm2.propentatech.com"
+    echo "🌐 Accessible via: http://a2elbm2.com"
     
 else
     echo "❌ Problème détecté"

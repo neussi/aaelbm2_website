@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-s#06#%yxzr8w7inp@r#-7s3ie+43jx3g6w!_@4)qneruqdak$1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.1', 'localhost','www.a2elbm2.propentatech.com', 'a2elbm2.propentatech.com','185.218.126.7', 'a2elbm2.org', 'www.a2elbm2.org']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'a2elbm2.com','185.218.126.7', 'www.a2elbm2.com']
 
 # Application definition
 INSTALLED_APPS = [

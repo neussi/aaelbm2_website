@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🔍 Vérification de l'état de a2elnm2.org..."
+echo "🔍 Vérification de l'état de a2elnm2.com..."
 
 # Status Docker
 echo "📦 Status Docker:"
@@ -20,7 +20,7 @@ curl -I http://localhost:8336 2>/dev/null || echo "❌ Application non accessibl
 
 # Test domaine
 echo "🌍 Test domaine:"
-curl -I http://a2elnm2.propentatech.com 2>/dev/null || echo "❌ Domaine non accessible"
+curl -I http://a2elnm2.com 2>/dev/null || echo "❌ Domaine non accessible"
 
 # Logs récents
 echo "📋 Derniers logs:"
