@@ -305,7 +305,6 @@ python manage.py migrate --fake-initial
 
 **2. Problème d'upload de fichiers**
 ```bash
-# Vérifier les permissions
 chmod 755 media/
 ```
 
