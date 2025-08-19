@@ -5345,3 +5345,105 @@ INFO 2025-08-19 06:48:51,442 autoreload 96270 135967616761856 Watching for file 
 INFO 2025-08-19 06:49:19,072 autoreload 96711 123475979075584 Watching for file changes with StatReloader
 INFO 2025-08-19 06:49:25,220 autoreload 96711 123475979075584 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
 INFO 2025-08-19 06:49:25,497 autoreload 96848 128729960591360 Watching for file changes with StatReloader
+INFO 2025-08-19 06:56:29,340 autoreload 99968 136951296851968 Watching for file changes with StatReloader
+ERROR 2025-08-19 06:56:32,782 log 99968 136951237703232 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 06:56:32,785 basehttp 99968 136951237703232 "GET /admin-panel/ HTTP/1.1" 400 143
+ERROR 2025-08-19 06:56:32,856 log 99968 136951229310528 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 06:56:32,856 basehttp 99968 136951229310528 "GET /favicon.ico HTTP/1.1" 400 143
+ERROR 2025-08-19 06:56:53,808 log 99968 136951229310528 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 06:56:53,808 basehttp 99968 136951229310528 "GET /admin-panel/ HTTP/1.1" 400 143
+ERROR 2025-08-19 06:56:53,917 log 99968 136951229310528 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 06:56:53,918 basehttp 99968 136951229310528 "GET /favicon.ico HTTP/1.1" 400 143
+ERROR 2025-08-19 06:57:43,379 log 99968 136951229310528 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 06:57:43,380 basehttp 99968 136951229310528 "GET / HTTP/1.1" 400 143
+INFO 2025-08-19 06:58:31,421 autoreload 99968 136951296851968 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-19 06:58:31,720 autoreload 101221 139634465091584 Watching for file changes with StatReloader
+INFO 2025-08-19 06:58:35,474 autoreload 101278 139611586633728 Watching for file changes with StatReloader
+INFO 2025-08-19 06:58:38,803 basehttp 101278 139611526395456 "GET / HTTP/1.1" 200 80266
+WARNING 2025-08-19 06:58:38,841 basehttp 101278 139611526395456 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-08-19 06:58:39,477 basehttp 101278 139611508561472 "GET /media/news/Screenshot_from_2025-06-24_16-07-02.png HTTP/1.1" 200 286312
+INFO 2025-08-19 06:58:39,479 basehttp 101278 139611500168768 "GET /media/members/8.png HTTP/1.1" 200 246850
+INFO 2025-08-19 06:58:39,481 basehttp 101278 139611516954176 "GET /media/gallery/images/8.png HTTP/1.1" 200 246850
+WARNING 2025-08-19 06:58:39,647 basehttp 101278 139611508561472 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+WARNING 2025-08-19 06:58:39,654 basehttp 101278 139611516954176 "GET /static/images/hero-bg.jpg HTTP/1.1" 404 1914
+INFO 2025-08-19 07:00:58,608 autoreload 101278 139611586633728 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-19 07:00:58,880 autoreload 102400 137408634294272 Watching for file changes with StatReloader
+INFO 2025-08-19 07:01:00,994 autoreload 102400 137408634294272 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-19 07:01:01,218 autoreload 102513 130520879988736 Watching for file changes with StatReloader
+INFO 2025-08-19 07:01:14,082 autoreload 102767 127545071968256 Watching for file changes with StatReloader
+ERROR 2025-08-19 07:01:20,093 log 102767 127545011861056 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 07:01:20,095 basehttp 102767 127545011861056 "GET / HTTP/1.1" 400 143
+ERROR 2025-08-19 07:01:20,155 log 102767 127545011861056 Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/middleware/security.py", line 28, in process_request
+    host = self.redirect_host or request.get_host()
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000'. You may need to add '127.0.0.1' to ALLOWED_HOSTS.
+WARNING 2025-08-19 07:01:20,156 basehttp 102767 127545011861056 "GET /favicon.ico HTTP/1.1" 400 143
+INFO 2025-08-19 07:02:43,818 autoreload 102767 127545071968256 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-08-19 07:02:44,096 autoreload 103504 129478035656704 Watching for file changes with StatReloader
