@@ -115,36 +115,99 @@ def members(request):
 def member_registration(request):
     """Inscription d'un nouveau membre"""
     if request.method == 'POST':
-        form = MemberRegistrationForm(request.POST)
+        form = MemberRegistrationForm(request.POST, request.FILES)  # Ajouter request.FILES
         if form.is_valid():
-            member = form.save()
-            messages.success(request, _('Votre demande d\'adhésion a été envoyée avec succès!'))
+            member = form.save(commit=False)
+            member.is_active = False  # En attente de validation par l'administration
+            member.save()
             
-            # Envoyer un email de notification
+            messages.success(
+                request, 
+                _('Votre demande d\'adhésion a été envoyée avec succès! '
+                  'Vous recevrez une confirmation par email une fois votre compte validé.')
+            )
+            
+            # Envoyer un email de notification à l'administration
             try:
+                # Email pour l'administration
+                admin_subject = 'Nouvelle demande d\'adhésion - A²ELBM2'
+                admin_message = f"""
+                Nouvelle demande d'adhésion reçue:
+                
+                Nom et Prénom: {member.nom_prenom}
+                Email: {member.email}
+                Téléphone: {member.telephone}
+                Promotion: {member.promotion}
+                Profession: {member.profession}
+                Lieu de naissance: {member.lieu_naissance}
+                Date de naissance: {member.date_naissance}
+                Adresse actuelle: {member.adresse}
+                Photo: {'Oui' if member.photo else 'Non'}
+                
+                Veuillez vous connecter à l'administration pour valider ou rejeter cette demande.
+                """
+                
                 send_mail(
-                    'Nouvelle demande d\'adhésion - A²ELBM2',
-                    f'Nouveau membre: {member.nom_prenom}\nEmail: {member.email}\nPromotion: {member.promotion}',
+                    admin_subject,
+                    admin_message,
                     settings.EMAIL_HOST_USER,
                     [settings.ASSOCIATION_EMAIL],
                     fail_silently=True,
                 )
-            except:
+                
+                # Email de confirmation pour le membre
+                member_subject = 'Demande d\'adhésion reçue - A²ELBM2'
+                member_message = f"""
+                Bonjour {member.nom_prenom},
+                
+                Nous avons bien reçu votre demande d'adhésion à l'Association des Anciens Élèves 
+                du Lycée Bilingue de Melong 2 (A²ELBM2).
+                
+                Votre demande sera examinée par notre bureau dans un délai de 48 heures.
+                Vous recevrez une confirmation par email une fois votre adhésion validée.
+                
+                Récapitulatif de votre demande:
+                - Promotion: {member.promotion}
+                - Email: {member.email}
+                - Téléphone: {member.telephone}
+                
+                En cas de questions, n'hésitez pas à nous contacter.
+                
+                Cordialement,
+                L'équipe A²ELBM2
+                """
+                
+                send_mail(
+                    member_subject,
+                    member_message,
+                    settings.EMAIL_HOST_USER,
+                    [member.email],
+                    fail_silently=True,
+                )
+            except Exception as e:
+                # Logger l'erreur mais ne pas bloquer l'inscription
+                print(f"Erreur lors de l'envoi de l'email: {e}")
                 pass
             
             return redirect('member_registration_success')
     else:
         form = MemberRegistrationForm()
     
-    context = {'form': form}
+    context = {
+        'form': form,
+        'page_title': _('Devenir membre'),
+    }
     return render(request, 'main/member_registration.html', context)
 
 
-
-
 def member_registration_success(request):
-    """Page de confirmation d'inscription"""
-    return render(request, 'main/member_registration_success.html')
+    """Page de confirmation après inscription"""
+    context = {
+        'page_title': _('Demande envoyée'),
+    }
+    return render(request, 'main/member_registration_success.html', context)
+
+    
 
 def projects(request):
     """Page des projets"""

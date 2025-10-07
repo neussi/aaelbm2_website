@@ -4,6 +4,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Row, Column, HTML
 from .models import Member, EventRegistration, Contact
 
+
+
 class MemberRegistrationForm(forms.ModelForm):
     """Formulaire d'inscription des membres"""
     
@@ -11,16 +13,18 @@ class MemberRegistrationForm(forms.ModelForm):
         model = Member
         fields = [
             'nom_prenom', 'date_naissance', 'lieu_naissance', 
-            'promotion', 'telephone', 'email', 'profession', 'adresse'
+            'promotion', 'telephone', 'email', 'profession', 'adresse', 'photo'
         ]
         widgets = {
             'date_naissance': forms.DateInput(attrs={'type': 'date'}),
             'adresse': forms.Textarea(attrs={'rows': 3}),
+            'photo': forms.FileInput(attrs={'accept': 'image/*'}),
         }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_enctype = 'multipart/form-data'  # Important pour les fichiers
         self.helper.layout = Layout(
             Fieldset(
                 _('Informations personnelles'),
@@ -38,6 +42,7 @@ class MemberRegistrationForm(forms.ModelForm):
                 ),
                 'profession',
                 'adresse',
+                'photo',  # Ajout du champ photo
             ),
             HTML('''
                 <div class="form-check mb-3">
@@ -52,10 +57,29 @@ class MemberRegistrationForm(forms.ModelForm):
         
         # Ajouter des classes CSS personnalisées
         for field_name, field in self.fields.items():
-            field.widget.attrs.update({
-                'class': 'form-control',
-                'placeholder': field.label
-            })
+            if field_name != 'photo':
+                field.widget.attrs.update({
+                    'class': 'form-control',
+                    'placeholder': field.label
+                })
+            else:
+                field.widget.attrs.update({
+                    'class': 'form-control',
+                })
+    
+    def clean_photo(self):
+        """Validation de la photo"""
+        photo = self.cleaned_data.get('photo')
+        if photo:
+            # Vérifier la taille du fichier (max 5MB)
+            if photo.size > 5 * 1024 * 1024:
+                raise forms.ValidationError(_("La taille de l'image ne doit pas dépasser 5 MB."))
+            
+            # Vérifier le type de fichier
+            if not photo.content_type.startswith('image/'):
+                raise forms.ValidationError(_("Le fichier doit être une image."))
+        
+        return photo
 
 class EventRegistrationForm(forms.ModelForm):
     """Formulaire d'inscription aux événements"""

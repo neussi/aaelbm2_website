@@ -45,6 +45,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'admin_dashboard.middleware.AdminAuthMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'main.middleware.CustomErrorMiddleware',
+
 ]
 
 ROOT_URLCONF = 'aaelbm2_website.urls'

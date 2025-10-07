@@ -46,16 +46,16 @@
                              style="width: 80px; height: 80px;">
                             <i class="fas fa-user fa-2x text-white"></i>
                         </div>
-                        <h6>{{ object.nom_prenom }}</h6>
+                        <h6>{{ message.nom_prenom }}</h6>
                         
                         <div class="mt-2">
-                            {% if object.is_read %}
+                            {% if message.is_read %}
                                 <span class="badge bg-success">Lu</span>
                             {% else %}
                                 <span class="badge bg-warning">Non lu</span>
                             {% endif %}
                             
-                            {% if object.is_replied %}
+                            {% if message.is_replied %}
                                 <br><span class="badge bg-info mt-1">Répondu</span>
                             {% else %}
                                 <br><span class="badge bg-secondary mt-1">Non répondu</span>
@@ -63,23 +63,23 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <h4>{{ object.sujet }}</h4>
+                        <h4>{{ message.sujet }}</h4>
                         
                         <div class="row mb-3">
                             <div class="col-sm-6">
-                                <p><strong>Expéditeur :</strong> {{ object.nom_prenom }}</p>
-                                <p><strong>Email :</strong> {{ object.email }}</p>
-                                {% if object.telephone %}
-                                    <p><strong>Téléphone :</strong> {{ object.telephone }}</p>
+                                <p><strong>Expéditeur :</strong> {{ message.nom_prenom }}</p>
+                                <p><strong>Email :</strong> {{ message.email }}</p>
+                                {% if message.telephone %}
+                                    <p><strong>Téléphone :</strong> {{ message.telephone }}</p>
                                 {% endif %}
                             </div>
                             <div class="col-sm-6">
-                                <p><strong>Date de réception :</strong> {{ object.created_at|date:"d/m/Y à H:i" }}</p>
+                                <p><strong>Date de réception :</strong> {{ message.created_at|date:"d/m/Y à H:i" }}</p>
                                 <p><strong>Statut de lecture :</strong> 
-                                    {% if object.is_read %}Lu{% else %}Non lu{% endif %}
+                                    {% if message.is_read %}Lu{% else %}Non lu{% endif %}
                                 </p>
                                 <p><strong>Statut de réponse :</strong> 
-                                    {% if object.is_replied %}Répondu{% else %}Non répondu{% endif %}
+                                    {% if message.is_replied %}Répondu{% else %}Non répondu{% endif %}
                                 </p>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                         <div class="message-content">
                             <h6>Message :</h6>
                             <div class="border rounded p-3 bg-light">
-                                {{ object.message|linebreaks }}
+                                {{ message.message|linebreaks }}
                             </div>
                         </div>
                     </div>
@@ -103,11 +103,11 @@
                             Annuler
                         </a>
                         <div>
-                            <a href="{% url 'admin_message_detail' object.pk %}" class="btn btn-outline-primary me-2">
+                            <a href="{% url 'admin_message_detail' message.pk %}" class="btn btn-outline-primary me-2">
                                 <i class="fas fa-eye me-1"></i>
                                 Voir le message
                             </a>
-                            <a href="mailto:{{ object.email }}?subject=Re: {{ object.sujet }}" class="btn btn-outline-success me-2">
+                            <a href="mailto:{{ message.email }}?subject=Re: {{ message.sujet }}" class="btn btn-outline-success me-2">
                                 <i class="fas fa-reply me-1"></i>
                                 Répondre par email
                             </a>

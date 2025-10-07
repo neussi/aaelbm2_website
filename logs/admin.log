@@ -5988,3 +5988,235 @@ WARNING 2025-10-07 22:01:29,807 log 172200 136998219150912 Not Found: /w
 WARNING 2025-10-07 22:01:29,808 basehttp 172200 136998219150912 "GET /w HTTP/1.1" 404 7190
 WARNING 2025-10-07 22:01:30,531 log 172200 136998219150912 Not Found: /w
 WARNING 2025-10-07 22:01:30,532 basehttp 172200 136998219150912 "GET /w HTTP/1.1" 404 7190
+INFO 2025-10-07 23:13:15,726 autoreload 208117 135310060294144 Watching for file changes with StatReloader
+INFO 2025-10-07 23:13:20,066 basehttp 208117 135309924759104 "GET / HTTP/1.1" 200 82980
+WARNING 2025-10-07 23:13:20,157 basehttp 208117 135309924759104 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 23:13:24,665 log 208117 135309924759104 Not Found: /stats/
+WARNING 2025-10-07 23:13:24,666 basehttp 208117 135309924759104 "GET /stats/ HTTP/1.1" 404 16074
+INFO 2025-10-07 23:13:50,025 basehttp 208117 135309924759104 "GET /dashboard/members/h HTTP/1.1" 302 0
+INFO 2025-10-07 23:13:50,052 basehttp 208117 135309924759104 "GET /dashboard/auth/login/?next=/dashboard/members/h HTTP/1.1" 200 11559
+INFO 2025-10-07 23:13:57,682 basehttp 208117 135309924759104 "POST /dashboard/auth/login/?next=/dashboard/members/h HTTP/1.1" 302 0
+WARNING 2025-10-07 23:13:57,705 log 208117 135309924759104 Not Found: /dashboard/members/h
+WARNING 2025-10-07 23:13:57,706 basehttp 208117 135309924759104 "GET /dashboard/members/h HTTP/1.1" 404 16074
+WARNING 2025-10-07 23:15:32,501 log 208117 135309924759104 Not Found: /dashboard/members/h
+WARNING 2025-10-07 23:15:32,502 basehttp 208117 135309924759104 "GET /dashboard/members/h HTTP/1.1" 404 16074
+WARNING 2025-10-07 23:16:08,647 log 208117 135309924759104 Not Found: /favicon.ico
+INFO 2025-10-07 23:17:06,527 basehttp 208117 135309924759104 "GET /dashboard/auth/login/?next=/dashboard/members/h HTTP/1.1" 302 0
+INFO 2025-10-07 23:17:06,580 basehttp 208117 135309924759104 "GET /dashboard/ HTTP/1.1" 200 54546
+INFO 2025-10-07 23:17:11,532 basehttp 208117 135309924759104 "GET /admin/logout/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:17:11,546 basehttp 208117 135309924759104 "GET /dashboard/auth/login/ HTTP/1.1" 200 11152
+INFO 2025-10-07 23:17:22,636 basehttp 208117 135309924759104 "POST /dashboard/auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:17:22,670 basehttp 208117 135309924759104 "GET /dashboard/ HTTP/1.1" 200 54546
+WARNING 2025-10-07 23:17:22,837 log 208117 135309924759104 Not Found: /favicon.ico
+INFO 2025-10-07 23:17:31,884 basehttp 208117 135309924759104 "GET /dashboard/auth/password-reset/ HTTP/1.1" 200 6696
+INFO 2025-10-07 23:18:37,658 basehttp 208117 135309924759104 "GET /dashboard/auth/password-reset/ HTTP/1.1" 200 6696
+INFO 2025-10-07 23:18:50,604 basehttp 208117 135309924759104 "POST /dashboard/auth/password-reset/ HTTP/1.1" 200 7109
+INFO 2025-10-07 23:19:04,449 basehttp 208117 135309924759104 "POST /dashboard/auth/password-reset/ HTTP/1.1" 200 7104
+WARNING 2025-10-07 23:19:04,539 log 208117 135309924759104 Not Found: /favicon.ico
+INFO 2025-10-07 23:19:11,630 basehttp 208117 135309924759104 "GET /dashboard/auth/password-reset/ HTTP/1.1" 200 6696
+WARNING 2025-10-07 23:19:11,710 log 208117 135309924759104 Not Found: /favicon.ico
+WARNING 2025-10-07 23:19:45,690 log 208117 135309924759104 Forbidden (CSRF token from POST incorrect.): /dashboard/auth/login/
+WARNING 2025-10-07 23:19:45,691 basehttp 208117 135309924759104 "POST /dashboard/auth/login/ HTTP/1.1" 403 2541
+WARNING 2025-10-07 23:19:45,779 log 208117 135309924759104 Not Found: /favicon.ico
+WARNING 2025-10-07 23:19:49,847 log 208117 135309924759104 Forbidden (CSRF token from POST incorrect.): /dashboard/auth/login/
+WARNING 2025-10-07 23:19:49,848 basehttp 208117 135309924759104 "POST /dashboard/auth/login/ HTTP/1.1" 403 2541
+INFO 2025-10-07 23:19:51,818 basehttp 208117 135309924759104 "GET /dashboard/auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:19:51,877 basehttp 208117 135309924759104 "GET /dashboard/ HTTP/1.1" 200 53891
+WARNING 2025-10-07 23:19:52,021 log 208117 135309924759104 Not Found: /favicon.ico
+INFO 2025-10-07 23:19:57,197 basehttp 208117 135309924759104 "GET /dashboard/members/ HTTP/1.1" 200 55070
+WARNING 2025-10-07 23:19:57,358 log 208117 135309916366400 Not Found: /favicon.ico
+INFO 2025-10-07 23:20:12,195 basehttp 208117 135309916366400 "GET /dashboard/messages/ HTTP/1.1" 200 56850
+ERROR 2025-10-07 23:20:15,705 log 208117 135309916366400 Internal Server Error: /dashboard/messages/1/delete/
+ERROR 2025-10-07 23:20:15,706 basehttp 208117 135309916366400 "GET /dashboard/messages/1/delete/ HTTP/1.1" 500 26066
+WARNING 2025-10-07 23:20:15,934 log 208117 135309916366400 Not Found: /favicon.ico
+INFO 2025-10-07 23:21:00,523 autoreload 208117 135310060294144 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-10-07 23:21:01,732 autoreload 214203 138726042427392 Watching for file changes with StatReloader
+INFO 2025-10-07 23:21:06,273 autoreload 214203 138726042427392 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-10-07 23:21:07,135 autoreload 214429 139476768079872 Watching for file changes with StatReloader
+ERROR 2025-10-07 23:21:11,897 log 214429 139476641773120 Internal Server Error: /dashboard/messages/1/delete/
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/patrice/aaelbm2_website/admin_dashboard/views.py", line 451, in message_delete
+    return render(request, 'admin_dashboard/messages/confirm_delete.html', context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'admin_message_detail' with arguments '('',)' not found. 1 pattern(s) tried: ['dashboard/messages/(?P<pk>[0-9]+)/\\Z']
+ERROR 2025-10-07 23:21:11,900 basehttp 214429 139476641773120 "GET /dashboard/messages/1/delete/ HTTP/1.1" 500 194764
+INFO 2025-10-07 23:26:02,041 basehttp 214429 139476641773120 "GET /dashboard/messages/1/delete/ HTTP/1.1" 200 48537
+WARNING 2025-10-07 23:26:02,168 log 214429 139476641773120 Not Found: /favicon.ico
+INFO 2025-10-07 23:26:05,246 basehttp 214429 139476641773120 "POST /dashboard/messages/1/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:26:05,284 basehttp 214429 139476641773120 "GET /dashboard/messages/ HTTP/1.1" 200 53446
+INFO 2025-10-07 23:26:14,931 basehttp 214429 139476641773120 "GET /dashboard/gallery/ HTTP/1.1" 200 55878
+WARNING 2025-10-07 23:26:15,071 log 214429 139476641773120 Not Found: /favicon.ico
+INFO 2025-10-07 23:26:16,088 basehttp 214429 139476641773120 "GET /dashboard/news/ HTTP/1.1" 200 49935
+WARNING 2025-10-07 23:26:16,259 log 214429 139476641773120 Not Found: /favicon.ico
+INFO 2025-10-07 23:26:16,927 basehttp 214429 139476641773120 "GET /dashboard/events/ HTTP/1.1" 200 50278
+INFO 2025-10-07 23:26:17,699 basehttp 214429 139476641773120 "GET /dashboard/projects/ HTTP/1.1" 200 50178
+INFO 2025-10-07 23:26:18,666 basehttp 214429 139476641773120 "GET /dashboard/members/ HTTP/1.1" 200 55070
+INFO 2025-10-07 23:26:37,352 autoreload 214429 139476768079872 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
+INFO 2025-10-07 23:26:38,453 autoreload 217354 132987868168192 Watching for file changes with StatReloader
+WARNING 2025-10-07 23:26:44,374 log 217354 132987808118336 Not Found: /dashboard/members/j
+WARNING 2025-10-07 23:26:44,374 basehttp 217354 132987808118336 "GET /dashboard/members/j HTTP/1.1" 404 16074
+INFO 2025-10-07 23:31:49,588 autoreload 217354 132987868168192 /home/patrice/aaelbm2_website/main/forms.py changed, reloading.
+INFO 2025-10-07 23:31:50,657 autoreload 220143 130462059290624 Watching for file changes with StatReloader
+INFO 2025-10-07 23:31:53,896 autoreload 220143 130462059290624 /home/patrice/aaelbm2_website/main/forms.py changed, reloading.
+INFO 2025-10-07 23:31:54,399 autoreload 220309 127882385821696 Watching for file changes with StatReloader
+INFO 2025-10-07 23:32:00,569 autoreload 220309 127882385821696 /home/patrice/aaelbm2_website/main/forms.py changed, reloading.
+INFO 2025-10-07 23:32:01,377 autoreload 220409 130727330918400 Watching for file changes with StatReloader
+INFO 2025-10-07 23:32:29,937 autoreload 220409 130727330918400 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 23:32:30,883 autoreload 220752 138913846702080 Watching for file changes with StatReloader
+INFO 2025-10-07 23:33:40,857 autoreload 220752 138913846702080 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 23:33:42,067 autoreload 221426 139196700913664 Watching for file changes with StatReloader
+INFO 2025-10-07 23:33:55,756 autoreload 221426 139196700913664 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 23:33:56,688 autoreload 221619 135718008991744 Watching for file changes with StatReloader
+INFO 2025-10-07 23:33:59,167 autoreload 221619 135718008991744 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 23:33:59,917 autoreload 221726 136977875902464 Watching for file changes with StatReloader
+INFO 2025-10-07 23:34:07,400 autoreload 221726 136977875902464 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 23:34:08,367 autoreload 221886 126481445556224 Watching for file changes with StatReloader
+WARNING 2025-10-07 23:34:24,158 log 221886 126481386698304 Not Found: /stats/
+WARNING 2025-10-07 23:34:24,159 basehttp 221886 126481386698304 "GET /stats/ HTTP/1.1" 404 16074
+WARNING 2025-10-07 23:34:24,378 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:34:27,234 basehttp 221886 126481386698304 "GET / HTTP/1.1" 200 82980
+WARNING 2025-10-07 23:34:27,311 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:34:30,735 basehttp 221886 126481386698304 "GET /register/ HTTP/1.1" 200 45178
+WARNING 2025-10-07 23:34:30,850 basehttp 221886 126481386698304 "GET /static/images/default-avatar.png HTTP/1.1" 404 1935
+WARNING 2025-10-07 23:34:30,850 basehttp 221886 126481375159872 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:35:36,167 basehttp 221886 126481386698304 "POST /register/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:35:36,202 basehttp 221886 126481386698304 "GET /register/success/ HTTP/1.1" 200 44122
+WARNING 2025-10-07 23:35:36,348 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:35:42,112 basehttp 221886 126481386698304 "GET /dashboard/members HTTP/1.1" 301 0
+INFO 2025-10-07 23:35:42,170 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 58246
+WARNING 2025-10-07 23:35:42,315 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:35:45,999 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 58246
+INFO 2025-10-07 23:35:56,676 basehttp 221886 126481386698304 "GET /dashboard/members/4/approve/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:35:56,702 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 58484
+INFO 2025-10-07 23:36:01,272 basehttp 221886 126481386698304 "GET / HTTP/1.1" 200 84332
+WARNING 2025-10-07 23:36:01,348 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:36:49,023 basehttp 221886 126481386698304 "GET /dashboard/members/4/ HTTP/1.1" 200 49012
+INFO 2025-10-07 23:37:02,844 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 57815
+INFO 2025-10-07 23:37:08,731 basehttp 221886 126481386698304 "GET /dashboard/members/4/edit/ HTTP/1.1" 200 62518
+WARNING 2025-10-07 23:37:08,905 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:37:20,546 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 57815
+WARNING 2025-10-07 23:37:20,684 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:43:56,985 basehttp 221886 126481386698304 "GET /register/ HTTP/1.1" 200 49284
+WARNING 2025-10-07 23:43:57,113 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 23:43:57,153 basehttp 221886 126481386698304 "GET /static/images/school-bg.jpg HTTP/1.1" 404 1920
+INFO 2025-10-07 23:44:50,075 basehttp 221886 126481386698304 "POST /register/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:44:50,102 basehttp 221886 126481386698304 "GET /register/success/ HTTP/1.1" 200 44122
+WARNING 2025-10-07 23:44:50,198 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:44:54,105 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 60828
+INFO 2025-10-07 23:44:54,168 basehttp 221886 126481386698304 "GET /media/members/1.jpg HTTP/1.1" 200 684918
+WARNING 2025-10-07 23:44:54,223 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:45:25,148 basehttp 221886 126481386698304 "GET / HTTP/1.1" 200 84332
+WARNING 2025-10-07 23:45:25,247 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:45:28,098 basehttp 221886 126481386698304 "GET /register/ HTTP/1.1" 200 48912
+WARNING 2025-10-07 23:45:28,208 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:46:05,570 basehttp 221886 126481386698304 "POST /register/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:05,599 basehttp 221886 126481386698304 "GET /register/success/ HTTP/1.1" 200 44122
+WARNING 2025-10-07 23:46:05,689 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:46:09,166 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 63899
+INFO 2025-10-07 23:46:09,218 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 200 638810
+INFO 2025-10-07 23:46:09,233 basehttp 221886 126481375159872 "GET /media/members/1.jpg HTTP/1.1" 304 0
+WARNING 2025-10-07 23:46:09,286 log 221886 126481375159872 Not Found: /favicon.ico
+INFO 2025-10-07 23:46:14,847 basehttp 221886 126481386698304 "GET /dashboard/members/6/approve/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:14,877 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 64147
+INFO 2025-10-07 23:46:14,978 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+WARNING 2025-10-07 23:46:15,069 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:46:19,247 basehttp 221886 126481386698304 "GET /dashboard/members/5/reject/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:19,274 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 61136
+INFO 2025-10-07 23:46:19,342 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+WARNING 2025-10-07 23:46:19,396 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:46:25,576 basehttp 221886 126481386698304 "GET / HTTP/1.1" 200 84366
+WARNING 2025-10-07 23:46:25,676 basehttp 221886 126481386698304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 23:46:25,682 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+INFO 2025-10-07 23:46:42,254 basehttp 221886 126481386698304 "GET /dashboard/members/1/delete/ HTTP/1.1" 200 48429
+INFO 2025-10-07 23:46:43,844 basehttp 221886 126481386698304 "POST /dashboard/members/1/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:43,872 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 57843
+INFO 2025-10-07 23:46:43,995 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+WARNING 2025-10-07 23:46:44,063 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:46:47,037 basehttp 221886 126481386698304 "GET /dashboard/members/2/delete/ HTTP/1.1" 200 48553
+INFO 2025-10-07 23:46:48,567 basehttp 221886 126481386698304 "POST /dashboard/members/2/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:48,588 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 55080
+INFO 2025-10-07 23:46:48,718 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+WARNING 2025-10-07 23:46:48,782 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:46:52,478 basehttp 221886 126481386698304 "GET /dashboard/members/4/delete/ HTTP/1.1" 200 48533
+INFO 2025-10-07 23:46:54,291 basehttp 221886 126481386698304 "POST /dashboard/members/4/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:54,312 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 52335
+INFO 2025-10-07 23:46:54,450 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+WARNING 2025-10-07 23:46:54,517 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:46:56,981 basehttp 221886 126481386698304 "GET /dashboard/members/3/delete/ HTTP/1.1" 200 48533
+INFO 2025-10-07 23:46:58,580 basehttp 221886 126481386698304 "POST /dashboard/members/3/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:46:58,611 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 49590
+INFO 2025-10-07 23:46:58,777 basehttp 221886 126481386698304 "GET /media/members/Screenshot_from_2025-10-06_20-46-23.png HTTP/1.1" 304 0
+INFO 2025-10-07 23:47:01,791 basehttp 221886 126481386698304 "GET /dashboard/members/6/delete/ HTTP/1.1" 200 48456
+INFO 2025-10-07 23:47:03,311 basehttp 221886 126481386698304 "POST /dashboard/members/6/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:03,341 basehttp 221886 126481386698304 "GET /dashboard/members/ HTTP/1.1" 200 46452
+WARNING 2025-10-07 23:47:03,517 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:47:10,049 basehttp 221886 126481386698304 "GET /dashboard/projects/ HTTP/1.1" 200 50178
+INFO 2025-10-07 23:47:13,539 basehttp 221886 126481386698304 "GET /dashboard/projects/1/delete/ HTTP/1.1" 200 47241
+INFO 2025-10-07 23:47:15,066 basehttp 221886 126481386698304 "POST /dashboard/projects/1/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:15,085 basehttp 221886 126481386698304 "GET /dashboard/projects/ HTTP/1.1" 200 46117
+INFO 2025-10-07 23:47:17,050 basehttp 221886 126481386698304 "GET /dashboard/events/ HTTP/1.1" 200 50278
+INFO 2025-10-07 23:47:20,444 basehttp 221886 126481386698304 "GET /dashboard/events/1/delete/ HTTP/1.1" 200 48763
+INFO 2025-10-07 23:47:22,488 basehttp 221886 126481386698304 "POST /dashboard/events/1/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:22,518 basehttp 221886 126481386698304 "GET /dashboard/events/ HTTP/1.1" 200 45504
+INFO 2025-10-07 23:47:24,484 basehttp 221886 126481386698304 "GET /dashboard/news/ HTTP/1.1" 200 49507
+INFO 2025-10-07 23:47:24,528 basehttp 221886 126481386698304 "GET /dashboard/news/ HTTP/1.1" 200 49507
+INFO 2025-10-07 23:47:27,882 basehttp 221886 126481386698304 "GET /dashboard/news/1/delete/ HTTP/1.1" 200 48119
+INFO 2025-10-07 23:47:29,355 basehttp 221886 126481386698304 "POST /dashboard/news/1/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:29,379 basehttp 221886 126481386698304 "GET /dashboard/news/ HTTP/1.1" 200 46184
+WARNING 2025-10-07 23:47:29,562 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:47:31,421 basehttp 221886 126481386698304 "GET /dashboard/gallery/ HTTP/1.1" 200 55878
+INFO 2025-10-07 23:47:36,342 basehttp 221886 126481386698304 "GET /dashboard/gallery/1/delete/ HTTP/1.1" 200 48113
+INFO 2025-10-07 23:47:38,069 basehttp 221886 126481386698304 "POST /dashboard/gallery/1/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:38,085 basehttp 221886 126481386698304 "GET /dashboard/gallery/ HTTP/1.1" 200 49036
+INFO 2025-10-07 23:47:39,625 basehttp 221886 126481386698304 "GET /dashboard/messages/ HTTP/1.1" 200 52779
+INFO 2025-10-07 23:47:42,866 basehttp 221886 126481386698304 "GET /dashboard/messages/2/delete/ HTTP/1.1" 200 48550
+INFO 2025-10-07 23:47:44,135 basehttp 221886 126481386698304 "POST /dashboard/messages/2/delete/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:44,162 basehttp 221886 126481386698304 "GET /dashboard/messages/ HTTP/1.1" 200 49032
+WARNING 2025-10-07 23:47:44,342 log 221886 126481386698304 Not Found: /favicon.ico
+INFO 2025-10-07 23:47:52,896 basehttp 221886 126481386698304 "GET /admin/logout/ HTTP/1.1" 302 0
+INFO 2025-10-07 23:47:52,926 basehttp 221886 126481375159872 "GET /dashboard/auth/login/ HTTP/1.1" 200 11152
