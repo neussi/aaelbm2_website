@@ -5447,3 +5447,544 @@ django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000
 WARNING 2025-08-19 07:01:20,156 basehttp 102767 127545011861056 "GET /favicon.ico HTTP/1.1" 400 143
 INFO 2025-08-19 07:02:43,818 autoreload 102767 127545071968256 /home/patrice/aaelbm2_website/aaelbm2_website/settings.py changed, reloading.
 INFO 2025-08-19 07:02:44,096 autoreload 103504 129478035656704 Watching for file changes with StatReloader
+INFO 2025-10-07 20:08:14,972 autoreload 111834 133996211503104 Watching for file changes with StatReloader
+INFO 2025-10-07 20:08:26,550 basehttp 111834 133996152354368 code 400, message Bad request version ('\x97®\x87')
+ERROR 2025-10-07 20:08:26,550 basehttp 111834 133996152354368 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:26,552 basehttp 111834 133996152354368 code 400, message Bad request version ('\x00\x02\x01\x00\x00')
+ERROR 2025-10-07 20:08:26,553 basehttp 111834 133996152354368 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:26,559 basehttp 111834 133996143961664 code 400, message Bad request version ('ÚÚ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93')
+ERROR 2025-10-07 20:08:26,561 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:26,561 basehttp 111834 133995933201984 code 400, message Bad request version ('¬\x16ÆÊ\x18¨')
+ERROR 2025-10-07 20:08:26,563 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:26,567 basehttp 111834 133996143961664 code 400, message Bad request version ('\x00\x02\x01\x00\x00\x12\x00\x00\x00')
+ERROR 2025-10-07 20:08:26,568 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:26,569 basehttp 111834 133995933201984 code 400, message Bad request version ('\x1bìf\x19\x8a¦%\x82Pîº,\x15£\'ÜÉ5¥\x02\x86Ç\x82µJ\x03Y×µ\x08íêP\x02\x02|UhÍ"')
+ERROR 2025-10-07 20:08:26,569 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:37,004 basehttp 111834 133996152354368 code 400, message Bad request version ('\x8b[\\c')
+ERROR 2025-10-07 20:08:37,004 basehttp 111834 133996152354368 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:37,008 basehttp 111834 133996152354368 code 400, message Bad request version ('poãq')
+ERROR 2025-10-07 20:08:37,008 basehttp 111834 133996152354368 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:37,017 basehttp 111834 133995933201984 code 400, message Bad request version ('¥\x15¬\x0e\x9c®R\x01\x9bô')
+ERROR 2025-10-07 20:08:37,018 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:37,019 basehttp 111834 133996143961664 code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03z')
+ERROR 2025-10-07 20:08:37,019 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:37,021 basehttp 111834 133995924809280 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x12\x00\x00\x00#\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00')
+ERROR 2025-10-07 20:08:37,021 basehttp 111834 133995924809280 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:37,023 basehttp 111834 133995933201984 code 400, message Bad request version ("Y\x96'kÑ°")
+ERROR 2025-10-07 20:08:37,023 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:39,023 basehttp 111834 133995933201984 code 400, message Bad request syntax ('\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03F\x17íÆ\x99¶\x80\x97¯ÐÅg#\x17c>ÛÙÕä\x80fÃ²')
+ERROR 2025-10-07 20:08:39,023 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:39,025 basehttp 111834 133995933201984 code 400, message Bad request version ('\x01\x1a\x00\x00\x01\x00\x01')
+ERROR 2025-10-07 20:08:39,026 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:39,026 basehttp 111834 133995924809280 code 400, message Bad request version ('\x9a\x9a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063')
+ERROR 2025-10-07 20:08:39,027 basehttp 111834 133995924809280 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:39,028 basehttp 111834 133995933201984 code 400, message Bad request version ('\x97÷\x8dÅ\x10\x19Ë²³\x19[\x00\x97¿\x16Â<\x0e')
+ERROR 2025-10-07 20:08:39,028 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:46,166 basehttp 111834 133995924809280 code 400, message Bad request version ('::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063')
+ERROR 2025-10-07 20:08:46,167 basehttp 111834 133995924809280 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:46,169 basehttp 111834 133995924809280 code 400, message Bad request version ("¬du¥aâ$jç«4'¦\x8b³\xad1ö\x9e\x16ÇWÙl\x86IõP\x00J\x01")
+ERROR 2025-10-07 20:08:46,169 basehttp 111834 133995924809280 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:51,978 basehttp 111834 133995933201984 code 400, message Bad request version ('Þ4\x04pw¼\\òôÐ\x00')
+ERROR 2025-10-07 20:08:51,978 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:51,981 basehttp 111834 133995933201984 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01DÍ\x00\x05\x00\x03\x02h2\x00+\x00\x07\x06jj\x03\x04\x03\x03\x00\x12\x00\x00\x00')
+ERROR 2025-10-07 20:08:51,981 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:51,982 basehttp 111834 133996143961664 code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063ºº\x00\x00\x00')
+ERROR 2025-10-07 20:08:51,982 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:51,983 basehttp 111834 133995933201984 code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03')
+ERROR 2025-10-07 20:08:51,983 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:52,896 basehttp 111834 133995933201984 code 400, message Bad request version ('W\x12G¹Å\x17ìB\x161\x16\x93:(')
+ERROR 2025-10-07 20:08:52,896 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:52,898 basehttp 111834 133995933201984 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01ÿ\x01\x00\x01\x00\x00')
+ERROR 2025-10-07 20:08:52,899 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:52,900 basehttp 111834 133996143961664 code 400, message Bad request version ('©T\x03ùM±¹')
+ERROR 2025-10-07 20:08:52,900 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:52,902 basehttp 111834 133996143961664 code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÊÊ\x00\x00\x00')
+ERROR 2025-10-07 20:08:52,902 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:53,278 basehttp 111834 133996143961664 code 400, message Bad request version ('\x8b\x8bÝ)N7\x10)ÊÏµø;\x87Õ\x02²`\x98ÝY3\x00')
+ERROR 2025-10-07 20:08:53,278 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:53,280 basehttp 111834 133996143961664 code 400, message Bad request version ('\x00\x02\x01\x00DÍ\x00\x05\x00\x03\x02h2\x00\x17\x00\x00\x00')
+ERROR 2025-10-07 20:08:53,280 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:53,280 basehttp 111834 133995933201984 code 400, message Bad request version ('ÌGî\x84õ\x0e\xad\x0e¯p§\x94\x92y>¥\x18')
+ERROR 2025-10-07 20:08:53,281 basehttp 111834 133995933201984 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:08:53,282 basehttp 111834 133996143961664 code 400, message Bad request version ('_]E\\À(,\x9b\x17*DZ<§ùI\x92')
+ERROR 2025-10-07 20:08:53,283 basehttp 111834 133996143961664 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-10-07 20:09:06,677 basehttp 111834 133996143961664 "GET / HTTP/1.1" 200 80266
+WARNING 2025-10-07 20:09:06,907 basehttp 111834 133996143961664 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:09:11,317 basehttp 111834 133995933201984 "GET /media/members/8.png HTTP/1.1" 200 246850
+INFO 2025-10-07 20:09:11,319 basehttp 111834 133995914319424 "GET /media/gallery/images/8.png HTTP/1.1" 200 246850
+INFO 2025-10-07 20:09:11,320 basehttp 111834 133996143961664 "GET /media/news/Screenshot_from_2025-06-24_16-07-02.png HTTP/1.1" 200 286312
+WARNING 2025-10-07 20:09:11,348 basehttp 111834 133995914319424 "GET /static/images/hero-bg.jpg HTTP/1.1" 404 1914
+WARNING 2025-10-07 20:09:12,446 basehttp 111834 133996143961664 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+INFO 2025-10-07 20:09:29,402 basehttp 111834 133995933201984 "GET /members/ HTTP/1.1" 200 55839
+WARNING 2025-10-07 20:09:29,486 basehttp 111834 133995933201984 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:09:37,153 basehttp 111834 133995933201984 "GET /register/ HTTP/1.1" 200 43750
+WARNING 2025-10-07 20:09:37,219 basehttp 111834 133995933201984 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 20:09:37,309 basehttp 111834 133995933201984 "GET /static/images/school-bg.jpg HTTP/1.1" 404 1920
+INFO 2025-10-07 20:10:25,629 basehttp 111834 133995933201984 "POST /register/ HTTP/1.1" 302 0
+INFO 2025-10-07 20:10:25,657 basehttp 111834 133995933201984 "GET /register/success/ HTTP/1.1" 200 44050
+WARNING 2025-10-07 20:10:25,750 basehttp 111834 133995933201984 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 20:10:25,797 basehttp 111834 133995933201984 "GET /static/images/success-bg.jpg HTTP/1.1" 404 1923
+WARNING 2025-10-07 20:10:25,801 basehttp 111834 133996143961664 "GET /static/images/success-pattern.svg HTTP/1.1" 404 1938
+WARNING 2025-10-07 20:10:37,864 log 111834 133996143961664 Not Found: /register/success/d
+WARNING 2025-10-07 20:10:37,865 basehttp 111834 133996143961664 "GET /register/success/d HTTP/1.1" 404 6477
+INFO 2025-10-07 20:10:46,759 basehttp 111834 133996143961664 "GET / HTTP/1.1" 200 80266
+WARNING 2025-10-07 20:10:46,823 basehttp 111834 133996143961664 "GET /static/css/main.css HTTP/1.1" 404 1896
+ERROR 2025-10-07 20:10:53,147 log 111834 133996143961664 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 25, in _wrapper_view
+    resolved_login_url = resolve_url(login_url or settings.LOGIN_URL)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+ERROR 2025-10-07 20:10:53,148 basehttp 111834 133996143961664 "GET /dashboard/ HTTP/1.1" 500 92699
+WARNING 2025-10-07 20:11:17,608 log 111834 133996143961664 Not Found: /admin/dashboard/
+WARNING 2025-10-07 20:11:17,608 basehttp 111834 133996143961664 "GET /admin/dashboard/ HTTP/1.1" 404 6471
+WARNING 2025-10-07 20:11:17,691 log 111834 133996143961664 Not Found: /favicon.ico
+ERROR 2025-10-07 20:11:22,506 log 111834 133996143961664 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 25, in _wrapper_view
+    resolved_login_url = resolve_url(login_url or settings.LOGIN_URL)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+ERROR 2025-10-07 20:11:22,507 basehttp 111834 133996143961664 "GET /dashboard/ HTTP/1.1" 500 92699
+INFO 2025-10-07 20:17:29,748 autoreload 111834 133996211503104 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 20:17:31,091 autoreload 116790 138513195696128 Watching for file changes with StatReloader
+INFO 2025-10-07 20:17:32,358 autoreload 116790 138513195696128 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 20:17:33,167 autoreload 116875 131506442039296 Watching for file changes with StatReloader
+INFO 2025-10-07 20:17:42,401 autoreload 116875 131506442039296 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 20:17:43,463 autoreload 117082 137660679020544 Watching for file changes with StatReloader
+INFO 2025-10-07 20:18:08,988 autoreload 117082 137660679020544 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 20:18:09,930 autoreload 117369 128002127540224 Watching for file changes with StatReloader
+INFO 2025-10-07 20:19:28,155 autoreload 117369 128002127540224 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:19:29,154 autoreload 118152 139846354194432 Watching for file changes with StatReloader
+INFO 2025-10-07 20:19:33,692 autoreload 118152 139846354194432 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:19:34,561 autoreload 118309 137812341211136 Watching for file changes with StatReloader
+INFO 2025-10-07 20:19:39,080 autoreload 118309 137812341211136 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:19:39,770 autoreload 118448 130483646083072 Watching for file changes with StatReloader
+INFO 2025-10-07 20:19:41,155 autoreload 118448 130483646083072 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:19:42,033 autoreload 118533 125795873300480 Watching for file changes with StatReloader
+ERROR 2025-10-07 20:19:48,575 log 118533 125795813029440 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 25, in _wrapper_view
+    resolved_login_url = resolve_url(login_url or settings.LOGIN_URL)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/shortcuts.py", line 145, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+ERROR 2025-10-07 20:19:48,577 basehttp 118533 125795813029440 "GET /dashboard/ HTTP/1.1" 500 92699
+INFO 2025-10-07 20:20:06,723 autoreload 118533 125795873300480 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:20:07,711 autoreload 118857 134032537219072 Watching for file changes with StatReloader
+INFO 2025-10-07 20:20:28,356 autoreload 118857 134032537219072 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:20:29,069 autoreload 119171 140047264903168 Watching for file changes with StatReloader
+INFO 2025-10-07 20:20:35,817 basehttp 119171 140047135274560 "GET /dashboard/admin HTTP/1.1" 302 0
+INFO 2025-10-07 20:20:35,862 basehttp 119171 140047135274560 "GET /dashboard/auth/login/?next=/dashboard/admin HTTP/1.1" 200 11559
+INFO 2025-10-07 20:20:49,561 basehttp 119171 140047135274560 "POST /dashboard/auth/login/?next=/dashboard/admin HTTP/1.1" 200 11547
+INFO 2025-10-07 20:20:58,672 basehttp 119171 140047135274560 "POST /dashboard/auth/login/?next=/dashboard/admin HTTP/1.1" 302 0
+ERROR 2025-10-07 20:20:58,827 log 119171 140047135274560 Internal Server Error: /dashboard/admin
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+KeyError: 'admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "/home/patrice/aaelbm2_website/admin_dashboard/views.py", line 53, in dashboard_home
+    return render(request, 'admin_dashboard/home.html', context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/urls/base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'admin' is not a registered namespace
+ERROR 2025-10-07 20:20:58,829 basehttp 119171 140047135274560 "GET /dashboard/admin HTTP/1.1" 500 178487
+INFO 2025-10-07 20:21:12,968 autoreload 119171 140047264903168 /home/patrice/aaelbm2_website/admin_dashboard/urls.py changed, reloading.
+INFO 2025-10-07 20:21:13,703 autoreload 119676 132702523469824 Watching for file changes with StatReloader
+INFO 2025-10-07 20:23:14,191 autoreload 119676 132702523469824 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 20:23:14,751 autoreload 120738 124141850009600 Watching for file changes with StatReloader
+INFO 2025-10-07 20:23:19,262 autoreload 120738 124141850009600 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 20:23:19,746 autoreload 120891 132718846160896 Watching for file changes with StatReloader
+INFO 2025-10-07 20:23:23,190 autoreload 120891 132718846160896 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 20:23:23,983 autoreload 120978 136793695830016 Watching for file changes with StatReloader
+WARNING 2025-10-07 20:23:28,473 log 120978 136793567524416 Not Found: /dashboard/admin
+WARNING 2025-10-07 20:23:28,473 basehttp 120978 136793567524416 "GET /dashboard/admin HTTP/1.1" 404 13843
+INFO 2025-10-07 20:23:32,514 basehttp 120978 136793567524416 "GET /dashboard HTTP/1.1" 301 0
+INFO 2025-10-07 20:23:32,572 basehttp 120978 136793567524416 "GET /dashboard/ HTTP/1.1" 200 54546
+INFO 2025-10-07 20:25:07,130 basehttp 120978 136793567524416 "GET /dashboard/messages/ HTTP/1.1" 200 56850
+INFO 2025-10-07 20:25:11,720 basehttp 120978 136793567524416 "GET /dashboard/members/ HTTP/1.1" 200 52325
+INFO 2025-10-07 20:25:17,209 basehttp 120978 136793567524416 "GET /dashboard/members/2/ HTTP/1.1" 200 49070
+WARNING 2025-10-07 20:25:17,368 log 120978 136793567524416 Not Found: /favicon.ico
+WARNING 2025-10-07 20:25:43,649 log 120978 136793567524416 Not Found: /favicon.ico
+INFO 2025-10-07 20:25:47,210 basehttp 120978 136793567524416 "GET /dashboard/members/1/ HTTP/1.1" 200 48968
+INFO 2025-10-07 20:49:18,866 basehttp 120978 136793567524416 "GET /dashboard/settings/ HTTP/1.1" 200 69445
+WARNING 2025-10-07 20:49:19,107 log 120978 136793567524416 Not Found: /favicon.ico
+INFO 2025-10-07 20:49:33,036 basehttp 120978 136793567524416 "GET /dashboard/ HTTP/1.1" 200 53891
+WARNING 2025-10-07 20:49:33,249 log 120978 136793567524416 Not Found: /favicon.ico
+INFO 2025-10-07 20:49:46,300 basehttp 120978 136793567524416 "GET / HTTP/1.1" 200 80266
+WARNING 2025-10-07 20:49:46,407 basehttp 120978 136793567524416 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:49:55,451 basehttp 120978 136793567524416 "GET /about/ HTTP/1.1" 200 51777
+WARNING 2025-10-07 20:49:55,517 basehttp 120978 136793557034560 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:49:55,519 basehttp 120978 136793567524416 "GET /static/images/3.png HTTP/1.1" 200 18561
+INFO 2025-10-07 20:50:04,488 basehttp 120978 136793567524416 "GET /members/ HTTP/1.1" 200 55839
+WARNING 2025-10-07 20:50:04,549 basehttp 120978 136793567524416 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:51:28,554 basehttp 120978 136793567524416 "GET / HTTP/1.1" 200 80266
+WARNING 2025-10-07 20:51:28,636 basehttp 120978 136793567524416 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:52:13,561 autoreload 120978 136793695830016 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:52:15,038 autoreload 133855 133555173920768 Watching for file changes with StatReloader
+INFO 2025-10-07 20:52:16,123 basehttp 133855 133555114997312 "GET / HTTP/1.1" 200 81628
+WARNING 2025-10-07 20:52:16,237 basehttp 133855 133555114997312 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:52:35,217 basehttp 133855 133555114997312 "GET /members/ HTTP/1.1" 200 55839
+WARNING 2025-10-07 20:52:35,298 basehttp 133855 133555114997312 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:54:45,466 basehttp 133855 133555114997312 "GET /dashboard/members/ HTTP/1.1" 200 52325
+INFO 2025-10-07 20:54:50,866 basehttp 133855 133555114997312 "GET /dashboard/members/2/ HTTP/1.1" 200 49070
+INFO 2025-10-07 20:56:02,055 autoreload 133855 133555173920768 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:02,859 autoreload 135695 123486835499008 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:04,170 autoreload 135695 123486835499008 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:05,011 autoreload 135747 137690910724096 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:06,524 autoreload 135747 137690910724096 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:07,324 autoreload 135809 138222579343360 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:12,991 basehttp 135809 138222449456704 "GET /members/ HTTP/1.1" 200 57268
+WARNING 2025-10-07 20:56:13,074 basehttp 135809 138222449456704 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:56:24,643 basehttp 135809 138222449456704 "GET /dashboard/members/ HTTP/1.1" 200 52325
+WARNING 2025-10-07 20:56:24,776 log 135809 138222449456704 Not Found: /favicon.ico
+INFO 2025-10-07 20:56:36,178 autoreload 135809 138222579343360 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:36,752 autoreload 136106 138013663428608 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:52,321 autoreload 136106 138013663428608 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:53,084 autoreload 136372 140182488260608 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:54,414 autoreload 136372 140182488260608 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:55,289 autoreload 136425 129449078104064 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:56,867 autoreload 136425 129449078104064 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:56:57,708 autoreload 136479 134914114633728 Watching for file changes with StatReloader
+INFO 2025-10-07 20:56:59,292 autoreload 136479 134914114633728 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:57:00,171 autoreload 136528 136321118552064 Watching for file changes with StatReloader
+INFO 2025-10-07 20:57:00,789 basehttp 136528 136320986904128 "GET /members/ HTTP/1.1" 200 58733
+WARNING 2025-10-07 20:57:00,856 basehttp 136528 136320986904128 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 20:58:09,288 autoreload 136528 136321118552064 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:58:10,215 autoreload 137137 136275229683712 Watching for file changes with StatReloader
+INFO 2025-10-07 20:58:14,678 autoreload 137137 136275229683712 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 20:58:15,570 autoreload 137240 129330515853312 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:01,260 autoreload 137240 129330515853312 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:02,132 autoreload 138352 132783186354176 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:11,396 autoreload 138352 132783186354176 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:11,755 autoreload 138539 137418066206720 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:15,879 autoreload 138539 137418066206720 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:16,343 autoreload 138647 133048538497024 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:17,558 autoreload 138647 133048538497024 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:18,190 autoreload 138711 126166346149888 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:26,744 autoreload 138711 126166346149888 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:27,491 autoreload 138932 127034067312640 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:28,993 autoreload 138932 127034067312640 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:29,676 autoreload 138993 131270445846528 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:34,901 autoreload 138993 131270445846528 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:35,685 autoreload 139118 125925190737920 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:37,185 autoreload 139118 125925190737920 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:00:38,295 autoreload 139179 124238283419648 Watching for file changes with StatReloader
+INFO 2025-10-07 21:00:39,374 basehttp 139179 124238224684608 "GET /members/ HTTP/1.1" 200 57338
+WARNING 2025-10-07 21:00:39,440 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:02:12,377 basehttp 139179 124238224684608 "GET / HTTP/1.1" 200 81628
+WARNING 2025-10-07 21:02:12,454 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:02:19,635 basehttp 139179 124238224684608 "GET /about/ HTTP/1.1" 200 51777
+WARNING 2025-10-07 21:02:19,713 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:02:27,297 basehttp 139179 124238224684608 "GET /contact/ HTTP/1.1" 200 70248
+WARNING 2025-10-07 21:02:27,387 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:02:27,446 basehttp 139179 124238213146176 "GET /static/images/connect-pattern.svg HTTP/1.1" 404 1938
+WARNING 2025-10-07 21:02:27,451 basehttp 139179 124238224684608 "GET /static/images/contact-hero.jpg HTTP/1.1" 404 1929
+WARNING 2025-10-07 21:02:27,451 basehttp 139179 124238204753472 "GET /static/images/emergency-pattern.svg HTTP/1.1" 404 1944
+INFO 2025-10-07 21:02:59,955 basehttp 139179 124238204753472 "GET /gallery/ HTTP/1.1" 200 76202
+WARNING 2025-10-07 21:03:00,022 basehttp 139179 124238204753472 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:03:04,444 basehttp 139179 124238204753472 "GET /static/images/gallery-hero.jpg HTTP/1.1" 404 1929
+WARNING 2025-10-07 21:03:04,461 basehttp 139179 124238213146176 "GET /static/images/collection-pattern.svg HTTP/1.1" 404 1947
+WARNING 2025-10-07 21:03:04,461 basehttp 139179 124238224684608 "GET /static/images/photo-pattern.svg HTTP/1.1" 404 1932
+INFO 2025-10-07 21:09:33,352 basehttp 139179 124238224684608 "GET /about/ HTTP/1.1" 200 51777
+WARNING 2025-10-07 21:09:33,439 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:10:53,226 basehttp 139179 124238224684608 "GET /about/ HTTP/1.1" 200 51360
+WARNING 2025-10-07 21:10:53,280 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:11:20,497 basehttp 139179 124238224684608 "GET /about/ HTTP/1.1" 200 51359
+WARNING 2025-10-07 21:11:20,545 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:11:51,231 basehttp 139179 124238224684608 "GET / HTTP/1.1" 200 81628
+WARNING 2025-10-07 21:11:51,311 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:12:06,125 basehttp 139179 124238224684608 "GET /about/ HTTP/1.1" 200 51359
+WARNING 2025-10-07 21:12:06,226 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:12:13,333 basehttp 139179 124238224684608 "GET /members/ HTTP/1.1" 200 57338
+WARNING 2025-10-07 21:12:13,413 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:12:20,713 basehttp 139179 124238224684608 "GET /projects/ HTTP/1.1" 200 51692
+WARNING 2025-10-07 21:12:20,800 basehttp 139179 124238213146176 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:12:20,803 basehttp 139179 124238224684608 "GET /media/projects/8.png HTTP/1.1" 200 246850
+WARNING 2025-10-07 21:12:20,897 basehttp 139179 124238224684608 "GET /static/images/projects-hero.jpg HTTP/1.1" 404 1932
+WARNING 2025-10-07 21:12:20,906 basehttp 139179 124238213146176 "GET /static/images/innovation-pattern.svg HTTP/1.1" 404 1947
+INFO 2025-10-07 21:14:42,775 basehttp 139179 124238213146176 "GET /projects/ HTTP/1.1" 200 51699
+WARNING 2025-10-07 21:14:42,809 basehttp 139179 124238213146176 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:14:42,859 basehttp 139179 124238224684608 "GET /static/images/innovation-pattern.svg HTTP/1.1" 404 1947
+WARNING 2025-10-07 21:14:42,860 basehttp 139179 124238213146176 "GET /static/images/projects-hero.jpg HTTP/1.1" 404 1932
+INFO 2025-10-07 21:16:01,153 basehttp 139179 124238213146176 "GET /projects/ HTTP/1.1" 200 51696
+WARNING 2025-10-07 21:16:01,198 basehttp 139179 124238213146176 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:16:01,248 basehttp 139179 124238224684608 "GET /static/images/innovation-pattern.svg HTTP/1.1" 404 1947
+WARNING 2025-10-07 21:16:01,249 basehttp 139179 124238213146176 "GET /static/images/projects-hero.jpg HTTP/1.1" 404 1932
+INFO 2025-10-07 21:16:16,905 basehttp 139179 124238213146176 "GET /projects/ HTTP/1.1" 200 51695
+WARNING 2025-10-07 21:16:16,963 basehttp 139179 124238213146176 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:16:17,019 basehttp 139179 124238213146176 "GET /static/images/projects-hero.jpg HTTP/1.1" 404 1932
+WARNING 2025-10-07 21:16:17,020 basehttp 139179 124238224684608 "GET /static/images/innovation-pattern.svg HTTP/1.1" 404 1947
+INFO 2025-10-07 21:16:27,557 basehttp 139179 124238224684608 "GET /events/ HTTP/1.1" 200 62560
+INFO 2025-10-07 21:16:27,643 basehttp 139179 124238224684608 "GET /media/events/10.png HTTP/1.1" 200 353624
+WARNING 2025-10-07 21:16:27,660 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:16:27,715 basehttp 139179 124238224684608 "GET /static/images/events-hero.jpg HTTP/1.1" 404 1926
+WARNING 2025-10-07 21:16:27,717 basehttp 139179 124238213146176 "GET /static/images/calendar-pattern.svg HTTP/1.1" 404 1941
+INFO 2025-10-07 21:17:32,473 basehttp 139179 124238224684608 "GET /news/ HTTP/1.1" 200 47059
+WARNING 2025-10-07 21:17:32,570 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:17:32,614 basehttp 139179 124238224684608 "GET /static/images/news-hero.jpg HTTP/1.1" 404 1920
+WARNING 2025-10-07 21:17:32,615 basehttp 139179 124238213146176 "GET /static/images/news-pattern.svg HTTP/1.1" 404 1929
+INFO 2025-10-07 21:17:58,290 basehttp 139179 124238213146176 "GET /gallery/ HTTP/1.1" 200 76202
+WARNING 2025-10-07 21:17:58,356 basehttp 139179 124238213146176 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:19:59,988 basehttp 139179 124238224684608 "GET /contact/ HTTP/1.1" 200 70248
+WARNING 2025-10-07 21:20:00,103 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:20:03,816 basehttp 139179 124238224684608 "GET /donations/ HTTP/1.1" 200 51500
+WARNING 2025-10-07 21:20:03,890 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:21:14,559 basehttp 139179 124238224684608 "GET /donations/ HTTP/1.1" 200 51508
+WARNING 2025-10-07 21:21:14,604 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:21:49,593 basehttp 139179 124238224684608 "GET /donations/ HTTP/1.1" 200 51522
+WARNING 2025-10-07 21:21:49,639 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:22:21,937 basehttp 139179 124238224684608 "GET /donations/ HTTP/1.1" 200 51520
+WARNING 2025-10-07 21:22:21,984 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:22:32,295 basehttp 139179 124238224684608 "GET / HTTP/1.1" 200 81628
+WARNING 2025-10-07 21:22:32,372 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:22:33,808 basehttp 139179 124238224684608 "GET / HTTP/1.1" 200 81628
+WARNING 2025-10-07 21:22:33,895 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:22:36,859 basehttp 139179 124238224684608 "GET /members/ HTTP/1.1" 200 57338
+WARNING 2025-10-07 21:22:36,948 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:22:43,134 basehttp 139179 124238224684608 "GET /register/ HTTP/1.1" 200 43750
+WARNING 2025-10-07 21:22:43,192 basehttp 139179 124238224684608 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:27:01,713 autoreload 139179 124238283419648 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:27:02,787 autoreload 153215 135742334681088 Watching for file changes with StatReloader
+INFO 2025-10-07 21:27:07,311 autoreload 153215 135742334681088 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:27:08,423 autoreload 153347 130766064439296 Watching for file changes with StatReloader
+INFO 2025-10-07 21:30:53,192 autoreload 153347 130766064439296 /home/patrice/aaelbm2_website/admin_dashboard/views.py changed, reloading.
+INFO 2025-10-07 21:30:54,062 autoreload 155185 132427454902272 Watching for file changes with StatReloader
+INFO 2025-10-07 21:36:28,288 basehttp 155185 132427326420544 "GET /dashboard/members/2/edit/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:36:28,310 basehttp 155185 132427326420544 "GET /dashboard/auth/login/?next=/dashboard/members/2/edit/ HTTP/1.1" 200 11559
+WARNING 2025-10-07 21:36:28,566 log 155185 132427326420544 Not Found: /favicon.ico
+INFO 2025-10-07 21:36:36,278 basehttp 155185 132427326420544 "POST /dashboard/auth/login/?next=/dashboard/members/2/edit/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:36:36,325 basehttp 155185 132427326420544 "GET /dashboard/members/2/edit/ HTTP/1.1" 200 63193
+WARNING 2025-10-07 21:36:36,582 log 155185 132427326420544 Not Found: /favicon.ico
+INFO 2025-10-07 21:36:40,599 basehttp 155185 132427326420544 "GET /dashboard/members/ HTTP/1.1" 200 52325
+INFO 2025-10-07 21:36:43,715 basehttp 155185 132427326420544 "GET /dashboard/members/2/ HTTP/1.1" 200 49070
+INFO 2025-10-07 21:36:50,364 basehttp 155185 132427326420544 "GET /dashboard/members/ HTTP/1.1" 200 52325
+INFO 2025-10-07 21:36:52,368 basehttp 155185 132427326420544 "GET /dashboard/members/2/edit/ HTTP/1.1" 200 62538
+INFO 2025-10-07 21:37:20,316 basehttp 155185 132427326420544 "POST /dashboard/members/2/edit/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:37:20,337 basehttp 155185 132427326420544 "GET /dashboard/members/ HTTP/1.1" 200 53432
+INFO 2025-10-07 21:37:41,241 autoreload 155185 132427454902272 /home/patrice/aaelbm2_website/main/models.py changed, reloading.
+INFO 2025-10-07 21:37:42,432 autoreload 158661 130076540170240 Watching for file changes with StatReloader
+INFO 2025-10-07 21:37:52,198 autoreload 158841 123737128128512 Watching for file changes with StatReloader
+INFO 2025-10-07 21:37:56,618 basehttp 158841 123737001162304 "GET /dashboard/members/ HTTP/1.1" 200 52756
+WARNING 2025-10-07 21:37:56,747 log 158841 123737001162304 Not Found: /favicon.ico
+INFO 2025-10-07 21:37:59,846 basehttp 158841 123737001162304 "GET /dashboard/members/ HTTP/1.1" 200 52756
+WARNING 2025-10-07 21:38:56,391 log 158841 123737001162304 Forbidden (CSRF token from POST incorrect.): /register/
+WARNING 2025-10-07 21:38:56,393 basehttp 158841 123737001162304 "POST /register/ HTTP/1.1" 403 2541
+WARNING 2025-10-07 21:38:56,478 log 158841 123737001162304 Not Found: /favicon.ico
+INFO 2025-10-07 21:39:03,243 basehttp 158841 123737001162304 "GET /register/ HTTP/1.1" 200 43750
+WARNING 2025-10-07 21:39:03,301 basehttp 158841 123737001162304 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:39:09,819 basehttp 158841 123737001162304 "GET /dashboard/members/ HTTP/1.1" 200 52756
+WARNING 2025-10-07 21:39:09,937 log 158841 123737001162304 Not Found: /favicon.ico
+INFO 2025-10-07 21:39:13,087 basehttp 158841 123737001162304 "GET /dashboard/members/ HTTP/1.1" 200 52756
+INFO 2025-10-07 21:39:23,290 autoreload 159667 127865708343296 Watching for file changes with StatReloader
+INFO 2025-10-07 21:39:29,603 basehttp 159667 127865649624640 "GET /register/ HTTP/1.1" 200 43750
+WARNING 2025-10-07 21:39:29,671 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:39:31,950 basehttp 159667 127865649624640 "GET /projects/ HTTP/1.1" 200 51695
+WARNING 2025-10-07 21:39:32,033 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:39:32,097 basehttp 159667 127865639134784 "GET /static/images/innovation-pattern.svg HTTP/1.1" 404 1947
+WARNING 2025-10-07 21:39:32,098 basehttp 159667 127865649624640 "GET /static/images/projects-hero.jpg HTTP/1.1" 404 1932
+INFO 2025-10-07 21:39:33,833 basehttp 159667 127865649624640 "GET /members/ HTTP/1.1" 200 56565
+WARNING 2025-10-07 21:39:33,910 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:39:40,286 basehttp 159667 127865649624640 "GET /register/ HTTP/1.1" 200 43750
+WARNING 2025-10-07 21:39:40,352 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:40:12,304 basehttp 159667 127865649624640 "POST /register/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:40:12,337 basehttp 159667 127865649624640 "GET /register/success/ HTTP/1.1" 200 44050
+WARNING 2025-10-07 21:40:12,432 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:40:15,068 basehttp 159667 127865649624640 "GET / HTTP/1.1" 200 80266
+WARNING 2025-10-07 21:40:15,159 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:40:18,932 basehttp 159667 127865649624640 "GET /dashboard/members/ HTTP/1.1" 200 55932
+WARNING 2025-10-07 21:40:19,038 log 159667 127865649624640 Not Found: /favicon.ico
+INFO 2025-10-07 21:40:25,787 basehttp 159667 127865649624640 "GET /dashboard/members/2/approve/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:40:25,815 basehttp 159667 127865649624640 "GET /dashboard/members/ HTTP/1.1" 200 56180
+INFO 2025-10-07 21:40:30,458 basehttp 159667 127865649624640 "GET /dashboard/members/3/approve/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:40:30,482 basehttp 159667 127865649624640 "GET /dashboard/members/ HTTP/1.1" 200 55739
+INFO 2025-10-07 21:40:40,527 basehttp 159667 127865649624640 "GET /dashboard/members/2/edit/ HTTP/1.1" 200 62538
+INFO 2025-10-07 21:40:51,288 basehttp 159667 127865649624640 "POST /dashboard/members/2/edit/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:40:51,313 basehttp 159667 127865649624640 "GET /dashboard/members/ HTTP/1.1" 200 56177
+INFO 2025-10-07 21:40:55,980 basehttp 159667 127865649624640 "GET / HTTP/1.1" 200 81618
+WARNING 2025-10-07 21:40:56,046 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:41:05,444 basehttp 159667 127865649624640 "GET /dashboard/members/2/approve/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:41:05,477 basehttp 159667 127865649624640 "GET /dashboard/members/ HTTP/1.1" 200 55749
+INFO 2025-10-07 21:41:08,673 basehttp 159667 127865649624640 "GET / HTTP/1.1" 200 82980
+WARNING 2025-10-07 21:41:08,721 basehttp 159667 127865649624640 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:44:59,781 autoreload 159667 127865708343296 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 21:45:00,904 autoreload 162532 130569208406016 Watching for file changes with StatReloader
+INFO 2025-10-07 21:45:02,554 basehttp 162532 130569080927808 "GET / HTTP/1.1" 200 82980
+WARNING 2025-10-07 21:45:02,653 basehttp 162532 130569080927808 "GET /static/css/main.css HTTP/1.1" 404 1896
+WARNING 2025-10-07 21:45:05,434 log 162532 130569080927808 Not Found: /stats/
+WARNING 2025-10-07 21:45:05,435 basehttp 162532 130569080927808 "GET /stats/ HTTP/1.1" 404 6765
+INFO 2025-10-07 21:46:02,247 autoreload 162532 130569208406016 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:46:03,544 autoreload 163200 134778135367680 Watching for file changes with StatReloader
+INFO 2025-10-07 21:46:28,200 autoreload 163200 134778135367680 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:46:29,026 autoreload 163509 125298829348864 Watching for file changes with StatReloader
+WARNING 2025-10-07 21:47:44,065 log 163509 125298769131072 Not Found: /stats/
+WARNING 2025-10-07 21:47:44,066 basehttp 163509 125298769131072 "GET /stats/ HTTP/1.1" 404 6765
+WARNING 2025-10-07 21:47:46,133 log 163509 125298769131072 Not Found: /stats/
+WARNING 2025-10-07 21:47:46,134 basehttp 163509 125298769131072 "GET /stats/ HTTP/1.1" 404 6765
+WARNING 2025-10-07 21:47:46,948 log 163509 125298769131072 Not Found: /stats/
+WARNING 2025-10-07 21:47:46,949 basehttp 163509 125298769131072 "GET /stats/ HTTP/1.1" 404 6765
+WARNING 2025-10-07 21:47:47,129 log 163509 125298769131072 Not Found: /stats/
+WARNING 2025-10-07 21:47:47,129 basehttp 163509 125298769131072 "GET /stats/ HTTP/1.1" 404 6765
+INFO 2025-10-07 21:48:18,794 autoreload 163509 125298829348864 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 21:48:19,869 autoreload 164702 138651258253312 Watching for file changes with StatReloader
+INFO 2025-10-07 21:51:55,605 autoreload 164702 138651258253312 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 21:51:56,342 autoreload 166427 128060983844864 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:01,539 autoreload 166427 128060983844864 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 21:52:02,255 autoreload 166535 133801462214656 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:17,701 autoreload 166535 133801462214656 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:18,558 autoreload 166801 125577838968832 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:19,869 autoreload 166801 125577838968832 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:20,882 autoreload 166852 137315955888128 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:27,383 autoreload 166852 137315955888128 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:28,210 autoreload 166998 130450021556224 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:31,750 autoreload 166998 130450021556224 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:32,666 autoreload 167117 124726871945216 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:35,069 autoreload 167117 124726871945216 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:35,900 autoreload 167205 129470697996288 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:39,253 autoreload 167205 129470697996288 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:40,046 autoreload 167279 136841358262272 Watching for file changes with StatReloader
+INFO 2025-10-07 21:52:44,407 autoreload 167279 136841358262272 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:52:45,222 autoreload 167389 133854065827840 Watching for file changes with StatReloader
+WARNING 2025-10-07 21:52:47,614 log 167389 133853930845760 Not Found: /stats/
+WARNING 2025-10-07 21:52:47,614 basehttp 167389 133853930845760 "GET /stats/ HTTP/1.1" 404 6799
+WARNING 2025-10-07 21:52:49,254 log 167389 133853930845760 Not Found: /stats/
+WARNING 2025-10-07 21:52:49,255 basehttp 167389 133853930845760 "GET /stats/ HTTP/1.1" 404 6799
+INFO 2025-10-07 21:53:04,817 autoreload 167604 126468494643200 Watching for file changes with StatReloader
+WARNING 2025-10-07 21:53:11,790 log 167604 126468435736128 Not Found: /stats/s
+WARNING 2025-10-07 21:53:11,791 basehttp 167604 126468435736128 "GET /stats/s HTTP/1.1" 404 6802
+WARNING 2025-10-07 21:53:13,348 log 167604 126468435736128 Not Found: /stats/s
+WARNING 2025-10-07 21:53:13,349 basehttp 167604 126468435736128 "GET /stats/s HTTP/1.1" 404 6802
+INFO 2025-10-07 21:53:17,805 basehttp 167604 126468435736128 "GET / HTTP/1.1" 200 82980
+WARNING 2025-10-07 21:53:17,875 basehttp 167604 126468435736128 "GET /static/css/main.css HTTP/1.1" 404 1896
+ERROR 2025-10-07 21:56:52,288 log 167604 126468425246272 Internal Server Error: /test-404/
+Traceback (most recent call last):
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/patrice/aaelbm2_website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/patrice/aaelbm2_website/main/views.py", line 391, in test_404_view
+    return HttpResponseNotFound(render(request, 'errors/404.html', context).content)
+NameError: name 'HttpResponseNotFound' is not defined
+ERROR 2025-10-07 21:56:52,290 basehttp 167604 126468425246272 "GET /test-404/ HTTP/1.1" 500 74888
+WARNING 2025-10-07 21:56:52,588 log 167604 126468425246272 Not Found: /favicon.ico
+WARNING 2025-10-07 21:56:52,589 basehttp 167604 126468425246272 "GET /favicon.ico HTTP/1.1" 404 6814
+INFO 2025-10-07 21:57:06,054 autoreload 167604 126468494643200 /home/patrice/aaelbm2_website/main/views.py changed, reloading.
+INFO 2025-10-07 21:57:06,858 autoreload 169609 131311559561216 Watching for file changes with StatReloader
+INFO 2025-10-07 21:57:41,352 autoreload 169609 131311559561216 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 21:57:41,903 autoreload 170042 128509561036800 Watching for file changes with StatReloader
+INFO 2025-10-07 21:57:44,209 autoreload 170042 128509561036800 /home/patrice/aaelbm2_website/aaelbm2_website/urls.py changed, reloading.
+INFO 2025-10-07 21:57:44,561 autoreload 170161 130182272630784 Watching for file changes with StatReloader
+WARNING 2025-10-07 21:57:58,370 log 170161 130182213006912 Not Found: /test-404/
+WARNING 2025-10-07 21:57:58,370 basehttp 170161 130182213006912 "GET /test-404/ HTTP/1.1" 404 16074
+INFO 2025-10-07 21:58:27,427 basehttp 170161 130182213006912 "GET / HTTP/1.1" 200 82980
+WARNING 2025-10-07 21:58:27,516 basehttp 170161 130182213006912 "GET /static/css/main.css HTTP/1.1" 404 1896
+INFO 2025-10-07 21:58:28,581 basehttp 170161 130182135412288 "GET /media/gallery/images/8.png HTTP/1.1" 200 246850
+INFO 2025-10-07 21:58:28,582 basehttp 170161 130182213006912 "GET /media/news/Screenshot_from_2025-06-24_16-07-02.png HTTP/1.1" 200 286312
+INFO 2025-10-07 21:58:28,584 basehttp 170161 130182125971008 "GET /media/members/8.png HTTP/1.1" 200 246850
+WARNING 2025-10-07 21:58:29,034 basehttp 170161 130182213006912 "GET /static/images/hero-bg.jpg HTTP/1.1" 404 1914
+WARNING 2025-10-07 21:58:31,742 basehttp 170161 130182135412288 "GET /static/images/favicon.png HTTP/1.1" 404 1914
+WARNING 2025-10-07 21:58:42,027 log 170161 130182125971008 Not Found: /e
+WARNING 2025-10-07 21:58:42,028 basehttp 170161 130182125971008 "GET /e HTTP/1.1" 404 6750
+WARNING 2025-10-07 21:58:42,136 log 170161 130182125971008 Not Found: /favicon.ico
+INFO 2025-10-07 21:58:47,437 basehttp 170161 130182125971008 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-10-07 21:58:47,478 basehttp 170161 130182125971008 "GET /admin/login/?next=/dashboard/ HTTP/1.1" 200 4399
+INFO 2025-10-07 21:58:47,581 basehttp 170161 130182213006912 "GET /static/admin/js/theme.js HTTP/1.1" 200 1943
+INFO 2025-10-07 21:58:47,589 basehttp 170161 130182135412288 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2929
+INFO 2025-10-07 21:58:47,592 basehttp 170161 130182125971008 "GET /static/admin/css/base.css HTTP/1.1" 200 21310
+INFO 2025-10-07 21:58:47,592 basehttp 170161 130182117578304 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2694
+INFO 2025-10-07 21:58:47,594 basehttp 170161 130182213006912 "GET /static/admin/css/responsive.css HTTP/1.1" 200 18559
+INFO 2025-10-07 21:58:47,595 basehttp 170161 130182100792896 "GET /static/admin/css/login.css HTTP/1.1" 200 958
+INFO 2025-10-07 21:58:47,595 basehttp 170161 130182109185600 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+WARNING 2025-10-07 21:58:47,655 log 170161 130182213006912 Not Found: /favicon.ico
+WARNING 2025-10-07 21:58:52,832 log 170161 130182125971008 Not Found: /w
+WARNING 2025-10-07 21:58:52,833 basehttp 170161 130182125971008 "GET /w HTTP/1.1" 404 6750
+WARNING 2025-10-07 21:58:52,908 log 170161 130182109185600 Not Found: /favicon.ico
+INFO 2025-10-07 22:01:09,258 autoreload 170161 130182272630784 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 22:01:09,947 autoreload 172015 133398158475264 Watching for file changes with StatReloader
+INFO 2025-10-07 22:01:23,183 autoreload 172015 133398158475264 /home/patrice/aaelbm2_website/main/urls.py changed, reloading.
+INFO 2025-10-07 22:01:23,858 autoreload 172200 136998278406144 Watching for file changes with StatReloader
+WARNING 2025-10-07 22:01:27,334 log 172200 136998219150912 Not Found: /w
+WARNING 2025-10-07 22:01:27,334 basehttp 172200 136998219150912 "GET /w HTTP/1.1" 404 7190
+WARNING 2025-10-07 22:01:29,807 log 172200 136998219150912 Not Found: /w
+WARNING 2025-10-07 22:01:29,808 basehttp 172200 136998219150912 "GET /w HTTP/1.1" 404 7190
+WARNING 2025-10-07 22:01:30,531 log 172200 136998219150912 Not Found: /w
+WARNING 2025-10-07 22:01:30,532 basehttp 172200 136998219150912 "GET /w HTTP/1.1" 404 7190

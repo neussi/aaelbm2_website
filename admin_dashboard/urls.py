@@ -1,19 +1,20 @@
-# admin_dashboard/urls.py - Fichier principal mis à jour
+# admin_dashboard/urls.py
 from django.urls import path, include
 from . import views
 from . import auth_views
 
 urlpatterns = [
+
+    # ============= DASHBOARD =============
+    # Dashboard home (nécessite une connexion)
+    path('', views.dashboard_home, name='admin_dashboard_home'),
     # ============= AUTHENTIFICATION =============
     # Pages d'authentification
     path('auth/login/', auth_views.admin_login_view, name='admin_login'),
     path('auth/logout/', auth_views.admin_logout_view, name='admin_logout'),
     path('auth/register/', auth_views.admin_register_view, name='admin_register'),
     path('auth/password-reset/', auth_views.admin_password_reset_view, name='admin_password_reset'),
-    
-    # ============= DASHBOARD =============
-    # Dashboard home (nécessite une connexion)
-    path('', views.dashboard_home, name='admin_dashboard_home'),
+
     
     # ============= GESTION DES MEMBRES =============
     path('members/', views.members_list, name='admin_members_list'),

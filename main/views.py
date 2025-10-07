@@ -39,7 +39,6 @@ def home(request):
     
     # Membres du bureau
     bureau_members = Member.objects.filter(
-        member_type='bureau',
         is_active=True
     )
     
@@ -91,7 +90,9 @@ def members(request):
         member_type='conseil',
         is_active=True
     )
-    
+    general_members = Member.objects.filter(
+        is_active=True
+    )
     # Membres influents (avec bio)
     influential_members = Member.objects.filter(
         is_active=True,
@@ -103,9 +104,13 @@ def members(request):
         'founder_members': founder_members,
         'conseil_members': conseil_members,
         'influential_members': influential_members,
+        'general_members': general_members,
+
     }
     
     return render(request, 'main/members.html', context)
+
+
 
 def member_registration(request):
     """Inscription d'un nouveau membre"""
@@ -133,6 +138,9 @@ def member_registration(request):
     
     context = {'form': form}
     return render(request, 'main/member_registration.html', context)
+
+
+
 
 def member_registration_success(request):
     """Page de confirmation d'inscription"""
@@ -352,16 +360,22 @@ def whatsapp_redirect(request):
     
     return redirect(whatsapp_url)
 
-# ========================= ERROR HANDLERS =========================
-
-def handler404(request, exception):  # Ajouter le paramètre exception
+def handler404(request, exception=None):
     """Page d'erreur 404 personnalisée"""
-    
-    return render(request, '404.html', status=404)
+    context = {
+        'error_code': '404',
+        'error_title': 'Page non trouvée',
+        'error_message': 'Désolé, la page que vous recherchez n\'existe pas ou a été déplacée.',
+    }
+    return render(request, 'errors/404.html', context, status=404)
 
 
-def handler500(request):  # 500 garde un seul paramètre
+def handler500(request):
     """Page d'erreur 500 personnalisée"""
-    
-    return render(request, '500.html', status=500)
+    context = {
+        'error_code': '500',
+        'error_title': 'Erreur serveur',
+        'error_message': 'Une erreur interne s\'est produite. Notre équipe technique a été notifiée et travaille à résoudre le problème.',
+    }
+    return render(request, 'errors/500.html', context, status=500)
 

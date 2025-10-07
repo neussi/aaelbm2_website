@@ -52,6 +52,8 @@ def dashboard_home(request):
     
     return render(request, 'admin_dashboard/home.html', context)
 
+
+
 # ============= GESTION DES MEMBRES =============
 
 @staff_member_required

@@ -26,7 +26,7 @@ class Member(models.Model):
     poste_bureau = models.CharField(max_length=100, blank=True, null=True, verbose_name="Poste au bureau")
     photo = models.ImageField(upload_to='members/', blank=True, null=True)
     bio = RichTextField(blank=True, null=True, verbose_name="Biographie")
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     date_adhesion = models.DateTimeField(auto_now_add=True)
     
     class Meta:

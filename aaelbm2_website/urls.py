@@ -1,3 +1,5 @@
+# ============= urls.py (PRINCIPAL) =============
+
 """ URLs principales du projet aaelbm2_website """
 from django.contrib import admin
 from django.urls import path, include
@@ -6,12 +8,11 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
-    # Admin Django par défaut (pour les développeurs)
-    path('django-admin/', admin.site.urls),
     
     # Dashboard administrateur personnalisé
     path('dashboard/', include('admin_dashboard.urls')),
     
+    path('admin/', admin.site.urls),   
     # CKEditor pour l'upload de fichiers
     path('ckeditor/', include('ckeditor_uploader.urls')),
     
@@ -38,8 +39,18 @@ if settings.DEBUG:
     # Servir les fichiers média en développement
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
+    # ===== ROUTES POUR TESTER LES PAGES D'ERREUR EN DÉVELOPPEMENT =====
+    from main.views import handler404, handler500
+    
+    urlpatterns += [
+        path('test-404/', handler404, {'exception': Exception('Page non trouvée')}),
+        path('test-500/', handler500),
+    ]
+
 
 # Configuration de l'admin Django
 admin.site.site_header = "A²ELBM2 Administration Technique"
 admin.site.site_title = "A²ELBM2 Admin"
 admin.site.index_title = "Administration Technique Django"
+

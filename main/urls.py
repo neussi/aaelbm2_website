@@ -1,6 +1,7 @@
 # main/urls.py
 from django.urls import path
 from . import views
+from django.conf import settings
 
 urlpatterns = [
     # Page d'accueil
@@ -39,8 +40,11 @@ urlpatterns = [
     
     # WhatsApp redirect
     path('whatsapp/', views.whatsapp_redirect, name='whatsapp_redirect'),
+
 ]
 
-# ========================= HANDLERS D'ERREURS =========================
-handler404 = 'main.views.handler404'
-handler500 = 'main.views.handler500'
+if settings.DEBUG:
+    urlpatterns += [
+        path('test-404/', views.handler404, name='test_404'),
+        path('test-500/', views.handler500, name='test_500'),
+    ]
